@@ -90,11 +90,12 @@ function ProblemForm(props) {
     return end_at_date >= start_at_date;
   };
 
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     reset(defaultValue);
   }, [problem]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const endAtValue = getValues().end_at;
     if (watchStartAt && endAtValue) {
@@ -102,6 +103,7 @@ function ProblemForm(props) {
     }
   }, [watchStartAt]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (updateSuccess) {
       handleCancel();

@@ -94,6 +94,7 @@ function SprintUpdate({
   });
 
   // https://react-hook-form.com/v5/api/#reset
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     reset(defaultValue);
   }, [sprint]);

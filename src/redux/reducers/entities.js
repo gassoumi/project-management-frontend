@@ -21,7 +21,6 @@ const initialState = {
 };
 //const initialState = {};
 export default function (state = initialState, action) {
-  console.log(action.type);
   switch (action.type) {
     case ActionTypes.STARRED_SUCCESS_PROJECTS:
     case ActionTypes.STARRED_SUCCESS_NOTES:

@@ -1,3 +1,4 @@
+// eslint-disable-next-line react-hooks/exhaustive-deps
 import React, {Component} from 'react';
 import {BrowserRouter as BrowserRouter} from 'react-router-dom';
 import configureStore from './config/configureStore';
