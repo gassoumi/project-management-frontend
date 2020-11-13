@@ -76,8 +76,8 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "node --max_old_space_size=2560 node_modules/.bin/react-scripts start",
-    "build": "node --max_old_space_size=2560 node_modules/.bin/react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "./node_modules/.bin/eslint --fix --ignore-path .gitignore ."
@@ -102,10 +102,10 @@
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-react": "7.18.3",
     "eslint-plugin-unused-imports": "0.1.2",
-    "node-sass": "^4.13.1",
     "prettier": "1.19.1",
     "prettier-eslint": "9.0.1",
     "prettier-eslint-cli": "5.0.0",
+    "node-sass": "4.13.1",
     "sass-vars-to-js-loader": "2.1.1"
   },
   "engines": {
