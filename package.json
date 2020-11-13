@@ -74,7 +74,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0",
-	 "node-sass": "^4.13.1"
+	"node-sass": "^4.13.1",
+	"sass-vars-to-js-loader": "2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -105,8 +106,7 @@
     "eslint-plugin-unused-imports": "0.1.2",
     "prettier": "1.19.1",
     "prettier-eslint": "9.0.1",
-    "prettier-eslint-cli": "5.0.0",
-    "sass-vars-to-js-loader": "2.1.1"
+    "prettier-eslint-cli": "5.0.0"
   },
   "engines": {
     "node": "12.16.3",
