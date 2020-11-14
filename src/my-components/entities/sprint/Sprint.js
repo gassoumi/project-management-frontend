@@ -8,7 +8,6 @@ import axios from 'axios';
 import SprintTable from './SprintTable';
 import {SuspenseLoading} from "../../../Routes";
 import DeleteDialog from '../common/DeleteDialog';
-import {PageTitle} from "../../../layout-components";
 import Card from "@material-ui/core/Card";
 import AddNew from "../common/AddNew";
 import {getSortState, overridePaginationStateWithQueryParams} from "../../../utils";
@@ -197,10 +196,6 @@ function Sprint(props) {
 
   return (
     <>
-      {/*<PageTitle*/}
-      {/*  titleHeading="Sprints"*/}
-      {/*  // titleDescription="Building a projects related application? Start from this layout."*/}
-      {/*/>*/}
       <Fragment>
         <DeleteDialog
           object={sprintToDelete}

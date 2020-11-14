@@ -12,7 +12,6 @@ import Card from "@material-ui/core/Card";
 import AddNew from "../common/AddNew";
 import {getSortState, overridePaginationStateWithQueryParams} from "../../../utils";
 import NoteList from './NoteList';
-import {PageTitle} from "../../../layout-components";
 import {Box, CardContent, Divider, IconButton, Tab, Tabs, Tooltip, Typography} from "@material-ui/core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Pagination from '@material-ui/lab/Pagination';
@@ -206,10 +205,6 @@ function Note(props) {
 
   return (
     <>
-      {/*<PageTitle*/}
-      {/*  titleHeading="Story"*/}
-      {/*  // titleDescription="Building a projects related application? Start from this layout."*/}
-      {/*/>*/}
       <NoteDetail
         note={note}
         open={openDetailDialog}

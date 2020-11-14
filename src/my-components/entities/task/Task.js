@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {fetchTasks, deleteTaskById, clearCacheTask, clearCacheProject} from "../../../redux";
 import TaskTable from './TaskTable';
 import DeleteDialog from '../common/DeleteDialog';
-import {PageTitle} from "../../../layout-components";
 import Card from "@material-ui/core/Card";
 import AddNew from "../common/AddNew";
 import {getSortState, overridePaginationStateWithQueryParams} from "../../../utils";
@@ -211,9 +210,6 @@ function Task(props) {
 
   return (
     <>
-      {/*<PageTitle*/}
-      {/*  titleHeading="Taches"*/}
-      {/*/>*/}
       <DeleteDialog
         open={open}
         object={task}

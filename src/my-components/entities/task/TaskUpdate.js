@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import TaskForm from './TaskForm';
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
-import Loading from '../common/Loading';
+import {SuspenseLoading} from "../../../Routes";
 import {Card, Divider} from "@material-ui/core";
 
 
@@ -56,7 +56,7 @@ function TaskUpdate(props) {
   return (
     <>
       {!isNewTask && !isLoaded ?
-        <Loading/> :
+        <SuspenseLoading/> :
         <Grid container justify={"center"}>
           <Grid item xs={12} lg={9}>
             <Card className="mb-4">

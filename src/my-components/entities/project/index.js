@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
 import Project from './Project';
 import ProjectDetail from './ProjectDetail';
 import ProjectUpdate from './ProjectUpdate';

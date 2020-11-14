@@ -208,8 +208,8 @@ function TaskDetail(props) {
                       </div>
                     </Card>
                   </div>
-                </Grid> : null
-
+                </Grid> 
+                : null
             }
           </Grid>
         </>}

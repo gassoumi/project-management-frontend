@@ -20,8 +20,6 @@ import ProjectTable from './ProjectTable';
 import ProjectList from './ProjectList';
 import AddNew from '../common/AddNew';
 import {Selector} from '../index';
-
-import {PageTitle} from '../../../layout-components';
 import {SuspenseLoading} from "../../../Routes";
 import Alert from '../common/Alert';
 import {overridePaginationStateWithQueryParams, getSortState} from "../../../utils";
@@ -171,10 +169,6 @@ const ApplicationsProjectsContent = (props) => {
 
   return (
     <Fragment>
-      {/*<PageTitle*/}
-      {/*  titleHeading="Projets"*/}
-      {/*  // titleDescription="Building a projects related application? Start from this layout."*/}
-      {/*/>*/}
       <Fragment>
         <DeleteDialog
           object={project}

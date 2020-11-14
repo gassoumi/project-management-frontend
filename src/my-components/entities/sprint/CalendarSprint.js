@@ -9,10 +9,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import Loading from '../common/Loading';
-import GreenButton from "../common/GreenButton";
+import {SuspenseLoading as Loading} from "../../../Routes";
 import Grid from "@material-ui/core/Grid";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import {fetchSprints, deleteSprintById, fetchCalenderSprints, clearCacheSprint} from "../../../redux/actions";
@@ -226,14 +226,14 @@ const CalenderSprint = ({
         </Grid>
         <Grid xs={6} item container justify={"flex-end"}>
           {canEdit &&
-          <GreenButton startIcon={<AddCircleOutlineIcon/>}
+          <Button startIcon={<AddCircleOutlineIcon/>}
                        onClick={createNewSprint}
                        type="button"
                        variant="contained"
                        color={"primary"}
           >
             Ajouter un sprint
-          </GreenButton>}
+          </Button>}
         </Grid>
       </Grid>
       {isFetching ? <Loading/> :

@@ -1,6 +1,5 @@
 import React from 'react';
 import {Switch, Route, useLocation} from 'react-router-dom';
-import DocumentDetail from './DocumentDetail';
 import DocumentUpdate from './DocumentUpdate';
 import Document from './Document';
 import {CollapsedSidebar, LeftSidebar} from "../../../layout-blueprints";
@@ -70,7 +69,6 @@ const Routes = ({match}) => {
               variants={pageVariants}
               transition={pageTransition}>
               <ErrorBoundaryRoute exact path={`${match.url}/create`} component={DocumentUpdate}/>
-              <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={DocumentDetail}/>
               <ErrorBoundaryRoute exact path={`${match.url}/:id/edit`} component={DocumentUpdate}/>
             </motion.div>
           </Switch>

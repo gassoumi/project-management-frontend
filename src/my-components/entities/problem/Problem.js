@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {fetchProblems, deleteProblemById, clearCacheProblem} from "../../../redux";
 import ProblemTable from './ProblemTable';
 import DeleteDialog from '../common/DeleteDialog';
-import {PageTitle} from "../../../layout-components";
 import Card from "@material-ui/core/Card";
 import AddNew from "../common/AddNew";
 import {getSortState, overridePaginationStateWithQueryParams} from "../../../utils";
@@ -141,10 +140,6 @@ function Problem(props) {
 
   return (
     <>
-      {/*<PageTitle*/}
-      {/*  titleHeading="Problèmes"*/}
-      {/*  // titleDescription="Building a projects related application? Start from this layout."*/}
-      {/*/>*/}
       <DeleteDialog
         open={open}
         object={problem}

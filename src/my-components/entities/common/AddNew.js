@@ -83,7 +83,6 @@ function AddNew({label, count, queryValue, handleInput, handleQuery, handleAdd, 
           </Button>
         </div>
       }
-
     </div>
 
   );
