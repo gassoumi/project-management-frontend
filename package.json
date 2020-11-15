@@ -78,11 +78,12 @@
     "sass-vars-to-js-loader": "2.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "format": "./node_modules/.bin/eslint --fix --ignore-path .gitignore ."
+	"dev": "react-scripts start",
+	"start": "serve -s build",	
+	"build": "react-scripts build",
+	"test": "react-scripts test --env=jsdom",
+	"eject": "react-scripts eject",
+	"heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
