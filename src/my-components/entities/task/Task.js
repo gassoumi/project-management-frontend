@@ -317,7 +317,7 @@ const mapStateToProps = (state) => {
     tasks: listTask,
     nextPageUrl: tasks.nextPageUrl,
     isFetching: tasks.isFetching,
-    canEdit: state.auth.user.is_staff,
+    canEdit: state.auth.user.userProfile && state.auth.user.userProfile.is_manager,
     count: tasks.count,
     page: tasks.page,
     pageSize: tasks.pageSize,

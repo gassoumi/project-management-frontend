@@ -597,7 +597,7 @@ const mapStateToProps = (state) => {
     page: documents.page,
     count: documents.count,
     isFetching: documents.isFetching,
-    canEdit: state.auth.user.is_staff,
+    canEdit: state.auth.user.userProfile && state.auth.user.userProfile.is_manager,
     pageSize: documents.pageSize,
     deleteSuccess: document.deleteSuccess,
     updateSuccess: document.updateSuccess,

@@ -309,7 +309,7 @@ const mapStateToProps = (state) => {
     nextPageUrl: sprints.nextPageUrl,
     page: sprints.page,
     isFetching: sprints.isFetching,
-    canEdit: state.auth.user.is_staff,
+    canEdit: state.auth.user.userProfile && state.auth.user.userProfile.is_manager,
     count: sprints.count,
     pageSize: sprints.pageSize,
     updateSuccess: state.entity.sprint.updateSuccess,

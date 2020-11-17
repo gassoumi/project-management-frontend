@@ -204,8 +204,8 @@ const ApplicationsProjectsContent = (props) => {
         {props.isFetching ? <SuspenseLoading/> :
           (props.projects && props.projects.length > 0) ?
             (
-              < Fragment>
-                < TabPanel value={props.value} index={0}>
+              <Fragment>
+                <TabPanel value={props.value} index={0}>
                   <Grid container spacing={4}>
                     <ProjectList handleDelete={handleDelete} canEdit={props.canEdit} projects={props.projects}/>
                   </Grid>
@@ -273,7 +273,7 @@ const mapStateToProps = (state) => {
     nextPageUrl: projects.nextPageUrl,
     page: projects.page,
     isFetching: projects.isFetching,
-    canEdit: state.auth.user.is_staff,
+    canEdit: state.auth.user.userProfile && state.auth.user.userProfile.is_manager,
     count: projects.count,
     pageSize: projects.pageSize,
     updateSuccess: state.entity.project.updateSuccess,

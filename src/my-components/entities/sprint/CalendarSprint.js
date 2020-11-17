@@ -227,10 +227,10 @@ const CalenderSprint = ({
         <Grid xs={6} item container justify={"flex-end"}>
           {canEdit &&
           <Button startIcon={<AddCircleOutlineIcon/>}
-                       onClick={createNewSprint}
-                       type="button"
-                       variant="contained"
-                       color={"primary"}
+                  onClick={createNewSprint}
+                  type="button"
+                  variant="contained"
+                  color={"primary"}
           >
             Ajouter un sprint
           </Button>}
@@ -339,7 +339,7 @@ const mapStateToProps = (state) => {
     nextPageUrl: sprints.nextPageUrl,
     page: sprints.page,
     isFetching: sprints.isFetching,
-    canEdit: state.auth.user.is_staff,
+    canEdit: state.auth.user.userProfile && state.auth.user.userProfile.is_manager,
     count: sprints.count,
     pageSize: sprints.pageSize,
   };

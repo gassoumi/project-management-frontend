@@ -260,7 +260,7 @@ const mapStateToProps = (state, ownProps) => {
     project,
     tasks,
     isFetchingProjectTasks: projectTasks.isFetching,
-    canEdit: state.auth.user.is_staff,
+    canEdit: state.auth.user.userProfile && state.auth.user.userProfile.is_manager,
     count: projectTasks.count,
     page: projectTasks.page,
     pageSize: projectTasks.pageSize,
