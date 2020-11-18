@@ -11,8 +11,8 @@ import {getAvatar} from "../entities/project/ProjectTable";
 LatestProject.prototype = {
   rows: PropTypes.array.isRequired
 };
-export default function LatestProject({rows}) {
 
+export default function LatestProject({rows}) {
   return (
     <Fragment>
       <Card className="card-box">
@@ -82,7 +82,6 @@ export default function LatestProject({rows}) {
           </Button>
         </div>
       </Card>
-
     </Fragment>
   );
 }

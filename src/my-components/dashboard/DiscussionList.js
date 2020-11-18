@@ -40,63 +40,55 @@ DiscussionList.prototype = {
 export default function DiscussionList({items, title}) {
   const classes = useStyles();
   return (
-    <>
-      <div className={classes.root}>
-        <Paper className={classes.paper}>
-          {/*<div className="card-header">*/}
-          {/*  <div className="card-header--title font-size-lg font-weight-bold">*/}
-          {/*    {title}*/}
-          {/*  </div>*/}
-          {/*</div>*/}
-          <List
-            subheader={
-              <ListSubheader id="nested-list-subheader2" component="div">
-                <div className="font-size-lg font-weight-bold">
-                  {title}
-                </div>
-              </ListSubheader>}
-          >
-            <Divider/>
-            {items.map((item, index) => (
-              <React.Fragment key={item.id}>
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar src={item.user && item.user.userProfile &&
-                    item.user.userProfile.photo ? item.user.userProfile.photo : ""}>
-                      {item.user.username.charAt(0).toUpperCase()}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={
-                      <Link component={RouterLink} to={`/discussion/${item.id}`}>
+    <div className={classes.root}>
+      <Paper className={classes.paper}>
+        <List
+          subheader={
+            <ListSubheader id="nested-list-subheader2" component="div">
+              <div className="font-size-lg font-weight-bold">
+                {title}
+              </div>
+            </ListSubheader>}
+        >
+          <Divider/>
+          {items.map((item, index) => (
+            <React.Fragment key={item.id}>
+              <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                  <Avatar src={item.user && item.user.userProfile &&
+                  item.user.userProfile.photo ? item.user.userProfile.photo : ""}>
+                    {item.user.username.charAt(0).toUpperCase()}
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <Link component={RouterLink} to={`/discussion/${item.id}`}>
                         <span className="text-primary">
                         {item.object}
                         </span>
-                      </Link>
-                    }
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          className={classes.inline}
-                          color="textPrimary"
-                        >
-                          {item.user.username}
-                        </Typography>
-
-                        {` — ${getDisplayString(item.description, 50)}`}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-                {index !== (items.length - 1) && <Divider variant="inset" component="li"/>}
-              </React.Fragment>
-            ))
-            }
-          </List>
-        </Paper>
-      </div>
-    </>
+                    </Link>
+                  }
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}
+                        color="textPrimary"
+                      >
+                        {item.user.username}
+                      </Typography>
+                      {` — ${getDisplayString(item.description, 50)}`}
+                    </React.Fragment>
+                  }
+                />
+              </ListItem>
+              {index !== (items.length - 1) && <Divider variant="inset" component="li"/>}
+            </React.Fragment>
+          ))
+          }
+        </List>
+      </Paper>
+    </div>
   );
 }

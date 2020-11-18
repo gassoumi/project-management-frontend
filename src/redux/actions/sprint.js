@@ -4,7 +4,6 @@ import axios from 'axios';
 import {createMessage} from "./messages";
 import {normalize} from "normalizr";
 import {sprintListSchema, sprintSchema} from "../../utils";
-// import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import {fetchProjectById} from "./project";
 import _ from 'lodash';
 import moment from 'moment';
@@ -28,7 +27,6 @@ export const fetchSprints = (page = 1, pageSize, sort, searchQuery) => async (di
       getState().pagination.sprints.pageSize) || 5;
 
   try {
-    await sleep(1e1); // For demo purposes.
     const res = await axios.get(`/api/sprints/?search=${searchQuery}&page=${page}&page_size=${pageSizeToUse}&ordering=${sort}`);
     const {data: {results, next, count}} = res;
     const listProject = results.map(sprint => sprint.project);
@@ -57,8 +55,6 @@ export const fetchSprints = (page = 1, pageSize, sort, searchQuery) => async (di
       const {data, status} = error.response;
       dispatch(returnErrors(data, status));
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 
@@ -87,9 +83,6 @@ export const fetchCalenderSprints = (dateQueryFilter) => async (dispatch, getSta
   });
 
   try {
-    await sleep(1e1); // For demo purposes.
-    // const res = await axios.get(`/api/sprints/?page=${1}&page_size=${100}&${dateQueryFilter}`);
-    // const {data: {results, next, count}} = res;
     const data = {};
     const res = await recursiveFetch(`/api/sprints/?page=${1}&page_size=${100}&${dateQueryFilter}`, data);
     const {results, next, count} = res;
@@ -120,8 +113,6 @@ export const fetchCalenderSprints = (dateQueryFilter) => async (dispatch, getSta
       const {data, status} = error.response;
       dispatch(returnErrors(data, status));
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 
@@ -137,7 +128,6 @@ export const fetchWeekSprints = (page = 1, pageSize = 3) => async (dispatch, get
   const endWeek = today.endOf('isoWeek').format("YYYY-MM-DDTHH:mm");
 
   try {
-    await sleep(1e1); // For demo purposes.
     const res = await axios.get(`/api/sprints/?page=${page}&page_size=${pageSize}&desired_at__lte=${endWeek}&desired_at__gte=${startWeek}`);
     const {data: {results, next, count}} = res;
     const listProject = results.map(sprint => sprint.project);
@@ -166,8 +156,6 @@ export const fetchWeekSprints = (page = 1, pageSize = 3) => async (dispatch, get
       const {data, status} = error.response;
       dispatch(returnErrors(data, status));
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 
@@ -284,7 +272,6 @@ export const clearCacheSprint = () => dispatch => {
 
 //get Sprint by id
 export const fetchSprintById = id => async dispatch => {
-  // dispatch(showLoading());
   try {
     const response = await axios.get(`/api/sprints/${id}/`);
     const result = response.data;
@@ -299,8 +286,6 @@ export const fetchSprintById = id => async dispatch => {
       const {data, status} = error.response;
       dispatch(returnErrors(data, status));
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 

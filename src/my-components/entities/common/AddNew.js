@@ -51,7 +51,6 @@ function AddNew({label, count, queryValue, handleInput, handleQuery, handleAdd, 
                     size={"small"}
                     aria-label="toggle password visibility"
                     onClick={() => handleInput('')}
-                    // onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
                     {queryValue !== '' && <CloseIcon style={{fontSize: 15}}/>}
@@ -84,7 +83,6 @@ function AddNew({label, count, queryValue, handleInput, handleQuery, handleAdd, 
         </div>
       }
     </div>
-
   );
 }
 

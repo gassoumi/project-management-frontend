@@ -13,7 +13,6 @@ WeekTask.prototype = {
 };
 
 export default function WeekTask({rows}) {
-
   return (
     <Fragment>
       <Card className="card-box">
@@ -22,25 +21,6 @@ export default function WeekTask({rows}) {
             Plan d'action de cette semaine
           </div>
         </div>
-
-        {/* <div className="card-header">*/}
-        {/*  <div className="card-header--title font-size-lg font-weight-bold">*/}
-        {/*   Plan d'action de cette semaine*/}
-        {/*  </div>*/}
-        {/*</div>*/}
-        {/*<div className="font-size-lg px-3 py-4 font-weight-bold">*/}
-        {/*  Plan d'action de cette semaine*/}
-        {/*</div>*/}
-        {/*<Card className="card-box mb-4">*/}
-        {/*  <div className="card-header-alt p-4">*/}
-        {/*    <h6 className="font-weight-bold font-size-lg mb-1 text-black">*/}
-        {/*      Plan d'action de cette semaine*/}
-        {/*    </h6>*/}
-        {/*    /!*<p className="text-black-50 mb-0">*!/*/}
-        {/*    /!*  Reports for what we sold this week.*!/*/}
-        {/*    /!*</p>*!/*/}
-        {/*  </div>*/}
-
         <div className="table-responsive">
           <table className="table table-borderless table-hover text-nowrap mb-0">
             <thead>

@@ -29,7 +29,7 @@ export const loadUser = () => async (dispatch, getState) => {
   });
   try {
     const res = await axios.get('/api/auth/user');
-    await sleep(1e2);
+    // await sleep(1e2);
     dispatch({
       type: USER_LOADED,
       payload: res.data
@@ -59,7 +59,7 @@ export const login = (username, password) => async dispatch => {
     type: USER_SIGNING
   });
   try {
-    await sleep(1e2);
+    // await sleep(1e2);
     const res = await axios.post('/api/auth/login', body);
     dispatch({
       type: LOGIN_SUCCESS,

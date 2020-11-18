@@ -4,11 +4,9 @@ import axios from "axios";
 import {createMessage} from "./messages";
 import {normalize} from "normalizr";
 import {taskSchema, taskListSchema} from "../../utils";
-// import {showLoading, hideLoading} from "react-redux-loading-bar";
 import {fetchSprintById} from "./sprint";
 import {fetchUserById} from "./user";
 import _ from "lodash";
-import {sleep} from "./sprint";
 import moment from 'moment';
 
 //get list of tasks
@@ -26,7 +24,6 @@ export const fetchTasks = (page = 1, pageSize, sort, searchQuery) => async (disp
     5;
 
   try {
-    await sleep(1e2); // For demo purposes.
     const res = await axios.get(
       `/api/tasks/?search=${searchQuery}&page=${page}&page_size=${pageSizeToUse}&ordering=${sort}`
     );
@@ -69,8 +66,6 @@ export const fetchTasks = (page = 1, pageSize, sort, searchQuery) => async (disp
       const {data, status} = error.response;
       dispatch(returnErrors(data, status));
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 
@@ -92,7 +87,6 @@ export const fetchProjectTasks = (page = 1, pageSize, id) => async (
       getState().pagination.projectTasks.pageSize) || 5;
 
   try {
-    await sleep(1e2); // For demo purposes.
     const res = await axios.get(
       `/api/projects/${id}/tasks/?page=${page}&page_size=${pageSizeToUse}`
     );
@@ -135,8 +129,6 @@ export const fetchProjectTasks = (page = 1, pageSize, id) => async (
       const {data, status} = error.response;
       dispatch(returnErrors(data, status));
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 
@@ -145,10 +137,7 @@ export const fetchProjectTasks = (page = 1, pageSize, id) => async (
 //get list of tasks
 // https://stackoverflow.com/questions/50524040/how-to-filter-the-data-use-equal-or-greater-than-condition-in-the-url
 // https://stackoverflow.com/questions/58837940/django-rest-framework-filter-by-date-range
-export const fetchWeekTasks = (page = 1) => async (
-  dispatch,
-  getState
-) => {
+export const fetchWeekTasks = (page = 1) => async (dispatch) => {
   // dispatch(showLoading());
   dispatch({
     type: ActionTypes.STARRED_REQUEST_WEEK_TASKS,
@@ -161,7 +150,6 @@ export const fetchWeekTasks = (page = 1) => async (
 
   //moment(endWeek, 'YYYY-MM-DDTHH:mm Z').toDate()
   try {
-    await sleep(1e1); // For demo purposes.
     const res = await axios.get(
       `/api/tasks/?page=${page}&page_size=${5}&end_at__lte=${endWeek}&start_at__gte=${startWeek}`
     );
@@ -205,8 +193,6 @@ export const fetchWeekTasks = (page = 1) => async (
       const {data, status} = error.response;
       dispatch(returnErrors(data, status));
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 
@@ -359,5 +345,4 @@ export const fetchTaskById = (id) => async (dispatch) => {
       dispatch(returnErrors(data, status));
     }
   }
-  // dispatch(hideLoading());
 };

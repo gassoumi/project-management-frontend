@@ -5,15 +5,6 @@ import {createMessage} from "./messages";
 import {normalize} from "normalizr";
 import {notesListSchema, noteSchema} from "../../utils";
 
-// import {showLoading, hideLoading} from 'react-redux-loading-bar';
-
-
-export function sleep(delay = 0) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
-
 //get list of project projects
 export const fetchNotes = (page = 1, pageSize, sort, searchQuery) => async (dispatch, getState) => {
   // dispatch(showLoading());
@@ -26,7 +17,6 @@ export const fetchNotes = (page = 1, pageSize, sort, searchQuery) => async (disp
       getState().pagination.notes.pageSize) || 5;
 
   try {
-    await sleep(1e2); // For demo purposes.
     const res = await axios.get(`/api/notes/?search=${searchQuery}&page=${page}&page_size=${pageSizeToUse}&ordering=${sort}`);
     const {data: {results, next, count}} = res;
 
@@ -155,7 +145,6 @@ export const clearCacheNote = () => dispatch => {
 
 //get note
 export const fetchNoteById = id => async dispatch => {
-  // dispatch(showLoading());
   try {
     const response = await axios.get(`/api/notes/${id}/`);
     const result = response.data;
@@ -169,8 +158,6 @@ export const fetchNoteById = id => async dispatch => {
       const {data, status} = error.response;
       dispatch(returnErrors(data, status));
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 

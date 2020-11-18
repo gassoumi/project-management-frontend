@@ -4,11 +4,8 @@ import axios from 'axios';
 import {createMessage} from "./messages";
 import {normalize} from "normalizr";
 import {documentsListSchema} from "../../utils";
-// import {showLoading, hideLoading} from 'react-redux-loading-bar'
-import {sleep} from "./sprint";
 import {fetchTaskById} from "./task";
 import _ from "lodash";
-
 
 // https://stackoverflow.com/questions/41878838/how-do-i-set-multipart-in-axios-with-react
 // create a document
@@ -131,7 +128,6 @@ export const fetchDocuments = (page = 1, pageSize, queryString = "", sort, searc
       getState().pagination.documents.pageSize) || 5;
 
   try {
-    await sleep(1e2); // For demo purposes.
     const res = await axios
       .get(`/api/documents/?page=${page}&page_size=${pageSizeToUse}&${queryString}&search=${searchQuery}&ordering=${sort}`);
     const {data: {results, next, count}} = res;

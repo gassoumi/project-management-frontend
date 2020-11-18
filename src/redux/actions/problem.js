@@ -4,15 +4,9 @@ import axios from 'axios';
 import {createMessage} from "./messages";
 import {normalize} from "normalizr";
 import {problemListSchema, problemSchema} from "../../utils";
-// import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import {fetchTaskById} from "./task";
 import _ from 'lodash';
 
-export function sleep(delay = 0) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
 
 //get list of problems
 export const fetchProblems = (page = 1, pageSize, sort, searchQuery) => async (dispatch, getState) => {
@@ -26,7 +20,6 @@ export const fetchProblems = (page = 1, pageSize, sort, searchQuery) => async (d
       getState().pagination.problems.pageSize) || 5;
 
   try {
-    await sleep(1e1); // For demo purposes.
     const res = await axios.get(`/api/problems/?search=${searchQuery}&page=${page}&page_size=${pageSizeToUse}&ordering=${sort}`);
     const {data: {results, next, count}} = res;
     const listTask = results.map(problem => problem.task);
@@ -56,8 +49,6 @@ export const fetchProblems = (page = 1, pageSize, sort, searchQuery) => async (d
       const {data, status} = error.response;
       dispatch(returnErrors(data, status));
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 
@@ -72,7 +63,6 @@ export const fetchProblemsByTask = (page = 1, idTask, pageSize) => async (dispat
       getState().pagination.problems.pageSize) || 5;
 
   try {
-    await sleep(1e1); // For demo purposes.
     const res = await axios.get(`/api/problems/?page=${page}&page_size=${pageSizeToUse}&task=${idTask}`);
     const {data: {results, next, count}} = res;
     const normalizedData = normalize(results, problemListSchema);
@@ -93,15 +83,12 @@ export const fetchProblemsByTask = (page = 1, idTask, pageSize) => async (dispat
       const {data, status} = error.response;
       dispatch(returnErrors(data, status));
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 
 
 // create a problem
 export const createProblem = (problem) => (dispatch) => {
-
   dispatch({
     type: ActionTypes.START_UPDATE_PROBLEM
   });

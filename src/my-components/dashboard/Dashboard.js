@@ -19,8 +19,6 @@ import {
 } from "../../redux";
 import {Selector} from "../entities";
 import {SuspenseLoading} from "../../Routes";
-import {PageTitle} from "../../layout-components";
-
 
 function Dashboard(props) {
 
@@ -59,10 +57,6 @@ function Dashboard(props) {
 
   return (
     <>
-      {/*<PageTitle*/}
-      {/*  titleHeading="Dashboard"*/}
-      {/*  // titleDescription="Building a projects related application? Start from this layout."*/}
-      {/*/>*/}
       {!isLoaded ?
         <SuspenseLoading/> :
         <Grid container spacing={3}>
@@ -78,8 +72,7 @@ function Dashboard(props) {
               </Grid>
             </Grid>
           </Grid>
-
-
+          
           <Grid item xs={12} md={4}>
             {/*  space between all included grid */}
             <Grid container direction="column" spacing={3}>

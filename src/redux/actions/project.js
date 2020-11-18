@@ -4,11 +4,8 @@ import axios from 'axios';
 import {createMessage} from "./messages";
 import {normalize} from "normalizr";
 import {projectSchema, projectListSchema} from "../../utils";
-// import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import {fetchUserById} from "./user";
-import {sleep} from "./sprint";
 import _ from "lodash";
-
 
 //get list of project projects
 export const fetchProjects = (page = 1, pageSize, sort, searchQuery) => async (dispatch, getState) => {
@@ -21,7 +18,6 @@ export const fetchProjects = (page = 1, pageSize, sort, searchQuery) => async (d
       getState().pagination.projects.pageSize) || 5;
 
   try {
-    await sleep(1e3); // For demo purposes.
     const res = await axios.get(`/api/projects/?search=${searchQuery}&page=${page}&page_size=${pageSizeToUse}&ordering=${sort}`);
     const {data: {results, next, count}} = res;
     // get an array of arrays
@@ -61,7 +57,6 @@ export const fetchLatestProjects = (page = 1) => async dispatch => {
     type: ActionTypes.STARRED_REQUEST_LATEST_PROJECTS,
   });
   try {
-    await sleep(1e1); // For demo purposes.
     const res = await axios.get(`/api/projects/?page=${page}&page_size=${5}&ordering=-created_at`);
     const {data: {results, next, count}} = res;
     const normalizedData = normalize(results, projectListSchema);
@@ -101,7 +96,6 @@ export const createProject = (project) => async dispatch => {
   dispatch({
     type: ActionTypes.START_UPDATE_PROJECT
   });
-  await sleep(1e3);
   axios.post('/api/projects/', project)
     .then(response => {
       const designation = response.data.designation;
@@ -201,7 +195,6 @@ export const deleteProjectById = project => (dispatch) => {
 export const fetchProjectById = (id) => async dispatch => {
   // dispatch(showLoading());
   try {
-    await sleep(1e1); // For demo purposes.
     const response = await axios.get(`/api/projects/${id}/`);
     const result = response.data;
     const projectUsers = result.projectUsers;
@@ -228,8 +221,6 @@ export const fetchProjectById = (id) => async dispatch => {
         error: "il y'a une erreur"
       });
     }
-  } finally {
-    // dispatch(hideLoading());
   }
 };
 

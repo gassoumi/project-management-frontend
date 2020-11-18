@@ -6,14 +6,6 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {Controller} from "react-hook-form";
 
-
-function sleep(delay = 0) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
-
-
 // const URL = '/api/projects';
 const PARAM_SEARCH = "search=";
 const DEFAULT_PAGE_SIZE = 100;
@@ -41,7 +33,6 @@ function AsyncComboBox(props) {
     (async () => {
       setLoading(true);
       try {
-        await sleep(1e3); // For demo purposes.
         let finalUrl = `${url}?${PARAM_SEARCH}${inputValue}&page_size=${DEFAULT_PAGE_SIZE}`;
         if (urlParams) {
           finalUrl = finalUrl + urlParams;

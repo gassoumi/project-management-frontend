@@ -51,7 +51,6 @@ function DeleteDialog(props) {
         </div>
       </div>
     </Dialog>
-
   );
 }
 

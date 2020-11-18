@@ -8,16 +8,11 @@ import {
 } from "../../utils";
 // import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import _ from 'lodash';
-import {sleep} from "./sprint";
 import {fetchUserById, fetchUserById2} from "./user";
 
 
 //get list of discussions
 export const fetchDiscussions = (page = 1, pageSize, searchQuery) => async (dispatch, getState) => {
-  // dispatch(showLoading());
-  // dispatch({
-  //     type: ActionTypes.CLEAR_CACHE_COMMENT,
-  // });
   dispatch({
     type: ActionTypes.STARRED_REQUEST_DISCUSSIONS,
   });
@@ -27,7 +22,6 @@ export const fetchDiscussions = (page = 1, pageSize, searchQuery) => async (disp
       getState().pagination.discussions.pageSize) || 5;
 
   try {
-    await sleep(1e2); // For demo purposes.
     const res = await axios.get(`/api/discussions/?page=${page}&page_size=${pageSizeToUse}&search=${searchQuery}`);
     const {data: {results, next, count}} = res;
 
@@ -76,7 +70,6 @@ export const fetchTopDiscussions = (page = 1, pageSize) => async (dispatch, getS
       getState().pagination.topDiscussions.pageSize) || 5;
 
   try {
-    await sleep(1e2); // For demo purposes.
     const res = await axios.get(`/api/topDiscussion/?page=${page}&page_size=${pageSizeToUse}`);
     const {data: {results, next, count}} = res;
 
@@ -121,7 +114,6 @@ export const fetchLatestDiscussions = (page = 1) => async (dispatch, getState) =
 
 
   try {
-    await sleep(1e1); // For demo purposes.
     const res = await axios.get(`/api/discussions/?page=${page}&page_size=${3}`);
     const {data: {results, next, count}} = res;
 
@@ -175,7 +167,6 @@ export const fetchDiscussion = id => async (dispatch) => {
     type: ActionTypes.STARRED_FETCH_DISCUSSION,
   });
   try {
-    await sleep(1e2); // For demo purposes.
     const result = await axios.get(`/api/discussions/${id}/`);
     await fetchUserById(result.data.user)(dispatch);
     const normalizedData = normalize(result.data, discussionSchema);
@@ -207,7 +198,6 @@ export const fetchDiscussionNew = id => async (dispatch) => {
   return dispatch({
     type: 'FETCH_DISCUSSION',
     async payload() {
-      await sleep(1e2);
       const result = await axios.get(`/api/discussions/${id}/`);
       await dispatch(fetchUserById2(result.data.user));
       return result;
@@ -225,21 +215,6 @@ export const fetchDiscussionV2 = id => async (dispatch) => {
   })
 };
 
-// async payload() {
-//   await sleep(1e2);
-//   const result = await axios.get(`/api/discussions/${id}/`)
-//     .then();
-//   const resultUser = await fetchUserById(result.data.user)(dispatch);
-//   return resultUser;
-// }
-
-
-// export const fetchDiscussion = id => {
-//   return {
-//     type: 'FETCH_DISCUSSION',
-//     payload: axios.get(`/api/discussions/${id}/`)
-//   }
-// };
 
 // create a discussion
 export const createDiscussion = (discussion) => (dispatch, getState) => {

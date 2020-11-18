@@ -1,6 +1,5 @@
 // import {hideLoading, showLoading} from "react-redux-loading-bar";
 import * as ActionTypes from "../actionTypes";
-import {sleep} from "./sprint";
 import axios from "axios";
 import _ from "lodash";
 import {fetchUserById} from "./user";
@@ -21,7 +20,6 @@ export const fetchCommentsByDiscussion = (page = 1, pageSize, idDiscussion) =>
         getState().pagination.comments.pageSize) || 5;
 
     try {
-      await sleep(1e3); // For demo purposes.
       const resultComment = await axios
         .get(`/api/comments/?discussion=${idDiscussion}&page=${page}&page_size=${pageSizeToUse}`);
       if (resultComment.data && resultComment.data.results) {
