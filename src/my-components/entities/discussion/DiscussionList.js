@@ -1,13 +1,14 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {Divider, List, ListItem, Tooltip} from "@material-ui/core";
+import { Divider, List, ListItem, Tooltip } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import moment from 'moment';
-import {getDisplayString} from "../../utils";
+import { getDisplayString } from "../../utils";
 import Link from '@material-ui/core/Link';
-import {Link as RouterLink} from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import Avatar from '@material-ui/core/Avatar';
 
-function DiscussionList({discussions}) {
+function DiscussionList({ discussions }) {
   return (
     <List>
       {discussions.map((discussion, index) => (
@@ -18,17 +19,22 @@ function DiscussionList({discussions}) {
                 <div>
                   <Card className="card-transparent mb-3 mb-sm-0">
                     <Tooltip arrow title={discussion.user.username}>
-                      <a
+                      {/* <a
                         href="#/"
                         onClick={e => e.preventDefault()}
                         className="avatar-icon-wrapper avatar-icon-lg m-0">
                         <div className="dot-badge"/>
+              
                         <div className="avatar-icon">
                           <img
                             alt="..."
                             src={discussion.user && discussion.user.userProfile && discussion.user.userProfile.photo || null}/>
                         </div>
-                      </a>
+                      </a> */}
+                      <Avatar src={discussion.user && discussion.user.userProfile &&
+                        discussion.user.userProfile.photo && discussion.user.userProfile.photo || null}>
+                        {discussion.user.username.charAt(0).toUpperCase()}
+                      </Avatar>
                     </Tooltip>
                   </Card>
                 </div>
@@ -43,14 +49,14 @@ function DiscussionList({discussions}) {
                   </p>
                   <small className="text-black-50 pt-1 d-block">
                     Créée le : <b className="text-first">
-                    {moment(discussion.created_at).format('LL')}
-                  </b>
+                      {moment(discussion.created_at).format('LL')}
+                    </b>
                   </small>
                 </div>
               </div>
             </div>
           </ListItem>
-          {index < discussions.length - 1 && <Divider variant="middle"/>}
+          {index < discussions.length - 1 && <Divider variant="middle" />}
         </Fragment>
       ))}
     </List>

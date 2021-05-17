@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {getDisplayString} from "../../utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getDisplayString } from "../../utils";
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
-import {Avatar, IconButton, Tooltip} from "@material-ui/core";
-import {useRouteMatch} from "react-router-dom";
-import {Link as RouterLink} from 'react-router-dom';
+import { Avatar, IconButton, Tooltip } from "@material-ui/core";
+import { useRouteMatch } from "react-router-dom";
+import { Link as RouterLink } from 'react-router-dom';
 
 export const getAvatar = (index, project) => {
   const length = project.projectUsers.length;
@@ -16,7 +16,7 @@ export const getAvatar = (index, project) => {
     }
     return (
       <Tooltip title={project.projectUsers[index].user.username || ""}>
-        <Avatar alt="..." src={photo}/>
+        <Avatar alt="..." src={photo} />
       </Tooltip>
     )
   } else {
@@ -41,92 +41,88 @@ ProjectTable.propTypes = {
   handleDelete: PropTypes.func.isRequired
 };
 
-function ProjectTable({projects, sort, canEdit, handleDelete}) {
+function ProjectTable({ projects, sort, canEdit, handleDelete }) {
   let match = useRouteMatch("");
 
   return (
     <div className="table-responsive">
       <table className="table table-hover text-nowrap mb-0">
         <thead>
-        <tr>
-          <th className="text-left" style={{width: 180, cursor: 'pointer'}} onClick={sort('id')}>
-            ID <FontAwesomeIcon icon={['fas', 'sort']}/>
+          <tr>
+            <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('code')}>
+              Code projet <FontAwesomeIcon icon={['fas', 'sort']} />
+            </th>
+            <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('designation')}>
+              Projet <FontAwesomeIcon icon="sort" />
+            </th>
+            <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('objective')}>
+              Objective <FontAwesomeIcon icon="sort" />
+            </th>
+            <th className="text-center">
+              Membres
           </th>
-          <th className="text-left" style={{cursor: 'pointer'}} onClick={sort('code')}>
-            Code projet <FontAwesomeIcon icon={['fas', 'sort']}/>
-          </th>
-          <th className="text-center" style={{cursor: 'pointer'}} onClick={sort('designation')}>
-            Projet <FontAwesomeIcon icon="sort"/>
-          </th>
-          <th className="text-center" style={{cursor: 'pointer'}} onClick={sort('objective')}>
-            Objective <FontAwesomeIcon icon="sort"/>
-          </th>
-          <th className="text-center">
-            Membres
-          </th>
-          <th className="text-center">Actions</th>
-        </tr>
+            <th className="text-center">Actions</th>
+          </tr>
         </thead>
         <tbody>
-        {projects.map(project => (
-          <tr key={project.id}>
-            <td>{project.id}</td>
-            <td>{project.code}</td>
-            <td className="text-center font-weight-bold"> {getDisplayString(project.designation, 30)} </td>
-            <td className="text-center">{getDisplayString(project.objective, 40)}</td>
-            <td className="text-center">
-              {(project.projectUsers && project.projectUsers.length > 0) &&
-              <AvatarGroup className="d-flex justify-content-center">
-                {project.projectUsers.length > 0 &&
-                getAvatar(0, project)}
-                {project.projectUsers.length > 1 &&
-                getAvatar(1, project)}
-                {project.projectUsers.length > 2 &&
-                getAvatar(2, project)}
-                {project.projectUsers.length > 3 &&
-                getAvatar(3, project)}
-                {project.projectUsers.length > 4 &&
-                getAvatar(4, project)}
-              </AvatarGroup>
-              }
-            </td>
-            <td className="text-center">
-              {canEdit &&
-              <Tooltip arrow title="Modifier">
-                <IconButton
-                  component={RouterLink}
-                  to={`${match.url}/${project.id}/edit`}
-                  className="text-primary">
-                  <FontAwesomeIcon
-                    icon={['fas', 'pen']}
-                    className="font-size-sm"
-                  />
-                </IconButton>
-              </Tooltip>}
-              <Tooltip arrow title="Consulter">
-                <IconButton
-                  component={RouterLink}
-                  to={`${match.url}/${project.id}`}
-                  className="text-info">
-                  <FontAwesomeIcon
-                    icon={['fas', 'eye']}
-                    className="font-size-sm"
-                  />
-                </IconButton>
-              </Tooltip>
-              {canEdit &&
-              <Tooltip arrow title="Supprimer">
-                <IconButton onClick={() => handleDelete(project)} className="text-danger">
-                  <FontAwesomeIcon
-                    icon={['far', 'trash-alt']}
-                    className="font-size-sm"
-                  />
-                </IconButton>
-              </Tooltip>
-              }
-            </td>
-          </tr>
-        ))}
+          {projects.map(project => (
+            <tr key={project.id}>
+              <td>{project.code}</td>
+              <td className="text-center font-weight-bold"> {getDisplayString(project.designation, 30)} </td>
+              <td className="text-center">{getDisplayString(project.objective, 40)}</td>
+              <td className="text-center">
+                {(project.projectUsers && project.projectUsers.length > 0) &&
+                  <AvatarGroup className="d-flex justify-content-center">
+                    {project.projectUsers.length > 0 &&
+                      getAvatar(0, project)}
+                    {project.projectUsers.length > 1 &&
+                      getAvatar(1, project)}
+                    {project.projectUsers.length > 2 &&
+                      getAvatar(2, project)}
+                    {project.projectUsers.length > 3 &&
+                      getAvatar(3, project)}
+                    {project.projectUsers.length > 4 &&
+                      getAvatar(4, project)}
+                  </AvatarGroup>
+                }
+              </td>
+              <td className="text-center">
+                {canEdit &&
+                  <Tooltip arrow title="Modifier">
+                    <IconButton
+                      component={RouterLink}
+                      to={`${match.url}/${project.id}/edit`}
+                      className="text-primary">
+                      <FontAwesomeIcon
+                        icon={['fas', 'pen']}
+                        className="font-size-sm"
+                      />
+                    </IconButton>
+                  </Tooltip>}
+                <Tooltip arrow title="Consulter">
+                  <IconButton
+                    component={RouterLink}
+                    to={`${match.url}/${project.id}`}
+                    className="text-info">
+                    <FontAwesomeIcon
+                      icon={['fas', 'eye']}
+                      className="font-size-sm"
+                    />
+                  </IconButton>
+                </Tooltip>
+                {canEdit &&
+                  <Tooltip arrow title="Supprimer">
+                    <IconButton onClick={() => handleDelete(project)} className="text-danger">
+                      <FontAwesomeIcon
+                        icon={['far', 'trash-alt']}
+                        className="font-size-sm"
+                      />
+                    </IconButton>
+                  </Tooltip>
+                }
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

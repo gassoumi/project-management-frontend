@@ -84,11 +84,6 @@ const navItems2 = [
     "to": "/problem"
   },
   {
-    "label": "Documents",
-    "icon": "DescriptionIcon",
-    "to": "/document"
-  },
-  {
     "label": "Discussion",
     "icon": "ChatIcon",
     "to": "/discussion"

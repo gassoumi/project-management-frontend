@@ -1,7 +1,7 @@
 import axios from 'axios';
-import {returnErrors} from "../redux/actions/messages";
+import { returnErrors } from "../redux/actions/messages";
 
-// axios.defaults.baseURL = 'http://127.0.0.1:8000/';
+//axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 axios.defaults.baseURL = 'https://still-anchorage-23490.herokuapp.com/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 

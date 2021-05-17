@@ -1,10 +1,10 @@
-import React, {lazy} from 'react';
-import {Switch, Route, useLocation} from 'react-router-dom';
-import {motion} from 'framer-motion';
-import {tokenConfig} from "../../utils";
-import {returnErrors} from "../../redux/actions/messages";
+import React, { lazy } from 'react';
+import { Switch, Route, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { tokenConfig } from "../../utils";
+import { returnErrors } from "../../redux/actions/messages";
 import * as Selector from "../../redux/selectors";
-import {LeftSidebar} from "../../layout-blueprints";
+import { LeftSidebar } from "../../layout-blueprints";
 import ErrorBoundaryRoute from '../common/ErrorBoundaryRoute';
 // import Project from './project';
 // import Sprint from './sprint';
@@ -17,7 +17,7 @@ import ErrorBoundaryRoute from '../common/ErrorBoundaryRoute';
 const Project = lazy(() => import('./project'));
 const Sprint = lazy(() => import('./sprint'));
 const Task = lazy(() => import('./task'));
-const Document = lazy(() => import('./document'));
+//const Document = lazy(() => import('./document'));
 const Note = lazy(() => import('./note'));
 const Problem = lazy(() => import('./problem'));
 const Discussion = lazy(() => import('./discussion'));
@@ -25,7 +25,7 @@ const Dashboard = lazy(() => import('../dashboard'));
 
 // add all entities here
 const Routes = (props) => {
-  const {match} = props;
+  const { match } = props;
   const location = useLocation();
 
   const pageVariants = {
@@ -68,22 +68,22 @@ const Routes = (props) => {
               exit="out"
               variants={pageVariants}
               transition={pageTransition}>
-              <ErrorBoundaryRoute exact path="/dashboard" component={Dashboard}/>
-              <ErrorBoundaryRoute path={`${match.url}project`} component={Project}/>
-              <ErrorBoundaryRoute path={`${match.url}sprint`} component={Sprint}/>
-              <ErrorBoundaryRoute path={`${match.url}task`} component={Task}/>
-              <ErrorBoundaryRoute path={`${match.url}document`} component={Document}/>
-              <ErrorBoundaryRoute path={`${match.url}discussion`} component={Discussion}/>
-              <ErrorBoundaryRoute path={`${match.url}note`} component={Note}/>
-              <ErrorBoundaryRoute path={`${match.url}problem`} component={Problem}/>
+              <ErrorBoundaryRoute exact path="/dashboard" component={Dashboard} />
+              <ErrorBoundaryRoute path={`${match.url}project`} component={Project} />
+              <ErrorBoundaryRoute path={`${match.url}sprint`} component={Sprint} />
+              <ErrorBoundaryRoute path={`${match.url}task`} component={Task} />
+              <ErrorBoundaryRoute path={`${match.url}document`} component={Document} />
+              <ErrorBoundaryRoute path={`${match.url}discussion`} component={Discussion} />
+              <ErrorBoundaryRoute path={`${match.url}note`} component={Note} />
+              <ErrorBoundaryRoute path={`${match.url}problem`} component={Problem} />
             </motion.div>
           </Switch>
         </LeftSidebar>
       </Route>
-      <Route
+      {/* <Route
         path='/document'>
         <ErrorBoundaryRoute path={`${match.url}document`} component={Document}/>
-      </Route>
+      </Route> */}
       <>
         {/*<Switch>*/}
         {/*  <Route exact path="/dashboard" component={Dashboard}/>*/}
@@ -101,7 +101,7 @@ const Routes = (props) => {
   );
 };
 
-export {tokenConfig, returnErrors, Selector}
+export { tokenConfig, returnErrors, Selector }
 
 
 export default Routes;

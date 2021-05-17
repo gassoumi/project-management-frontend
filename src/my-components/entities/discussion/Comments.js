@@ -1,6 +1,6 @@
-import React, {useEffect, useState, Fragment} from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +13,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Avatar from '@material-ui/core/Avatar';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 function EditComment(props) {
 
   const classes = useStyles();
-  const {comment, handleCancelEdit, updateComment, idDiscussion} = props;
+  const { comment, handleCancelEdit, updateComment, idDiscussion } = props;
   const oldInputComment = comment.description;
 
   const [inputComment, setInputComment] = useState(comment.description);
@@ -51,7 +52,7 @@ function EditComment(props) {
 
   return (
     <form onSubmit={handleSubmit} className={classes.inputComment} noValidate
-          autoComplete="off">
+      autoComplete="off">
       <TextField
         fullWidth
         value={inputComment}
@@ -63,13 +64,13 @@ function EditComment(props) {
       <Grid container justify={"flex-end"} item xs={12}>
         <div className={classes.buttonsEdit}>
           <Button disabled={!inputComment || oldInputComment === inputComment} type="submit"
-                  variant="contained"
-                  color="primary">
+            variant="contained"
+            color="primary">
             Enregistrer
           </Button>
           <Button variant="contained"
-                  color={"default"}
-                  onClick={handleCancelEdit}
+            color={"default"}
+            onClick={handleCancelEdit}
           >
             Annuler
           </Button>
@@ -84,7 +85,7 @@ EditComment.propTypes = {};
 // TODO
 // https://codesandbox.io/s/mui-theme-css-hover-example-n8ou5?file=/demo.js:554-576
 function Comments(props) {
-  const {comments, authenticatedUser, updateComment, idDiscussion, deleteCommentById} = props;
+  const { comments, authenticatedUser, updateComment, idDiscussion, deleteCommentById } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const [newComments, setNewComments] = useState(
@@ -95,7 +96,7 @@ function Comments(props) {
   );
 
   useEffect(() => {
-    const newArray = comments.map(comment => ({...comment, show: false, edit: false}));
+    const newArray = comments.map(comment => ({ ...comment, show: false, edit: false }));
     setNewComments(newArray);
   }, [comments]);
 
@@ -109,26 +110,26 @@ function Comments(props) {
 
   const handleOnMouseEnter = (comment) => {
     const newArray = newComments.map(item => {
-      return item.id === comment.id ? {...item, show: true} : {...item, show: false};
+      return item.id === comment.id ? { ...item, show: true } : { ...item, show: false };
     });
     setNewComments(newArray);
   };
 
   const handleOnMouseLeave = () => {
-    const newArray = newComments.map(item => ({...item, show: false}));
+    const newArray = newComments.map(item => ({ ...item, show: false }));
     setNewComments(newArray);
   };
 
   const handleEdit = (comment) => {
     handleClose();
     const newArray = newComments.map(item => {
-      return item.id === comment.id ? {...item, edit: true} : {...item, edit: false};
+      return item.id === comment.id ? { ...item, edit: true } : { ...item, edit: false };
     });
     setNewComments(newArray);
   };
 
   const handleCancelEdit = () => {
-    const newArray = newComments.map(item => ({...item, edit: false}));
+    const newArray = newComments.map(item => ({ ...item, edit: false }));
     setNewComments(newArray);
   };
 
@@ -152,14 +153,18 @@ function Comments(props) {
     // else
     return (
       <div onMouseEnter={() => handleOnMouseEnter(comment)}
-           onMouseLeave={handleOnMouseLeave}
-           key={comment.id}>
+        onMouseLeave={handleOnMouseLeave}
+        key={comment.id}>
         <Grid container spacing={2}>
           <Grid item xs={11}>
             <div className="d-flex">
               <div className="avatar-icon-wrapper avatar-icon-md mr-3 pt-1">
                 <div className="avatar-icon circle">
-                  <img alt="..." src={comment.user.userProfile.photo}/>
+                  {/* <img alt="..." src={comment.user.userProfile.photo}/> */}
+                  <Avatar src={comment.user && comment.user.userProfile &&
+                    comment.user.userProfile.photo && comment.user.userProfile.photo || null}>
+                    {comment.user.username.charAt(0).toUpperCase()}
+                  </Avatar>
                 </div>
               </div>
               <div className="d-flex flex-column">
@@ -189,7 +194,7 @@ function Comments(props) {
                     aria-haspopup="true"
                     onClick={handleClick}
                     aria-label="settings">
-                    <MoreVertIcon/>
+                    <MoreVertIcon />
                   </IconButton>
                   <Menu
                     id="simple-menu"
@@ -200,13 +205,13 @@ function Comments(props) {
                   >
                     <MenuItem onClick={() => handleEdit(comment)}>
                       <ListItemIcon>
-                        <EditIcon fontSize={"small"}/>
+                        <EditIcon fontSize={"small"} />
                       </ListItemIcon>
                       Modifier
                     </MenuItem>
                     <MenuItem onClick={() => handleDelete(comment)}>
                       <ListItemIcon>
-                        <DeleteIcon fontSize={"small"}/>
+                        <DeleteIcon fontSize={"small"} />
                       </ListItemIcon>
                       Supprimer
                     </MenuItem>

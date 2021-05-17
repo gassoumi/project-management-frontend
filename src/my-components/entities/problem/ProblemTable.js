@@ -1,10 +1,10 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {IconButton, List, ListItem, Menu} from "@material-ui/core";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { IconButton, List, ListItem, Menu } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from 'moment';
-import {getDisplayString} from "../../utils";
-import {Link as RouterLink} from 'react-router-dom';
+import { getDisplayString } from "../../utils";
+import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
 ProblemTable.propTypes = {
@@ -16,14 +16,14 @@ ProblemTable.propTypes = {
 };
 
 export const getColorProblem = value => {
-    if (value === "NON_CLOTURE") {
-      return "danger";
-    }
-    return "success";
+  if (value === "NON_CLOTURE") {
+    return "danger";
   }
-;
+  return "success";
+}
+  ;
 
-function ProblemRow({problem, handleEdit, handleDelete, authenticatedUser}) {
+function ProblemRow({ problem, handleEdit, handleDelete, authenticatedUser }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const openMenu = (event) => {
@@ -36,15 +36,14 @@ function ProblemRow({problem, handleEdit, handleDelete, authenticatedUser}) {
 
   return (
     <tr>
-      <td>{problem.id}</td>
       <td>
         {
           problem.task && problem.task.sprint && problem.task.sprint.project &&
           <Link component={RouterLink}
-                to={`/project/${problem.task.sprint.project.id}`}>
-               <span className="text-primary">
+            to={`/project/${problem.task.sprint.project.id}`}>
+            <span className="text-primary">
               {getDisplayString(problem.task.sprint.project.designation, 40)}
-               </span>
+            </span>
           </Link>
         }
       </td>
@@ -55,9 +54,9 @@ function ProblemRow({problem, handleEdit, handleDelete, authenticatedUser}) {
             component={RouterLink}
             to={`/task/${problem.task.id}`}
           >
-                    <span className="text-primary">
-                      {problem.task.description}
-                    </span>
+            <span className="text-primary">
+              {problem.task.description}
+            </span>
           </Link>
         }
       </td>
@@ -84,14 +83,14 @@ function ProblemRow({problem, handleEdit, handleDelete, authenticatedUser}) {
           size="medium">
           <FontAwesomeIcon
             className="font-size-sm"
-            icon={['fas', 'arrow-right']}/>
+            icon={['fas', 'arrow-right']} />
         </IconButton>
         <Menu
           id="userMenu"
           anchorEl={anchorEl}
           keepMounted
           getContentAnchorEl={null}
-          classes={{list: 'p-0'}}
+          classes={{ list: 'p-0' }}
           anchorOrigin={{
             vertical: 'top',
             horizontal: 'left'
@@ -111,7 +110,7 @@ function ProblemRow({problem, handleEdit, handleDelete, authenticatedUser}) {
                   onClick={() => handleEdit(problem.id)}
                   button>
                   <div className="nav-link-icon opacity-6">
-                    <FontAwesomeIcon icon={['fas', 'pen']}/>
+                    <FontAwesomeIcon icon={['fas', 'pen']} />
                   </div>
                   <span>Modifier</span>
                 </ListItem>
@@ -121,7 +120,7 @@ function ProblemRow({problem, handleEdit, handleDelete, authenticatedUser}) {
                 to={`/problem/${problem.id}`}
                 button>
                 <div className="nav-link-icon opacity-6">
-                  <FontAwesomeIcon icon={['fas', 'eye']}/>
+                  <FontAwesomeIcon icon={['fas', 'eye']} />
                 </div>
                 <span>Consulter</span>
               </ListItem>
@@ -132,7 +131,7 @@ function ProblemRow({problem, handleEdit, handleDelete, authenticatedUser}) {
                   onClick={() => handleDelete(problem)}
                   button>
                   <div className="nav-link-icon opacity-6">
-                    <FontAwesomeIcon icon={['far', 'trash-alt']}/>
+                    <FontAwesomeIcon icon={['far', 'trash-alt']} />
                   </div>
                   <span>Supprimer</span>
                 </ListItem>
@@ -145,46 +144,43 @@ function ProblemRow({problem, handleEdit, handleDelete, authenticatedUser}) {
   )
 }
 
-function ProblemTable({problems, sort, handleEdit, handleDelete, authenticatedUser}) {
+function ProblemTable({ problems, sort, handleEdit, handleDelete, authenticatedUser }) {
   return (
     <table className="text-nowrap mb-0 table table-borderless table-hover">
       <thead>
-      <tr>
-        <th style={{cursor: 'pointer'}} onClick={sort('id')}>
-          ID <FontAwesomeIcon icon="sort"/>
+        <tr>
+          <th className="text-left" style={{ cursor: 'pointer' }}>
+            Projet
         </th>
-        <th className="text-left" style={{cursor: 'pointer'}}>
-          Projet
-        </th>
-        <th className="text-left" style={{cursor: 'pointer'}} onClick={sort('task')}>
-          Tache <FontAwesomeIcon icon="sort"/>
-        </th>
-        <th className="text-left" style={{cursor: 'pointer'}} onClick={sort('description')}>
-          Description <FontAwesomeIcon icon="sort"/>
-        </th>
-        <th className="text-center" style={{cursor: 'pointer'}} onClick={sort('status')}>
-          Statut <FontAwesomeIcon icon="sort"/>
-        </th>
-        <th className="text-left" style={{cursor: 'pointer'}} onClick={sort('start_at')}>
-          Date Debut <FontAwesomeIcon icon="sort"/>
-        </th>
-        <th className="text-left" style={{cursor: 'pointer'}} onClick={sort('end_at')}>
-          Date fin <FontAwesomeIcon icon="sort"/>
-        </th>
-        <th className="text-center">Actions</th>
-      </tr>
+          <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('task')}>
+            Tache <FontAwesomeIcon icon="sort" />
+          </th>
+          <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('description')}>
+            Description <FontAwesomeIcon icon="sort" />
+          </th>
+          <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('status')}>
+            Statut <FontAwesomeIcon icon="sort" />
+          </th>
+          <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('start_at')}>
+            Date Debut <FontAwesomeIcon icon="sort" />
+          </th>
+          <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('end_at')}>
+            Date fin <FontAwesomeIcon icon="sort" />
+          </th>
+          <th className="text-center">Actions</th>
+        </tr>
       </thead>
       <tbody>
-      {problems.map(problem => (
-        <Fragment key={problem.id}>
-          <ProblemRow
-            problem={problem}
-            handleDelete={handleDelete}
-            handleEdit={handleEdit}
-            authenticatedUser={authenticatedUser}
-          />
-        </Fragment>
-      ))}
+        {problems.map(problem => (
+          <Fragment key={problem.id}>
+            <ProblemRow
+              problem={problem}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+              authenticatedUser={authenticatedUser}
+            />
+          </Fragment>
+        ))}
       </tbody>
     </table>
   );

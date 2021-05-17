@@ -1,10 +1,10 @@
-import React, {Suspense, Fragment} from 'react';
-import {Switch, Route, Redirect, useLocation} from 'react-router-dom';
-import {AnimatePresence, motion} from 'framer-motion';
+import React, { Suspense, Fragment } from 'react';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
-import {ThemeProvider} from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
-import {ClimbingBoxLoader} from 'react-spinners';
+import { ClimbingBoxLoader } from 'react-spinners';
 
 import MuiTheme from './theme';
 
@@ -27,7 +27,7 @@ export const SuspenseLoading = () => {
     <Fragment>
       <div className="d-flex align-items-center flex-column vh-100 justify-content-center text-center py-3">
         <div className="d-flex align-items-center flex-column px-4">
-          <ClimbingBoxLoader color={'#5383ff'} loading={true}/>
+          <ClimbingBoxLoader color={'#5383ff'} loading={true} />
         </div>
         <div className="text-muted font-size-xl text-center pt-3">
           Veuillez patienter pendant le chargement
@@ -65,9 +65,9 @@ const Routes = () => {
   return (
     <ThemeProvider theme={MuiTheme}>
       <AnimatePresence>
-        <Suspense fallback={<SuspenseLoading/>}>
+        <Suspense fallback={<SuspenseLoading />}>
           <Switch>
-            <Redirect exact from="/" to="/dashboard"/>
+            <Redirect exact from="/" to="/dashboard" />
             <Route
               path={[
                 '/login',
@@ -80,7 +80,7 @@ const Routes = () => {
                     exit="out"
                     variants={pageVariants}
                     transition={pageTransition}>
-                    <ErrorBoundaryRoute path="/login" component={Login}/>
+                    <ErrorBoundaryRoute path="/login" component={Login} />
                   </motion.div>
                 </Switch>
               </MinimalLayout>
@@ -90,12 +90,11 @@ const Routes = () => {
               '/project',
               '/sprint',
               '/task',
-              '/document',
               '/discussion',
               '/note',
               '/problem',
             ]}>
-              <PrivateRoute path="/" component={Entities}/>
+              <PrivateRoute path="/" component={Entities} />
             </Route>
             <Route
               path='*'
@@ -108,7 +107,7 @@ const Routes = () => {
                     exit="out"
                     variants={pageVariants}
                     transition={pageTransition}>
-                    <ErrorBoundaryRoute path="*" component={MyPageError404}/>
+                    <ErrorBoundaryRoute path="*" component={MyPageError404} />
                   </motion.div>
                 </Switch>
               </MinimalLayout>
