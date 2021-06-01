@@ -179,7 +179,7 @@ function DiscussionDetail(props) {
             </Grid>
             <Typography color={"textSecondary"} paragraph>
               {`${moment(discussion.created_at).format('LL')} 
-                                 par ${discussion.user.username}
+                                 By ${discussion.user.username}
                                  `}
             </Typography>
             <Divider />
