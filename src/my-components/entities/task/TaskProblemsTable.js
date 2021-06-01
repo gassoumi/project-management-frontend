@@ -26,7 +26,7 @@ function TaskProblemsTable({ problems }) {
             Resolution tools
         </th>
           <th className="text-center">
-            Statuts
+            Status
         </th>
           <th className="text-center">
             Start date
@@ -51,7 +51,7 @@ function TaskProblemsTable({ problems }) {
             </td>
             <td className="text-center">
               <div className={`badge badge-${getColorProblem(problem.status)} px-4`}>
-                {problem.status === "NON_CLOTURE" ? "NON CLOTURE" : "CLOTURE"}
+                {problem.status === "NON_CLOTURE" ? "Not closed" : "Closed"}
               </div>
             </td>
             <td className="text-center">

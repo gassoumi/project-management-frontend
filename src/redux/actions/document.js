@@ -1,10 +1,10 @@
 import * as ActionTypes from "../actionTypes";
-import {returnErrors} from "./messages";
+import { returnErrors } from "./messages";
 import axios from 'axios';
-import {createMessage} from "./messages";
-import {normalize} from "normalizr";
-import {documentsListSchema} from "../../utils";
-import {fetchTaskById} from "./task";
+import { createMessage } from "./messages";
+import { normalize } from "normalizr";
+import { documentsListSchema } from "../../utils";
+import { fetchTaskById } from "./task";
 import _ from "lodash";
 
 // https://stackoverflow.com/questions/41878838/how-do-i-set-multipart-in-axios-with-react
@@ -20,7 +20,7 @@ export const createDocument = (formData) => dispatch => {
     .then(response => {
       const description = response.data.description;
       dispatch(createMessage({
-        added: `Le document ${description}  a été ajouté `
+        added: `the document ${description}  is added `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_DOCUMENT
@@ -31,15 +31,15 @@ export const createDocument = (formData) => dispatch => {
     })
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       // dispatch({
       //     type: ActionTypes.ACTION_FAILURE_DOCUMENT
       // })
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 export const clearCacheDocument = () => dispatch => {
@@ -51,30 +51,30 @@ export const clearCacheDocument = () => dispatch => {
 //Delete document
 // TODO delete api from backend
 export const deleteDocumentById = document => (dispatch) => {
-    // dispatch(showLoading());
-    const id = document.id;
-    axios.delete(`/api/documents/${id}/`)
-      .then(res => {
-        dispatch(createMessage({
-          deleted: `le document ${document.description} a été supprimée`
-        }));
-        dispatch({
-          type: ActionTypes.CLEAR_CACHE_DOCUMENT
-        });
-        dispatch({
-          type: ActionTypes.REMOVE_SUCCESS_DOCUMENT
-        })
+  // dispatch(showLoading());
+  const id = document.id;
+  axios.delete(`/api/documents/${id}/`)
+    .then(res => {
+      dispatch(createMessage({
+        deleted: `the document ${document.description} is deleted`
+      }));
+      dispatch({
+        type: ActionTypes.CLEAR_CACHE_DOCUMENT
+      });
+      dispatch({
+        type: ActionTypes.REMOVE_SUCCESS_DOCUMENT
       })
-      .catch(error => {
-        if (error.response) {
-          const {data, status} = error.response;
-          dispatch(returnErrors(data, status));
-        }
-      }).finally(() => {
+    })
+    .catch(error => {
+      if (error.response) {
+        const { data, status } = error.response;
+        dispatch(returnErrors(data, status));
+      }
+    }).finally(() => {
       // dispatch(hideLoading())
     });
-  }
-;
+}
+  ;
 
 // update a document
 export const updateDocument = (id, formData) => async dispatch => {
@@ -91,10 +91,10 @@ export const updateDocument = (id, formData) => async dispatch => {
   axios.patch(`/api/documents/${id}/`, formData, config)
     .then(response => {
       const description = response.data.description;
-      const message = isMoveToExpired ? "déplacé à la liste des documents à périmés" :
-        "modifié";
+      const message = isMoveToExpired ? "moved to the list of obsolete documents" :
+        "modified";
       dispatch(createMessage({
-        updated: `le document ${description} a été ${message} `
+        updated: `the document ${description} is ${message} `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_DOCUMENT
@@ -105,15 +105,15 @@ export const updateDocument = (id, formData) => async dispatch => {
     })
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
         type: ActionTypes.UPDATE_FAILURE_DOCUMENT
       });
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 //get list of documents
@@ -130,7 +130,7 @@ export const fetchDocuments = (page = 1, pageSize, queryString = "", sort, searc
   try {
     const res = await axios
       .get(`/api/documents/?page=${page}&page_size=${pageSizeToUse}&${queryString}&search=${searchQuery}&ordering=${sort}`);
-    const {data: {results, next, count}} = res;
+    const { data: { results, next, count } } = res;
     // fetch all tasks of this list of documents
     const listTask = results.map(document => document.task).filter(item => item != null);
     const filteredIdTask = _.uniq(listTask);
@@ -155,7 +155,7 @@ export const fetchDocuments = (page = 1, pageSize, queryString = "", sort, searc
       type: ActionTypes.STARRED_FAILURE_DOCUMENTS,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   } finally {

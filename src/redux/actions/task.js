@@ -1,11 +1,11 @@
 import * as ActionTypes from "../actionTypes";
-import {returnErrors} from "./messages";
+import { returnErrors } from "./messages";
 import axios from "axios";
-import {createMessage} from "./messages";
-import {normalize} from "normalizr";
-import {taskSchema, taskListSchema} from "../../utils";
-import {fetchSprintById} from "./sprint";
-import {fetchUserById} from "./user";
+import { createMessage } from "./messages";
+import { normalize } from "normalizr";
+import { taskSchema, taskListSchema } from "../../utils";
+import { fetchSprintById } from "./sprint";
+import { fetchUserById } from "./user";
 import _ from "lodash";
 import moment from 'moment';
 
@@ -28,7 +28,7 @@ export const fetchTasks = (page = 1, pageSize, sort, searchQuery) => async (disp
       `/api/tasks/?search=${searchQuery}&page=${page}&page_size=${pageSizeToUse}&ordering=${sort}`
     );
     const {
-      data: {results, next, count},
+      data: { results, next, count },
     } = res;
     // fetch all sprint of this list of task
     const listSprint = results.map((task) => task.sprint);
@@ -63,7 +63,7 @@ export const fetchTasks = (page = 1, pageSize, sort, searchQuery) => async (disp
       type: ActionTypes.STARRED_FAILURE_TASKS,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   }
@@ -91,7 +91,7 @@ export const fetchProjectTasks = (page = 1, pageSize, id) => async (
       `/api/projects/${id}/tasks/?page=${page}&page_size=${pageSizeToUse}`
     );
     const {
-      data: {results, next, count},
+      data: { results, next, count },
     } = res;
     // fetch all sprint of this list of task
     const listSprint = results.map((task) => task.sprint);
@@ -126,7 +126,7 @@ export const fetchProjectTasks = (page = 1, pageSize, id) => async (
       type: ActionTypes.STARRED_FAILURE_PROJECT_TASKS,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   }
@@ -154,7 +154,7 @@ export const fetchWeekTasks = (page = 1) => async (dispatch) => {
       `/api/tasks/?page=${page}&page_size=${5}&end_at__lte=${endWeek}&start_at__gte=${startWeek}`
     );
     const {
-      data: {results, next, count},
+      data: { results, next, count },
     } = res;
     // fetch all sprint of this list of task
     const listSprint = results.map((task) => task.sprint);
@@ -190,7 +190,7 @@ export const fetchWeekTasks = (page = 1) => async (dispatch) => {
       type: ActionTypes.STARRED_FAILURE_WEEK_TASKS,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   }
@@ -220,7 +220,7 @@ export const createTask = (task) => (dispatch) => {
       const description = response.data.description;
       dispatch(
         createMessage({
-          added: `la tache ${description}  a été creée `,
+          added: `the task ${description}  is created `,
         })
       );
       dispatch({
@@ -235,7 +235,7 @@ export const createTask = (task) => (dispatch) => {
     })
     .catch((error) => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
@@ -259,7 +259,7 @@ export const updateTask = (idTask, task) => (dispatch) => {
       const description = response.data.description;
       dispatch(
         createMessage({
-          updated: `la tache ${description} a été modifiée `,
+          updated: `the task ${description} is modified `,
         })
       );
       dispatch({
@@ -274,7 +274,7 @@ export const updateTask = (idTask, task) => (dispatch) => {
     })
     .catch((error) => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
@@ -295,7 +295,7 @@ export const deleteTaskById = (task) => (dispatch) => {
     .then((res) => {
       dispatch(
         createMessage({
-          deleted: `la tache ${task.description} a été supprimée`,
+          deleted: `the task ${task.description} is deleted`,
         })
       );
       dispatch({
@@ -311,7 +311,7 @@ export const deleteTaskById = (task) => (dispatch) => {
     // .then(() => fetchSprints()(dispatch))
     .catch((error) => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
     })
@@ -341,7 +341,7 @@ export const fetchTaskById = (id) => async (dispatch) => {
       type: ActionTypes.FETCH_FAILURE_TASK,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   }

@@ -2,10 +2,10 @@
 import * as ActionTypes from "../actionTypes";
 import axios from "axios";
 import _ from "lodash";
-import {fetchUserById} from "./user";
-import {normalize} from "normalizr";
-import {commentsListSchema} from "../../utils";
-import {returnErrors, createMessage} from "./messages";
+import { fetchUserById } from "./user";
+import { normalize } from "normalizr";
+import { commentsListSchema } from "../../utils";
+import { returnErrors, createMessage } from "./messages";
 
 
 export const fetchCommentsByDiscussion = (page = 1, pageSize, idDiscussion) =>
@@ -23,7 +23,7 @@ export const fetchCommentsByDiscussion = (page = 1, pageSize, idDiscussion) =>
       const resultComment = await axios
         .get(`/api/comments/?discussion=${idDiscussion}&page=${page}&page_size=${pageSizeToUse}`);
       if (resultComment.data && resultComment.data.results) {
-        const {data: {results, next, count}} = resultComment;
+        const { data: { results, next, count } } = resultComment;
         const users = results.map(comment => comment.user);
         const filteredUsers = _.uniq(users);
         for (const idUser of filteredUsers) {
@@ -44,7 +44,7 @@ export const fetchCommentsByDiscussion = (page = 1, pageSize, idDiscussion) =>
         type: ActionTypes.STARRED_FAILURE_COMMENTS,
       });
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
     } finally {
@@ -65,12 +65,12 @@ export const createComment = (comment) => (dispatch, getState) => {
     type: ActionTypes.START_UPDATE_COMMENT
   });
   // inject the user here
-  const newComment = {...comment, user: getState().auth.user.id};
+  const newComment = { ...comment, user: getState().auth.user.id };
   axios.post('/api/comments/', newComment)
     .then(response => {
       const description = response.data.description;
       dispatch(createMessage({
-        added: `le commentaire ${description}  a été creé `
+        added: `the comment ${description}  is created `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_COMMENT
@@ -81,15 +81,15 @@ export const createComment = (comment) => (dispatch, getState) => {
     })
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
         type: ActionTypes.UPDATE_FAILURE_COMMENT
       });
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 // update a comment
@@ -99,12 +99,12 @@ export const updateComment = (idComment, comment) => (dispatch, getState) => {
     type: ActionTypes.START_UPDATE_COMMENT
   });
   // inject the user here
-  const newComment = {...comment, user: getState().auth.user.id};
+  const newComment = { ...comment, user: getState().auth.user.id };
   axios.put(`/api/comments/${idComment}/`, newComment)
     .then(response => {
       const description = response.data.description;
       dispatch(createMessage({
-        updated: `le commentaire ${description} a été modifié `
+        updated: `the comment ${description} is modified `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_COMMENT
@@ -115,15 +115,15 @@ export const updateComment = (idComment, comment) => (dispatch, getState) => {
     })
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
         type: ActionTypes.UPDATE_FAILURE_COMMENT
       });
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 //Delete a comment
@@ -133,7 +133,7 @@ export const deleteCommentById = comment => (dispatch) => {
   axios.delete(`/api/comments/${id}/`)
     .then(res => {
       dispatch(createMessage({
-        deleted: `le commentaire ${comment.description} a été supprimée`
+        deleted: `the comment ${comment.description} is deleted`
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_COMMENT
@@ -145,10 +145,10 @@ export const deleteCommentById = comment => (dispatch) => {
     // .then(() => fetchSprints()(dispatch))
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
     }).finally(() => {
-    // dispatch(hideLoading())
-  });
+      // dispatch(hideLoading())
+    });
 };

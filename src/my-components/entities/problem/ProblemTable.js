@@ -159,7 +159,7 @@ function ProblemTable({ problems, sort, handleEdit, handleDelete, authenticatedU
             Description <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('status')}>
-            Statuts <FontAwesomeIcon icon="sort" />
+            Status <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('start_at')}>
             Start date  <FontAwesomeIcon icon="sort" />

@@ -1,14 +1,14 @@
 import * as ActionTypes from "../actionTypes";
-import {createMessage, returnErrors} from "./messages";
+import { createMessage, returnErrors } from "./messages";
 import axios from 'axios';
-import {normalize} from "normalizr";
+import { normalize } from "normalizr";
 import {
   discussionSchema,
   discussionsListSchema,
 } from "../../utils";
 // import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import _ from 'lodash';
-import {fetchUserById, fetchUserById2} from "./user";
+import { fetchUserById, fetchUserById2 } from "./user";
 
 
 //get list of discussions
@@ -23,7 +23,7 @@ export const fetchDiscussions = (page = 1, pageSize, searchQuery) => async (disp
 
   try {
     const res = await axios.get(`/api/discussions/?page=${page}&page_size=${pageSizeToUse}&search=${searchQuery}`);
-    const {data: {results, next, count}} = res;
+    const { data: { results, next, count } } = res;
 
     // fetch all users of this list of discussions
     const listUser = results.map(discussion => discussion.user);
@@ -46,7 +46,7 @@ export const fetchDiscussions = (page = 1, pageSize, searchQuery) => async (disp
     });
   } catch (error) {
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
     dispatch({
@@ -71,7 +71,7 @@ export const fetchTopDiscussions = (page = 1, pageSize) => async (dispatch, getS
 
   try {
     const res = await axios.get(`/api/topDiscussion/?page=${page}&page_size=${pageSizeToUse}`);
-    const {data: {results, next, count}} = res;
+    const { data: { results, next, count } } = res;
 
     // fetch all users of this list of discussions
     const listUser = results.map(discussion => discussion.user);
@@ -94,7 +94,7 @@ export const fetchTopDiscussions = (page = 1, pageSize) => async (dispatch, getS
     });
   } catch (error) {
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
     dispatch({
@@ -115,7 +115,7 @@ export const fetchLatestDiscussions = (page = 1) => async (dispatch, getState) =
 
   try {
     const res = await axios.get(`/api/discussions/?page=${page}&page_size=${3}`);
-    const {data: {results, next, count}} = res;
+    const { data: { results, next, count } } = res;
 
     // fetch all users of this list of discussions
     const listUser = results.map(discussion => discussion.user);
@@ -138,7 +138,7 @@ export const fetchLatestDiscussions = (page = 1) => async (dispatch, getState) =
     });
   } catch (error) {
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
     dispatch({
@@ -177,16 +177,16 @@ export const fetchDiscussion = id => async (dispatch) => {
   } catch (error) {
 
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch({
         type: ActionTypes.FETCH_FAILURE_DISCUSSION,
-        error: {data, status},
+        error: { data, status },
       });
       dispatch(returnErrors(data, status));
     } else {
       dispatch({
         type: ActionTypes.FETCH_FAILURE_DISCUSSION,
-        error: "il y'a une erreur"
+        error: "there is an error"
       });
     }
   } finally {
@@ -222,12 +222,12 @@ export const createDiscussion = (discussion) => (dispatch, getState) => {
   dispatch({
     type: ActionTypes.START_UPDATE_DISCUSSION
   });
-  const newDiscussion = {...discussion, user: getState().auth.user.id};
+  const newDiscussion = { ...discussion, user: getState().auth.user.id };
   axios.post('/api/discussions/', newDiscussion)
     .then(response => {
       const object = response.data.object;
       dispatch(createMessage({
-        added: `la discussion ${object}  a été creée `
+        added: `the discussion ${object}  is created `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_TOP_DISCUSSION
@@ -241,15 +241,15 @@ export const createDiscussion = (discussion) => (dispatch, getState) => {
     })
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
         type: ActionTypes.UPDATE_FAILURE_DISCUSSION
       });
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 // update a discussion
@@ -258,12 +258,12 @@ export const updateDiscussion = (idDiscussion, discussion) => async (dispatch, g
   dispatch({
     type: ActionTypes.START_UPDATE_DISCUSSION
   });
-  const newDiscussion = {...discussion, user: getState().auth.user.id};
+  const newDiscussion = { ...discussion, user: getState().auth.user.id };
   try {
     const response = await axios.put(`/api/discussions/${idDiscussion}/`, newDiscussion);
     const object = response.data.object;
     dispatch(createMessage({
-      updated: `la discussion ${object} a été modifiée `
+      updated: `the discussion ${object} is updated `
     }));
     // dispatch({
     //     type: ActionTypes.CLEAR_CACHE_DISCUSSION
@@ -274,7 +274,7 @@ export const updateDiscussion = (idDiscussion, discussion) => async (dispatch, g
     })
   } catch (error) {
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
     dispatch({

@@ -201,7 +201,7 @@ function TaskForm(props) {
                 validate: {
                   date: value => moment(value).isValid() || getDateMessage(),
                   greatOrEqualThan: value => {
-                    return isGreatOrEqualThan(value) || "La date de fin doit etre superieur au date de debut";
+                    return isGreatOrEqualThan(value) || "The end date must be greater than the start date";
                   },
                 },
               }}

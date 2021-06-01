@@ -244,7 +244,7 @@ function Task(props) {
                   textColor="primary"
                   variant="fullWidth"
                   onChange={handleChange}>
-                  <Tab className="py-3" label="Tous" />
+                  <Tab className="py-3" label="All" />
                   <Tab className={`py-3 text-${getColorTask('Backlog')}`} label="Backlog" />
                   <Tab className={`py-3 text-${getColorTask('A Faire')}`} label="To do" />
                   <Tab className={`py-3 text-${getColorTask('En Cours')}`} label="In progress" />

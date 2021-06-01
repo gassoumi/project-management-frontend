@@ -1,8 +1,8 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {connect} from "react-redux";
-import {logout} from "../../redux/actions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { connect } from "react-redux";
+import { logout } from "../../redux/actions";
 
 import {
   Avatar,
@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 
 import avatar4 from '../../assets/images/avatars/avatar4.jpg';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const StyledBadge = withStyles({
   badge: {
@@ -48,7 +48,7 @@ const StyledBadge = withStyles({
   }
 })(Badge);
 
-export function HeaderUserbox({logout, auth}) {
+export function HeaderUserbox({ logout, auth }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
@@ -79,7 +79,7 @@ export function HeaderUserbox({logout, auth}) {
             }}
             variant="dot">
             <Avatar sizes="44" alt={auth.user.username}
-                    src={auth.user.userProfile && auth.user.userProfile.photo ? auth.user.userProfile.photo : ""}/>
+              src={auth.user.userProfile && auth.user.userProfile.photo ? auth.user.userProfile.photo : ""} />
           </StyledBadge>
         </Box>
         <div className="d-none d-xl-block pl-3">
@@ -89,7 +89,7 @@ export function HeaderUserbox({logout, auth}) {
           {/*<span className="text-white-50">Senior React Developer</span>*/}
         </div>
         <span className="pl-1 pl-xl-3">
-          <FontAwesomeIcon icon={['fas', 'angle-down']} className="opacity-5"/>
+          <FontAwesomeIcon icon={['fas', 'angle-down']} className="opacity-5" />
         </span>
       </Button>
 
@@ -119,7 +119,7 @@ export function HeaderUserbox({logout, auth}) {
                 }}
                 variant="dot">
                 <Avatar sizes="44" alt={auth.user.username}
-                        src={auth.user.userProfile && auth.user.userProfile.photo ? auth.user.userProfile.photo : ""}/>
+                  src={auth.user.userProfile && auth.user.userProfile.photo ? auth.user.userProfile.photo : ""} />
               </StyledBadge>
             </Box>
             <div className="pl-3 ">
@@ -130,11 +130,11 @@ export function HeaderUserbox({logout, auth}) {
               {/*  Senior React Developer*/}
               {/*</span>*/}
             </div>
-            <Divider className="w-100 mt-2"/>
+            <Divider className="w-100 mt-2" />
             {/*<ListItem button>My Account</ListItem>*/}
-            <ListItem button>Paramètre de profil</ListItem>
+            {/* <ListItem button>Paramètre de profil</ListItem> */}
             {/*<ListItem button>Active tasks</ListItem>*/}
-            <ListItem onClick={handleLogout} button>Se déconnecter</ListItem>
+            <ListItem onClick={handleLogout} button>Sign out</ListItem>
             <>
               {/*<Divider className="w-100"/>*/}
               {/*<ListItem className="p-0">*/}
@@ -193,4 +193,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {logout})(HeaderUserbox);
+export default connect(mapStateToProps, { logout })(HeaderUserbox);

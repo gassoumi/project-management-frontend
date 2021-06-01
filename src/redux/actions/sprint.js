@@ -1,10 +1,10 @@
 import * as ActionTypes from "../actionTypes";
-import {returnErrors} from "./messages";
+import { returnErrors } from "./messages";
 import axios from 'axios';
-import {createMessage} from "./messages";
-import {normalize} from "normalizr";
-import {sprintListSchema, sprintSchema} from "../../utils";
-import {fetchProjectById} from "./project";
+import { createMessage } from "./messages";
+import { normalize } from "normalizr";
+import { sprintListSchema, sprintSchema } from "../../utils";
+import { fetchProjectById } from "./project";
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -28,7 +28,7 @@ export const fetchSprints = (page = 1, pageSize, sort, searchQuery) => async (di
 
   try {
     const res = await axios.get(`/api/sprints/?search=${searchQuery}&page=${page}&page_size=${pageSizeToUse}&ordering=${sort}`);
-    const {data: {results, next, count}} = res;
+    const { data: { results, next, count } } = res;
     const listProject = results.map(sprint => sprint.project);
     const filteredIdProject = _.uniq(listProject);
 
@@ -52,7 +52,7 @@ export const fetchSprints = (page = 1, pageSize, sort, searchQuery) => async (di
       type: ActionTypes.STARRED_FAILURE_SPRINTS,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   }
@@ -71,7 +71,7 @@ const recursiveFetch = async (url, data) => {
   } else {
     newResult = res.data.results;
   }
-  const newData = {...res.data, results: newResult};
+  const newData = { ...res.data, results: newResult };
   return await recursiveFetch(res.data.next, newData);
 };
 
@@ -85,7 +85,7 @@ export const fetchCalenderSprints = (dateQueryFilter) => async (dispatch, getSta
   try {
     const data = {};
     const res = await recursiveFetch(`/api/sprints/?page=${1}&page_size=${100}&${dateQueryFilter}`, data);
-    const {results, next, count} = res;
+    const { results, next, count } = res;
     const listProject = results.map(sprint => sprint.project);
     const filteredIdProject = _.uniq(listProject);
 
@@ -110,7 +110,7 @@ export const fetchCalenderSprints = (dateQueryFilter) => async (dispatch, getSta
       type: ActionTypes.STARRED_FAILURE_SPRINTS,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   }
@@ -129,7 +129,7 @@ export const fetchWeekSprints = (page = 1, pageSize = 3) => async (dispatch, get
 
   try {
     const res = await axios.get(`/api/sprints/?page=${page}&page_size=${pageSize}&desired_at__lte=${endWeek}&desired_at__gte=${startWeek}`);
-    const {data: {results, next, count}} = res;
+    const { data: { results, next, count } } = res;
     const listProject = results.map(sprint => sprint.project);
     const filteredIdProject = _.uniq(listProject);
 
@@ -153,7 +153,7 @@ export const fetchWeekSprints = (page = 1, pageSize = 3) => async (dispatch, get
       type: ActionTypes.STARRED_FAILURE_WEEK_SPRINTS,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   }
@@ -169,7 +169,7 @@ export const createSprint = (sprint) => (dispatch) => {
     .then(response => {
       const name = response.data.name;
       dispatch(createMessage({
-        added: `le sprint ${name}  a été creé `
+        added: `the sprint ${name}  is created `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_WEEK_SPRINT
@@ -183,15 +183,15 @@ export const createSprint = (sprint) => (dispatch) => {
     })
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
         type: ActionTypes.UPDATE_FAILURE_SPRINT
       });
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 // update a sprint
@@ -204,7 +204,7 @@ export const updateSprint = (idSprint, sprint) => dispatch => {
     .then(response => {
       const name = response.data.name;
       dispatch(createMessage({
-        updated: `le sprint ${name} a été modifié `
+        updated: `the sprint ${name} is modified `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_WEEK_SPRINT
@@ -219,47 +219,47 @@ export const updateSprint = (idSprint, sprint) => dispatch => {
     // .then(() => fetchSprints()(dispatch))
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
         type: ActionTypes.UPDATE_FAILURE_SPRINT
       })
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 //Delete sprint
 export const deleteSprintById = sprint => (dispatch) => {
-    // dispatch(showLoading());
-    const id = sprint.id;
-    axios.delete(`/api/sprints/${id}/`)
-      .then(res => {
-        dispatch(createMessage({
-          deleted: `le sprint ${sprint.name} a été supprimé`
-        }));
-        dispatch({
-          type: ActionTypes.CLEAR_CACHE_WEEK_SPRINT
-        });
-        dispatch({
-          type: ActionTypes.CLEAR_CACHE_SPRINT
-        });
-        dispatch({
-          type: ActionTypes.REMOVE_SUCCESS_SPRINT
-        })
+  // dispatch(showLoading());
+  const id = sprint.id;
+  axios.delete(`/api/sprints/${id}/`)
+    .then(res => {
+      dispatch(createMessage({
+        deleted: `the sprint ${sprint.name} is deleted`
+      }));
+      dispatch({
+        type: ActionTypes.CLEAR_CACHE_WEEK_SPRINT
+      });
+      dispatch({
+        type: ActionTypes.CLEAR_CACHE_SPRINT
+      });
+      dispatch({
+        type: ActionTypes.REMOVE_SUCCESS_SPRINT
       })
-      // .then(() => fetchSprints()(dispatch))
-      .catch(error => {
-        if (error.response) {
-          const {data, status} = error.response;
-          dispatch(returnErrors(data, status));
-        }
-      }).finally(() => {
+    })
+    // .then(() => fetchSprints()(dispatch))
+    .catch(error => {
+      if (error.response) {
+        const { data, status } = error.response;
+        dispatch(returnErrors(data, status));
+      }
+    }).finally(() => {
       // dispatch(hideLoading())
     });
-  }
-;
+}
+  ;
 
 export const clearCacheSprint = () => dispatch => {
   dispatch({
@@ -283,7 +283,7 @@ export const fetchSprintById = id => async dispatch => {
     });
   } catch (error) {
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   }

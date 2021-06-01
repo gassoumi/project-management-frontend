@@ -1,10 +1,10 @@
 import * as ActionTypes from "../actionTypes";
-import {returnErrors} from "./messages";
+import { returnErrors } from "./messages";
 import axios from 'axios';
-import {createMessage} from "./messages";
-import {normalize} from "normalizr";
-import {projectSchema, projectListSchema} from "../../utils";
-import {fetchUserById} from "./user";
+import { createMessage } from "./messages";
+import { normalize } from "normalizr";
+import { projectSchema, projectListSchema } from "../../utils";
+import { fetchUserById } from "./user";
 import _ from "lodash";
 
 //get list of project projects
@@ -19,7 +19,7 @@ export const fetchProjects = (page = 1, pageSize, sort, searchQuery) => async (d
 
   try {
     const res = await axios.get(`/api/projects/?search=${searchQuery}&page=${page}&page_size=${pageSizeToUse}&ordering=${sort}`);
-    const {data: {results, next, count}} = res;
+    const { data: { results, next, count } } = res;
     // get an array of arrays
     const projectsUsers = results.map(project => project.projectUsers);
     const users = projectsUsers.map(projectUser => projectUser.map(item => item.user));
@@ -42,7 +42,7 @@ export const fetchProjects = (page = 1, pageSize, sort, searchQuery) => async (d
       type: ActionTypes.STARRED_FAILURE_PROJECTS,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   } finally {
@@ -58,7 +58,7 @@ export const fetchLatestProjects = (page = 1) => async dispatch => {
   });
   try {
     const res = await axios.get(`/api/projects/?page=${page}&page_size=${5}&ordering=-created_at`);
-    const {data: {results, next, count}} = res;
+    const { data: { results, next, count } } = res;
     const normalizedData = normalize(results, projectListSchema);
     dispatch({
       type: ActionTypes.STARRED_SUCCESS_LATEST_PROJECTS,
@@ -73,7 +73,7 @@ export const fetchLatestProjects = (page = 1) => async dispatch => {
       type: ActionTypes.STARRED_FAILURE_LATEST_PROJECTS,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   } finally {
@@ -100,7 +100,7 @@ export const createProject = (project) => async dispatch => {
     .then(response => {
       const designation = response.data.designation;
       dispatch(createMessage({
-        added: `le projet ${designation}  a été creé `
+        added: `the project ${designation}  is created `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_LATEST_PROJECT
@@ -114,15 +114,15 @@ export const createProject = (project) => async dispatch => {
     })
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
         type: ActionTypes.UPDATE_FAILURE_PROJECT
       })
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 // update a project
@@ -135,7 +135,7 @@ export const updateProject = (idProject, project) => dispatch => {
     .then(response => {
       const designation = response.data.designation;
       dispatch(createMessage({
-        updated: `le projet ${designation} a été modifié `
+        updated: `the project ${designation} is modified `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_LATEST_PROJECT
@@ -149,46 +149,46 @@ export const updateProject = (idProject, project) => dispatch => {
     })
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
         type: ActionTypes.UPDATE_FAILURE_PROJECT
       })
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 //Delete Project
 export const deleteProjectById = project => (dispatch) => {
-    // dispatch(showLoading());
-    const id = project.id;
-    axios.delete(`/api/projects/${id}/`)
-      .then(res => {
-        dispatch(createMessage({
-          deleted: `le projet ${project.designation} a été supprimé`
-        }));
-        dispatch({
-          type: ActionTypes.CLEAR_CACHE_LATEST_PROJECT
-        });
-        dispatch({
-          type: ActionTypes.CLEAR_CACHE_PROJECT
-        });
-        dispatch({
-          type: ActionTypes.REMOVE_SUCCESS_PROJECT
-        })
+  // dispatch(showLoading());
+  const id = project.id;
+  axios.delete(`/api/projects/${id}/`)
+    .then(res => {
+      dispatch(createMessage({
+        deleted: `the project ${project.designation} is deleted`
+      }));
+      dispatch({
+        type: ActionTypes.CLEAR_CACHE_LATEST_PROJECT
+      });
+      dispatch({
+        type: ActionTypes.CLEAR_CACHE_PROJECT
+      });
+      dispatch({
+        type: ActionTypes.REMOVE_SUCCESS_PROJECT
       })
-      .catch(error => {
-        if (error.response) {
-          const {data, status} = error.response;
-          dispatch(returnErrors(data, status));
-        }
-      }).finally(() => {
+    })
+    .catch(error => {
+      if (error.response) {
+        const { data, status } = error.response;
+        dispatch(returnErrors(data, status));
+      }
+    }).finally(() => {
       // dispatch(hideLoading())
     });
-  }
-;
+}
+  ;
 
 
 //get Project
@@ -209,10 +209,10 @@ export const fetchProjectById = (id) => async dispatch => {
     });
   } catch (error) {
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch({
         type: ActionTypes.FETCH_FAILURE_PROJECT,
-        error: {data, status},
+        error: { data, status },
       });
       dispatch(returnErrors(data, status));
     } else {

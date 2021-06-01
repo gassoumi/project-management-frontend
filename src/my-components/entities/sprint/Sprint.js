@@ -234,7 +234,7 @@ function Sprint(props) {
             (<div className="example-card-seamless mb-4-spacing">
               <Card className="card-box mb-4">
                 <div className="card-header pr-2">
-                  <div className="card-header--title">Sprints statuts</div>
+                  <div className="card-header--title">Sprints status</div>
                   <div className="card-header--actions">
                     <Tooltip arrow title="Refresh">
                       <IconButton size="small" color="primary" className="mr-3">

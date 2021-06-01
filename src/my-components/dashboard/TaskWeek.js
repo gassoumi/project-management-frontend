@@ -6,7 +6,7 @@ import moment from 'moment';
 import { getDisplayString } from "../utils";
 import Link from "@material-ui/core/Link";
 import { Avatar, Card } from "@material-ui/core";
-import { getColorTask } from "../entities/task/TaskTable";
+import { getColorTask, getTaskValue } from "../entities/task/TaskTable";
 
 WeekTask.prototype = {
   rows: PropTypes.array.isRequired
@@ -64,7 +64,7 @@ export default function WeekTask({ rows }) {
                     }
                   </td>
                   <td className="text-left">
-                    <span className={`badge badge-${getColorTask(row.task)}`}>{row.status}</span>
+                    <span className={`badge badge-${getColorTask(row.task)}`}>{getTaskValue(row.status)}</span>
                   </td>
                   <td className="text-center">
                     {moment(row.end_at).format('L')}
@@ -82,7 +82,7 @@ export default function WeekTask({ rows }) {
             component={RouterLink}
             to="/task" color="primary"
           >
-            Voir tout
+            See all
           </Button>
         </div>
       </Card>

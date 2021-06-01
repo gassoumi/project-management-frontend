@@ -1,9 +1,9 @@
 // import {hideLoading, showLoading} from "react-redux-loading-bar";
 import * as ActionTypes from "../actionTypes";
 import axios from "axios";
-import {normalize} from "normalizr";
-import {userSchema, usersListSchema} from "../../utils";
-import {returnErrors} from "./messages";
+import { normalize } from "normalizr";
+import { userSchema, usersListSchema } from "../../utils";
+import { returnErrors } from "./messages";
 
 export const fetchUsers = (page = 1, pageSize) => async (dispatch, getState) => {
   // dispatch(showLoading());
@@ -17,7 +17,7 @@ export const fetchUsers = (page = 1, pageSize) => async (dispatch, getState) => 
 
   try {
     const res = await axios.get(`/api/auth/users/?page=${page}&page_size=${pageSizeToUse}`);
-    const {data: {results, next, count}} = res;
+    const { data: { results, next, count } } = res;
 
     const normalizedData = normalize(results, usersListSchema);
 
@@ -34,7 +34,7 @@ export const fetchUsers = (page = 1, pageSize) => async (dispatch, getState) => 
       type: ActionTypes.STARRED_FAILURE_USERS,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   } finally {
@@ -61,7 +61,7 @@ export const fetchUserById = (id) => async dispatch => {
     });
   } catch (error) {
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   } finally {

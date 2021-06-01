@@ -17,7 +17,7 @@ import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
 import { getDisplayString } from "../../utils";
 import { getColorTask } from "./TaskTable";
-import { getColorSprint } from "../sprint/SprintTable";
+import { getColorSprint, getSprintValue } from "../sprint/SprintTable";
 
 function TaskDetail(props) {
   const id = props.match.params.id;
@@ -106,11 +106,11 @@ function TaskDetail(props) {
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <h5>
-                        Statuts :
+                        Status :
                       </h5>
                       <h5>
                         <span className={`badge badge-${getColorTask(task.status)}`}>
-                          {task.status === "NON_CLOTURE" ? "NON CLOTURE" : "CLOTURE"}
+                          {task.status === "NON_CLOTURE" ? "Not closed" : "Closed"}
                         </span>
                       </h5>
                     </Grid>
@@ -154,10 +154,10 @@ function TaskDetail(props) {
                     {task.sprint.name}
                   </ReactMarkdown>
                   <h5 className="mb-1">
-                    Statuts :
+                    Status :
                   </h5>
                   <h5 className="mb-3"><span className={`badge badge-${getColorSprint(task.sprint.status)}`}>
-                    {task.sprint.status}
+                    {getSprintValue(task.sprint.status)}
                   </span></h5>
                   <div className="mb-3">
                     <h5>

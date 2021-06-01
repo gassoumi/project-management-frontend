@@ -28,6 +28,7 @@ import LoadingButton from '../common/LoadingButton';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { Redirect } from "react-router-dom";
 import { SuspenseLoading } from '../../Routes';
+import UserPassword from './UserPassword';
 
 
 function TabPanel(props) {
@@ -116,6 +117,9 @@ const Login = (props) => {
                         </div>
                       </div>
                     </Grid>
+
+
+
                     <Grid
                       item
                       xs={12}
@@ -123,6 +127,7 @@ const Login = (props) => {
                       lg={7}
                       className="d-flex align-items-center">
                       <Container maxWidth="sm">
+                        <UserPassword />
                         <h3 className="display-4 mb-2 font-weight-bold">
                           Login with your credentials
                         </h3>
@@ -217,6 +222,7 @@ const Login = (props) => {
                         </Card>
                       </Container>
                     </Grid>
+
                   </Grid>
                 </div>
               </div>

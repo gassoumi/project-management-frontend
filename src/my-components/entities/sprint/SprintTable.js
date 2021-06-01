@@ -31,6 +31,22 @@ export const getColorSprint = value => {
 };
 
 
+export const getSprintValue = value => {
+  switch (value) {
+    case "Planifiè":
+      return "Planned";
+    case "En Cours":
+      return "In progress";
+    case "Cloturé":
+      return "Closing";
+    case "Archivé":
+      return "Archived";
+    default:
+      return "value";
+  }
+};
+
+
 function SprintTable({ sprints, canEdit, sort, handleEdit, handleDelete }) {
   return (
     <table className="text-nowrap mb-0 table table-borderless table-hover">
@@ -46,7 +62,7 @@ function SprintTable({ sprints, canEdit, sort, handleEdit, handleDelete }) {
             Date <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('status')}>
-            Statuts <FontAwesomeIcon icon="sort" />
+            Status <FontAwesomeIcon icon="sort" />
           </th>
           {canEdit && <th className="text-center">Actions</th>}
         </tr>
@@ -69,7 +85,7 @@ function SprintTable({ sprints, canEdit, sort, handleEdit, handleDelete }) {
               {moment(sprint.desired_at).format('LL')}
             </td>
             <td className="text-center">
-              <div className={`badge badge-${getColorSprint(sprint.status)} px-4`}>{sprint.status}</div>
+              <div className={`badge badge-${getColorSprint(sprint.status)} px-4`}>{getSprintValue(sprint.status)}</div>
             </td>
             {canEdit &&
               <td className="text-center">

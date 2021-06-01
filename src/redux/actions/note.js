@@ -1,9 +1,9 @@
 import * as ActionTypes from "../actionTypes";
-import {returnErrors} from "./messages";
+import { returnErrors } from "./messages";
 import axios from 'axios';
-import {createMessage} from "./messages";
-import {normalize} from "normalizr";
-import {notesListSchema, noteSchema} from "../../utils";
+import { createMessage } from "./messages";
+import { normalize } from "normalizr";
+import { notesListSchema, noteSchema } from "../../utils";
 
 //get list of project projects
 export const fetchNotes = (page = 1, pageSize, sort, searchQuery) => async (dispatch, getState) => {
@@ -18,7 +18,7 @@ export const fetchNotes = (page = 1, pageSize, sort, searchQuery) => async (disp
 
   try {
     const res = await axios.get(`/api/notes/?search=${searchQuery}&page=${page}&page_size=${pageSizeToUse}&ordering=${sort}`);
-    const {data: {results, next, count}} = res;
+    const { data: { results, next, count } } = res;
 
     const normalizedData = normalize(results, notesListSchema);
 
@@ -35,7 +35,7 @@ export const fetchNotes = (page = 1, pageSize, sort, searchQuery) => async (disp
       type: ActionTypes.STARRED_FAILURE_NOTES,
     });
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   } finally {
@@ -50,12 +50,12 @@ export const createNote = (note) => (dispatch, getState) => {
   dispatch({
     type: ActionTypes.START_UPDATE_NOTE
   });
-  const newNote = {...note, user: getState().auth.user.id};
+  const newNote = { ...note, user: getState().auth.user.id };
   axios.post('/api/notes/', newNote)
     .then(response => {
       const note = response.data.note;
       dispatch(createMessage({
-        added: `la note ${note}  a été creé `
+        added: `the story ${note}  is created `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_NOTE
@@ -66,15 +66,15 @@ export const createNote = (note) => (dispatch, getState) => {
     })
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
         type: ActionTypes.UPDATE_FAILURE_NOTE
       });
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 // update a note
@@ -83,12 +83,12 @@ export const updateNote = (idNote, note) => (dispatch, getState) => {
   dispatch({
     type: ActionTypes.START_UPDATE_PROBLEM
   });
-  const newNote = {...note, user: getState().auth.user.id};
+  const newNote = { ...note, user: getState().auth.user.id };
   axios.put(`/api/notes/${idNote}/`, newNote)
     .then(response => {
       const note = response.data.note;
       dispatch(createMessage({
-        updated: `la note ${note} a été modifié `
+        updated: `the story ${note} is modified `
       }));
       dispatch({
         type: ActionTypes.CLEAR_CACHE_NOTE
@@ -99,43 +99,43 @@ export const updateNote = (idNote, note) => (dispatch, getState) => {
     })
     .catch(error => {
       if (error.response) {
-        const {data, status} = error.response;
+        const { data, status } = error.response;
         dispatch(returnErrors(data, status));
       }
       dispatch({
         type: ActionTypes.UPDATE_FAILURE_NOTE
       });
     }).finally(() => {
-    // dispatch(hideLoading())
-  })
+      // dispatch(hideLoading())
+    })
 };
 
 //Delete note
 export const deleteNote = note => (dispatch) => {
-    // dispatch(showLoading());
-    const id = note.id;
-    axios.delete(`/api/notes/${id}/`)
-      .then(res => {
-        dispatch(createMessage({
-          deleted: `la note ${note.note} a été supprimé`
-        }));
-        dispatch({
-          type: ActionTypes.CLEAR_CACHE_NOTE
-        });
-        dispatch({
-          type: ActionTypes.REMOVE_SUCCESS_NOTE
-        })
+  // dispatch(showLoading());
+  const id = note.id;
+  axios.delete(`/api/notes/${id}/`)
+    .then(res => {
+      dispatch(createMessage({
+        deleted: `the story ${note.note} is deleted`
+      }));
+      dispatch({
+        type: ActionTypes.CLEAR_CACHE_NOTE
+      });
+      dispatch({
+        type: ActionTypes.REMOVE_SUCCESS_NOTE
       })
-      .catch(error => {
-        if (error.response) {
-          const {data, status} = error.response;
-          dispatch(returnErrors(data, status));
-        }
-      }).finally(() => {
+    })
+    .catch(error => {
+      if (error.response) {
+        const { data, status } = error.response;
+        dispatch(returnErrors(data, status));
+      }
+    }).finally(() => {
       // dispatch(hideLoading())
     });
-  }
-;
+}
+  ;
 
 export const clearCacheNote = () => dispatch => {
   dispatch({
@@ -155,7 +155,7 @@ export const fetchNoteById = id => async dispatch => {
     });
   } catch (error) {
     if (error.response) {
-      const {data, status} = error.response;
+      const { data, status } = error.response;
       dispatch(returnErrors(data, status));
     }
   }

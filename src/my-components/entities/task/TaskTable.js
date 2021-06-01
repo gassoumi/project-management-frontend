@@ -34,6 +34,23 @@ export const getColorTask = value => {
   }
 };
 
+export const getTaskValue = value => {
+  switch (value) {
+    case "A Faire":
+      return "To do";
+    case "En Cours":
+      return "In progress";
+    case "A Verifier":
+      return "To check";
+    case "Termine":
+      return "Completed";
+    case "Backlog":
+      return "Backlog";
+    default:
+      return value;
+  }
+};
+
 export const getTaskCodeColor = (value) => {
   switch (value) {
     case "A Faire":
@@ -69,7 +86,7 @@ function NoteTable({ tasks, canEdit, sort, handleEdit, handleDelete, displayStat
           {
             displayStatus &&
             <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('status')}>
-              Statuts <FontAwesomeIcon icon="sort" />
+              Status <FontAwesomeIcon icon="sort" />
             </th>
           }
 
@@ -118,7 +135,7 @@ function NoteTable({ tasks, canEdit, sort, handleEdit, handleDelete, displayStat
             {
               displayStatus &&
               <td className="text-center">
-                <div className={`badge badge-${getColorTask(task.status)} px-4`}>{task.status}</div>
+                <div className={`badge badge-${getColorTask(task.status)} px-4`}>{getTaskValue(task.status)}</div>
               </td>
             }
             <td className="text-center">

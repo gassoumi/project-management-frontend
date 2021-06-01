@@ -11,7 +11,7 @@ import moment from 'moment';
 import Typography from "@material-ui/core/Typography";
 import { getDisplayString } from "../utils";
 import { Card } from "@material-ui/core";
-import { getColorSprint } from "../entities/sprint/SprintTable";
+import { getColorSprint, getSprintValue } from "../entities/sprint/SprintTable";
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -95,7 +95,7 @@ export default function WeekSprint({ items }) {
                 />
                 <ListItemSecondaryAction>
                   <h5>
-                    <span className={`badge badge-${getColorSprint(item.status)} px-4`}>{item.status}</span>
+                    <span className={`badge badge-${getColorSprint(item.status)} px-4`}>{getSprintValue(item.status)}</span>
                   </h5>
                 </ListItemSecondaryAction>
               </ListItem>
