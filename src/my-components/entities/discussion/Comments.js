@@ -172,7 +172,7 @@ function Comments(props) {
                   href="#/"
                   onClick={e => e.preventDefault()}
                   className="font-weight-bold"
-                  title="...">
+                >
                   {comment.user.username}
                 </a>
                 <Typography variant={"caption"} gutterBottom>
