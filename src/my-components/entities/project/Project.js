@@ -1,7 +1,7 @@
-import React, {Fragment, useState, useEffect} from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from "react-redux";
-import {fetchProjects, clearCacheProject, deleteProjectById, setTabValueProject} from "../../../redux";
+import { connect } from "react-redux";
+import { fetchProjects, clearCacheProject, deleteProjectById, setTabValueProject } from "../../../redux";
 
 
 import {
@@ -19,15 +19,15 @@ import {
 import ProjectTable from './ProjectTable';
 import ProjectList from './ProjectList';
 import AddNew from '../common/AddNew';
-import {Selector} from '../index';
-import {SuspenseLoading} from "../../../Routes";
+import { Selector } from '../index';
+import { SuspenseLoading } from "../../../Routes";
 import Alert from '../common/Alert';
-import {overridePaginationStateWithQueryParams, getSortState} from "../../../utils";
+import { overridePaginationStateWithQueryParams, getSortState } from "../../../utils";
 import DeleteDialog from "../common/DeleteDialog";
 
 
 function TabPanel(props) {
-  const {children, value, index, ...other} = props;
+  const { children, value, index, ...other } = props;
 
   return (
     <Typography
@@ -175,45 +175,45 @@ const ApplicationsProjectsContent = (props) => {
           open={open}
           handleClose={() => setOpen(false)}
           deleteObject={props.deleteProjectById}
-          title=" Êtes-vous sûr de vouloir supprimer ce projet?"
-          label={project.designation}/>
+          title="Are you sure to delete this project ?"
+          label={project.designation} />
         <Card className="card-box mb-4">
           <div>
             <AddNew
               canEdit={props.canEdit}
-              label="Projets"
+              label="Projects"
               count={props.count}
-              buttonLabel="Ajouter un projet"
+              buttonLabel="Add a project"
               handleAdd={createNew}
               handleInput={handleInput}
               handleQuery={handleQuery}
               queryValue={query}
             />
-            <Divider/>
+            <Divider />
             <Tabs
               value={props.value}
               indicatorColor="secondary"
               textColor="secondary"
               variant="fullWidth"
               onChange={handleChange}>
-              <Tab label="Colonnes de liste"/>
-              <Tab label="Tableau"/>
+              <Tab label="Grid" />
+              <Tab label="Table" />
             </Tabs>
           </div>
         </Card>
-        {props.isFetching ? <SuspenseLoading/> :
+        {props.isFetching ? <SuspenseLoading /> :
           (props.projects && props.projects.length > 0) ?
             (
               <Fragment>
                 <TabPanel value={props.value} index={0}>
                   <Grid container spacing={4}>
-                    <ProjectList handleDelete={handleDelete} canEdit={props.canEdit} projects={props.projects}/>
+                    <ProjectList handleDelete={handleDelete} canEdit={props.canEdit} projects={props.projects} />
                   </Grid>
                 </TabPanel>
                 <TabPanel value={props.value} index={1}>
                   <Card className="card-box mb-4">
                     <ProjectTable handleDelete={handleDelete} canEdit={props.canEdit} projects={props.projects}
-                                  sort={sort}/>
+                      sort={sort} />
                   </Card>
                 </TabPanel>
                 <Grid container spacing={3}>
@@ -234,7 +234,7 @@ const ApplicationsProjectsContent = (props) => {
             (
               <Fragment>
                 <Card className="card-box p-2 mb-4">
-                  <Alert label="Aucun projet trouvé"/>
+                  <Alert label="No project found" />
                 </Card>
               </Fragment>
             )
@@ -264,7 +264,7 @@ ApplicationsProjectsContent.prototype = {
 const mapStateToProps = (state) => {
 
   const {
-    pagination: {projects},
+    pagination: { projects },
   } = state;
   const listProject = Selector.getProjectsPage(state);
 

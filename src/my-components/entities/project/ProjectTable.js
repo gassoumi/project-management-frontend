@@ -50,16 +50,16 @@ function ProjectTable({ projects, sort, canEdit, handleDelete }) {
         <thead>
           <tr>
             <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('code')}>
-              Code projet <FontAwesomeIcon icon={['fas', 'sort']} />
+              Project code <FontAwesomeIcon icon={['fas', 'sort']} />
             </th>
             <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('designation')}>
-              Projet <FontAwesomeIcon icon="sort" />
+              Project <FontAwesomeIcon icon="sort" />
             </th>
             <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('objective')}>
               Objective <FontAwesomeIcon icon="sort" />
             </th>
             <th className="text-center">
-              Membres
+              Members
           </th>
             <th className="text-center">Actions</th>
           </tr>
@@ -88,7 +88,7 @@ function ProjectTable({ projects, sort, canEdit, handleDelete }) {
               </td>
               <td className="text-center">
                 {canEdit &&
-                  <Tooltip arrow title="Modifier">
+                  <Tooltip arrow title="Edit">
                     <IconButton
                       component={RouterLink}
                       to={`${match.url}/${project.id}/edit`}
@@ -99,7 +99,7 @@ function ProjectTable({ projects, sort, canEdit, handleDelete }) {
                       />
                     </IconButton>
                   </Tooltip>}
-                <Tooltip arrow title="Consulter">
+                <Tooltip arrow title="View">
                   <IconButton
                     component={RouterLink}
                     to={`${match.url}/${project.id}`}
@@ -111,7 +111,7 @@ function ProjectTable({ projects, sort, canEdit, handleDelete }) {
                   </IconButton>
                 </Tooltip>
                 {canEdit &&
-                  <Tooltip arrow title="Supprimer">
+                  <Tooltip arrow title="Delete">
                     <IconButton onClick={() => handleDelete(project)} className="text-danger">
                       <FontAwesomeIcon
                         icon={['far', 'trash-alt']}

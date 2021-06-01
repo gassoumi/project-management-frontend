@@ -3,7 +3,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-export default function ComboBoxClassification({register, name, errors, defaultValue}) {
+export default function ComboBoxClassification({ register, name, errors, defaultValue }) {
 
   return (
     <Autocomplete
@@ -18,8 +18,8 @@ export default function ComboBoxClassification({register, name, errors, defaultV
         error={!!errors[name]}
         helperText={errors[name] && errors[name].message}
         inputRef={register}
-        label="Choisir une classification"
-        variant="outlined"/>}
+        label="Choose a classification"
+        variant="outlined" />}
     />
   );
 }

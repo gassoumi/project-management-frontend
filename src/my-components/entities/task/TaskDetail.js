@@ -1,27 +1,27 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Grid from "@material-ui/core/Grid";
-import {fetchTaskById, clearCacheTask, clearCacheProblem, fetchProblemsByTask} from "../../../redux";
-import {connect} from "react-redux";
-import {Selector} from "../index";
-import {SuspenseLoading} from "../../../Routes";
+import { fetchTaskById, clearCacheTask, clearCacheProblem, fetchProblemsByTask } from "../../../redux";
+import { connect } from "react-redux";
+import { Selector } from "../index";
+import { SuspenseLoading } from "../../../Routes";
 import moment from 'moment';
 import Divider from '@material-ui/core/Divider';
 import TaskProblemsTable from './TaskProblemsTable';
 import CircularProgress from '../common/CircularProgress';
 import Card from "@material-ui/core/Card";
-import {Avatar, CardContent, IconButton, TablePagination, Tooltip} from "@material-ui/core";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Avatar, CardContent, IconButton, TablePagination, Tooltip } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactMarkdown from "react-markdown";
 import Link from "@material-ui/core/Link";
-import {Link as RouterLink} from "react-router-dom";
-import {getDisplayString} from "../../utils";
-import {getColorTask} from "./TaskTable";
-import {getColorSprint} from "../sprint/SprintTable";
+import { Link as RouterLink } from "react-router-dom";
+import { getDisplayString } from "../../utils";
+import { getColorTask } from "./TaskTable";
+import { getColorSprint } from "../sprint/SprintTable";
 
 function TaskDetail(props) {
   const id = props.match.params.id;
-  const {task, isLoaded, fetchTaskById, clearCacheTask, clearCacheProblem, fetchProblemsByTask} = props;
+  const { task, isLoaded, fetchTaskById, clearCacheTask, clearCacheProblem, fetchProblemsByTask } = props;
 
   useEffect(() => {
     fetchTaskById(id);
@@ -50,17 +50,17 @@ function TaskDetail(props) {
   return (
     <>
       {!isLoaded ?
-        <SuspenseLoading/> :
+        <SuspenseLoading /> :
         <>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
               <Card className="mb-4">
                 <div className="card-header bg-neutral-first">
                   <div className="card-header--title font-size-lg px-1 py-1 font-weight-bold">
-                    Informations du tache
+                    Task information
                   </div>
                 </div>
-                <Divider/>
+                <Divider />
                 <div className="p-4">
                   <h5 className="mb-1">
                     Description :
@@ -73,13 +73,13 @@ function TaskDetail(props) {
                     task.sprint.project.designation &&
                     <div className="mb-3">
                       <h5>
-                        Projet :
+                        Project :
                       </h5>
                       <Link component={RouterLink}
-                            to={`/project/${task.sprint.project.id}`}>
-                               <span className="text-primary font-size-lg">
-                              {getDisplayString(task.sprint.project.designation, 50)}
-                               </span>
+                        to={`/project/${task.sprint.project.id}`}>
+                        <span className="text-primary font-size-lg">
+                          {getDisplayString(task.sprint.project.designation, 50)}
+                        </span>
                       </Link>
                     </div>
                   }
@@ -87,12 +87,12 @@ function TaskDetail(props) {
                   <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
                       <h5>
-                        Responsable :
+                        Responsible :
                       </h5>
                       <div className="d-flex align-items-center">
                         <Avatar
                           src={task.user.userProfile && task.user.userProfile.photo && task.user.userProfile.photo}
-                          className="mr-2"/>
+                          className="mr-2" />
                         <div>
                           <a
                             href="#/"
@@ -106,12 +106,12 @@ function TaskDetail(props) {
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <h5>
-                        Statut :
+                        Statuts :
                       </h5>
                       <h5>
-                          <span className={`badge badge-${getColorTask(task.status)}`}>
-                            {task.status === "NON_CLOTURE" ? "NON CLOTURE" : "CLOTURE"}
-                          </span>
+                        <span className={`badge badge-${getColorTask(task.status)}`}>
+                          {task.status === "NON_CLOTURE" ? "NON CLOTURE" : "CLOTURE"}
+                        </span>
                       </h5>
                     </Grid>
                   </Grid>
@@ -119,7 +119,7 @@ function TaskDetail(props) {
                     <Grid container spacing={2}>
                       <Grid item xs={12} md={6}>
                         <h5>
-                          Date début :
+                          Start date :
                         </h5>
                         <div className="font-size-lg text-black-50">
                           {moment(task.start_at).format('LL')}
@@ -127,7 +127,7 @@ function TaskDetail(props) {
                       </Grid>
                       <Grid item xs={12} md={6}>
                         <h5>
-                          Date fin :
+                          End date :
                         </h5>
                         <div className="font-size-lg text-black-50">
                           {moment(task.end_at).format('LL')}
@@ -142,19 +142,19 @@ function TaskDetail(props) {
               <Card className="mb-4">
                 <div className="card-header bg-neutral-first">
                   <div className="card-header--title font-size-lg px-1 py-1 font-weight-bold">
-                    Information du sprint de cette tache
+                    Sprint information for this task
                   </div>
                 </div>
-                <Divider/>
+                <Divider />
                 <div className="p-4">
                   <h5 className="mb-1">
-                    Nom du sprint :
+                    Sprint name :
                   </h5>
                   <ReactMarkdown className="font-size-lg text-black-50">
                     {task.sprint.name}
                   </ReactMarkdown>
                   <h5 className="mb-1">
-                    Statut :
+                    Statuts :
                   </h5>
                   <h5 className="mb-3"><span className={`badge badge-${getColorSprint(task.sprint.status)}`}>
                     {task.sprint.status}
@@ -171,19 +171,19 @@ function TaskDetail(props) {
               </Card>
             </Grid>
             {props.isFetching ?
-              <CircularProgress/> :
+              <CircularProgress /> :
               props.problems.length > 0 ?
                 <Grid item xs={12}>
                   <div className="example-card-seamless mb-4-spacing">
                     <Card className="card-box mb-4">
                       <div className="card-header bg-neutral-first pr-2">
                         <div className="card-header--title font-size-lg px-1 py-1 font-weight-bold">
-                          Les problèmes de tache
+                          Task problems
                         </div>
                         <div className="card-header--actions">
                           <Tooltip arrow title="Refresh">
                             <IconButton size="small" color="primary" className="mr-3">
-                              <FontAwesomeIcon icon={['fas', 'cog']} spin/>
+                              <FontAwesomeIcon icon={['fas', 'cog']} spin />
                             </IconButton>
                           </Tooltip>
                         </div>
@@ -208,7 +208,7 @@ function TaskDetail(props) {
                       </div>
                     </Card>
                   </div>
-                </Grid> 
+                </Grid>
                 : null
             }
           </Grid>
@@ -232,8 +232,8 @@ TaskDetail.propTypes = {
 const mapStateToProps = (state, ownProps) => {
 
   const {
-    pagination: {problems},
-    entity: {problem}
+    pagination: { problems },
+    entity: { problem }
   } = state;
   const listProblems = Selector.getProblemsPage(state);
 

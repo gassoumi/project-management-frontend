@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import PropTypes from "prop-types";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function DeleteDialog(props) {
   const {
@@ -39,14 +39,14 @@ function DeleteDialog(props) {
             variant="outlined"
             color="secondary"
             className="mx-1">
-            <span className="btn-wrapper--label">Annuler</span>
+            <span className="btn-wrapper--label">Cancel</span>
           </Button>
           <Button
             onClick={handleDelete}
             color="primary"
             variant="contained"
             className="mx-1">
-            <span className="btn-wrapper--label">Supprimer</span>
+            <span className="btn-wrapper--label">Delete</span>
           </Button>
         </div>
       </div>

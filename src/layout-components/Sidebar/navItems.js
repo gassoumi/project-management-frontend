@@ -50,7 +50,7 @@ const iconsMap = {
 
 const navItems2 = [
   {
-    label: 'Menu de navigation',
+    label: 'Navigation menu',
     content: JSON.parse(
       `[
   {
@@ -59,7 +59,7 @@ const navItems2 = [
     "to": "/dashboard"
   },
   {
-    "label": "Projets",
+    "label": "Projects",
     "icon": "LockOpenIcon",
     "to": "/project"
   },
@@ -69,7 +69,7 @@ const navItems2 = [
     "to": "/sprint"
   },
   {
-    "label": "Taches",
+    "label": "Tasks",
     "icon": "AssignmentIcon",
     "to": "/task"
   },
@@ -79,7 +79,7 @@ const navItems2 = [
     "to": "/note"
   },
   {
-    "label": "Problèmes",
+    "label": "Problems",
     "icon": "ErrorIcon",
     "to": "/problem"
   },

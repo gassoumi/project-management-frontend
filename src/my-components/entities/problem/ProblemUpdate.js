@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import ProblemForm from './ProblemForm';
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
 import queryString from "query-string";
-import {Card, Divider} from "@material-ui/core";
-import {SuspenseLoading} from "../../../Routes";
+import { Card, Divider } from "@material-ui/core";
+import { SuspenseLoading } from "../../../Routes";
 
 function ProblemUpdate(props) {
 
@@ -24,7 +24,7 @@ function ProblemUpdate(props) {
         const responseProblem = await axios.get(`/api/problems/${id}/`);
         const responseTask = await axios.get(`/api/tasks/${responseProblem.data.task}/`);
         if (active) {
-          setProblem({...responseProblem.data, task: responseTask.data});
+          setProblem({ ...responseProblem.data, task: responseTask.data });
         }
       } catch (e) {
         console.log(e);
@@ -39,7 +39,7 @@ function ProblemUpdate(props) {
       try {
         const responseTask = await axios.get(`/api/tasks/${idTask}/`);
         if (active) {
-          setProblem({task: responseTask.data})
+          setProblem({ task: responseTask.data })
         }
       } catch (e) {
         console.log(e);
@@ -75,14 +75,14 @@ function ProblemUpdate(props) {
   return (
     <>
       {!isNewProblem && !isLoaded ?
-        <SuspenseLoading/> :
+        <SuspenseLoading /> :
         <Grid container justify={"center"}>
           <Grid item xs={12} lg={9}>
             <Card className="mb-4">
               <div className="p-4 font-size-lg font-weight-bold">
-                {isNewProblem ? "Ajouter un nouveau " : "Modifier le "} problème
+                {isNewProblem ? "Add a new " : "Edit the "} problem
               </div>
-              <Divider/>
+              <Divider />
               <ProblemForm
                 isNewProblem={isNewProblem}
                 problem={problem}

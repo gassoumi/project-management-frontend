@@ -1,14 +1,14 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {Selector} from "../index";
-import {connect} from "react-redux";
-import {fetchTasks, deleteTaskById, clearCacheTask, clearCacheProject} from "../../../redux";
+import { Selector } from "../index";
+import { connect } from "react-redux";
+import { fetchTasks, deleteTaskById, clearCacheTask, clearCacheProject } from "../../../redux";
 import TaskTable from './TaskTable';
 import DeleteDialog from '../common/DeleteDialog';
 import Card from "@material-ui/core/Card";
 import AddNew from "../common/AddNew";
-import {getSortState, overridePaginationStateWithQueryParams} from "../../../utils";
-import {SuspenseLoading} from "../../../Routes";
+import { getSortState, overridePaginationStateWithQueryParams } from "../../../utils";
+import { SuspenseLoading } from "../../../Routes";
 import {
   Box,
   CardContent,
@@ -17,12 +17,12 @@ import {
   Tabs,
   Typography
 } from "@material-ui/core";
-import {getColorTask} from "./TaskTable";
+import { getColorTask } from "./TaskTable";
 import Alert from '../common/Alert';
 
 
 function TabPanel(props) {
-  const {children, value, index, ...other} = props;
+  const { children, value, index, ...other } = props;
 
   return (
     <Typography
@@ -190,7 +190,7 @@ function Task(props) {
   const getTabContent = (filter) => {
     const newTasks = props.tasks.filter(task => task.status === filter);
     if (newTasks.length === 0) {
-      return <Alert label="Pas de taches !!"/>;
+      return <Alert label="No task found !!" />;
     } else {
       return (
         <div className="table-responsive">
@@ -215,16 +215,16 @@ function Task(props) {
         object={task}
         handleClose={() => setOpen(false)}
         deleteObject={props.deleteTaskById}
-        title="Êtes-vous sûr de vouloir supprimer cette tâche?"
+        title="Are sure to delete this task ?"
         label={task.description}
       />
       <Card className="card-box mb-4">
         <div>
           <AddNew
             canEdit={props.canEdit}
-            label="Taches"
+            label="Tasks"
             count={props.count}
-            buttonLabel="Ajouter une tache"
+            buttonLabel="Add a task"
             handleAdd={createNew}
             handleInput={handleInput}
             handleQuery={handleQuery}
@@ -233,7 +233,7 @@ function Task(props) {
         </div>
       </Card>
       {props.isFetching ?
-        <SuspenseLoading/>
+        <SuspenseLoading />
         : (props.tasks && props.tasks.length > 0) ?
           (<div className="example-card-seamless mb-4-spacing">
             <Card className="card-box bg-white mb-4">
@@ -244,12 +244,12 @@ function Task(props) {
                   textColor="primary"
                   variant="fullWidth"
                   onChange={handleChange}>
-                  <Tab className="py-3" label="Tous"/>
-                  <Tab className={`py-3 text-${getColorTask('Backlog')}`} label="Backlog"/>
-                  <Tab className={`py-3 text-${getColorTask('A Faire')}`} label="A faire"/>
-                  <Tab className={`py-3 text-${getColorTask('En Cours')}`} label="En cours"/>
-                  <Tab className={`py-3 text-${getColorTask('A Verifier')}`} label="A vérifier"/>
-                  <Tab className={`py-3 text-${getColorTask('Termine')}`} label="Terminé"/>
+                  <Tab className="py-3" label="Tous" />
+                  <Tab className={`py-3 text-${getColorTask('Backlog')}`} label="Backlog" />
+                  <Tab className={`py-3 text-${getColorTask('A Faire')}`} label="A faire" />
+                  <Tab className={`py-3 text-${getColorTask('En Cours')}`} label="En cours" />
+                  <Tab className={`py-3 text-${getColorTask('A Verifier')}`} label="A vérifier" />
+                  <Tab className={`py-3 text-${getColorTask('Termine')}`} label="Terminé" />
                 </Tabs>
                 <TabPanel value={value} index={0}>
                   <div className="table-responsive">
@@ -294,10 +294,10 @@ function Task(props) {
             </Card>
           </div>) :
           (<Fragment>
-              <Card className="card-box p-2 mb-4">
-                <Alert label="Aucun tache trouvé"/>
-              </Card>
-            </Fragment>
+            <Card className="card-box p-2 mb-4">
+              <Alert label="No task found" />
+            </Card>
+          </Fragment>
           )
       }
     </>
@@ -308,8 +308,8 @@ Task.propTypes = {};
 
 const mapStateToProps = (state) => {
   const {
-    pagination: {tasks},
-    entity: {task}
+    pagination: { tasks },
+    entity: { task }
   } = state;
   const listTask = Selector.getTasksPage(state);
 
@@ -326,5 +326,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {fetchTasks, deleteTaskById, clearCacheTask, clearCacheProject})(Task);
+export default connect(mapStateToProps, { fetchTasks, deleteTaskById, clearCacheTask, clearCacheProject })(Task);
 

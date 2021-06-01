@@ -7,7 +7,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CloseIcon from '@material-ui/icons/Close';
 
 AddNew.propTypes = {
@@ -21,17 +21,17 @@ AddNew.propTypes = {
   canEdit: PropTypes.bool.isRequired
 };
 
-function AddNew({label, count, queryValue, handleInput, handleQuery, handleAdd, buttonLabel, canEdit}) {
+function AddNew({ label, count, queryValue, handleInput, handleQuery, handleAdd, buttonLabel, canEdit }) {
   return (
     <div className="d-block p-3 d-md-flex justify-content-between align-items-center text-center text-md-left">
       <div className="d-flex flex-md-row flex-column align-items-center">
         <div className="font-size-lg font-weight-bold">{label}</div>
         <div className="mx-3 d-none d-md-block">
-          <div className="divider-v position-relative"/>
-          <div className="divider-v position-relative"/>
+          <div className="divider-v position-relative" />
+          <div className="divider-v position-relative" />
         </div>
         <span className="text-black-50 font-size-md pr-3">
-          {count} au total
+          {count} in total
         </span>
         <div>
           <TextField
@@ -42,7 +42,7 @@ function AddNew({label, count, queryValue, handleInput, handleQuery, handleAdd, 
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon/>
+                  <SearchIcon />
                 </InputAdornment>
               ),
               endAdornment: (
@@ -53,14 +53,14 @@ function AddNew({label, count, queryValue, handleInput, handleQuery, handleAdd, 
                     onClick={() => handleInput('')}
                     edge="end"
                   >
-                    {queryValue !== '' && <CloseIcon style={{fontSize: 15}}/>}
+                    {queryValue !== '' && <CloseIcon style={{ fontSize: 15 }} />}
                   </IconButton>
                 </InputAdornment>
               )
             }}
           />
           <Button variant="contained" color="primary" onClick={handleQuery} className="m-2 ml-3">
-            Rechercher
+            Search
           </Button>
         </div>
       </div>
@@ -72,12 +72,12 @@ function AddNew({label, count, queryValue, handleInput, handleQuery, handleAdd, 
             variant="outlined"
             color="primary"
             className="font-weight-bold px-3">
-          <span className="btn-wrapper--icon">
-            <FontAwesomeIcon
-              icon={['fas', 'plus-circle']}
-              className="text-success"
-            />
-          </span>
+            <span className="btn-wrapper--icon">
+              <FontAwesomeIcon
+                icon={['fas', 'plus-circle']}
+                className="text-success"
+              />
+            </span>
             <span className="btn-wrapper--label"> {buttonLabel}</span>
           </Button>
         </div>

@@ -1,16 +1,16 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {Button, Card, Grid, Tooltip} from "@material-ui/core";
-import {getDisplayString} from "../../utils";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useRouteMatch} from "react-router-dom";
-import {Link as RouterLink} from 'react-router-dom';
+import { Button, Card, Grid, Tooltip } from "@material-ui/core";
+import { getDisplayString } from "../../utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouteMatch } from "react-router-dom";
+import { Link as RouterLink } from 'react-router-dom';
 
 function getUsersClasses(index) {
   let classes = "badge mt-1 mb-4 font-weight-normal font-size-lg px-4 py-1 h-auto badge-neutral-";
   const remainder = index % 3;
   switch (remainder) {
-    case 0 :
+    case 0:
       classes += "success text-success";
       break;
     case 1:
@@ -29,14 +29,14 @@ ProjectList.propTypes = {
   handleDelete: PropTypes.func.isRequired
 };
 
-function ProjectList({projects, canEdit, handleDelete}) {
+function ProjectList({ projects, canEdit, handleDelete }) {
   let match = useRouteMatch("");
 
   return (
     <Fragment>
       {projects.map((project, index) => (
         <Grid key={project.id} item xs={12} md={6} lg={4}>
-          <Card style={{height: '100%'}} className="card-box p-4 mb-4">
+          <Card style={{ height: '100%' }} className="card-box p-4 mb-4">
             {/*<Card style={{height: '100%'}} className="card-box p-4 mb-4 d-flex">*/}
             <div className="text-center d-flex flex-column flex-grow-1">
               <>
@@ -55,8 +55,8 @@ function ProjectList({projects, canEdit, handleDelete}) {
                 (project.projectUsers && project.projectUsers.length > 0) &&
                 <div>
                   <div className={getUsersClasses(index)}>
-                    <span className="font-weight-bold pr-1"> {project.projectUsers.length} </span> utilisateurs
-                    actifs
+                    <span className="font-weight-bold pr-1"> {project.projectUsers.length} </span>
+                    active users
                   </div>
                 </div>
               }
@@ -65,23 +65,23 @@ function ProjectList({projects, canEdit, handleDelete}) {
               </p>
               <div className="pt-0">
                 {canEdit &&
-                <Tooltip arrow title="Modifier">
-                  <Button
-                    component={RouterLink}
-                    to={`${match.url}/${project.id}/edit`}
-                    variant="outlined"
-                    color="primary"
-                    size="small"
-                    className="mr-1 d-40"><span className="btn-wrapper--icon">
-          <FontAwesomeIcon
-            icon={['fas', 'pen']}
-            className="font-size-lg"
-          />
-          </span>
-                  </Button>
-                </Tooltip>}
+                  <Tooltip arrow title="Edit">
+                    <Button
+                      component={RouterLink}
+                      to={`${match.url}/${project.id}/edit`}
+                      variant="outlined"
+                      color="primary"
+                      size="small"
+                      className="mr-1 d-40"><span className="btn-wrapper--icon">
+                        <FontAwesomeIcon
+                          icon={['fas', 'pen']}
+                          className="font-size-lg"
+                        />
+                      </span>
+                    </Button>
+                  </Tooltip>}
 
-                <Tooltip arrow title="Consulter">
+                <Tooltip arrow title="View">
                   <Button
                     component={RouterLink}
                     to={`${match.url}/${project.id}`}
@@ -89,15 +89,15 @@ function ProjectList({projects, canEdit, handleDelete}) {
                     color="inherit"
                     size="small"
                     className="mr-1 d-40 btn text-info">
-          <span className="btn-wrapper--icon">
-          <FontAwesomeIcon
-            icon={['fas', 'eye']}
-            className="font-size-lg"
-          />
-          </span>
+                    <span className="btn-wrapper--icon">
+                      <FontAwesomeIcon
+                        icon={['fas', 'eye']}
+                        className="font-size-lg"
+                      />
+                    </span>
                   </Button>
                 </Tooltip>
-                {canEdit && <Tooltip arrow title="Supprimer">
+                {canEdit && <Tooltip arrow title="Delete">
                   <Button
                     onClick={() => handleDelete(project)}
                     color="inherit"
@@ -105,12 +105,12 @@ function ProjectList({projects, canEdit, handleDelete}) {
                     variant="outlined"
                     size="small"
                   >
-          <span className="btn-wrapper--icon">
-          <FontAwesomeIcon
-            icon={['far', 'trash-alt']}
-            className="font-size-lg"
-          />
-          </span>
+                    <span className="btn-wrapper--icon">
+                      <FontAwesomeIcon
+                        icon={['far', 'trash-alt']}
+                        className="font-size-lg"
+                      />
+                    </span>
                   </Button>
                 </Tooltip>
                 }

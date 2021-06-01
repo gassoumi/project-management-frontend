@@ -37,16 +37,16 @@ function SprintTable({ sprints, canEdit, sort, handleEdit, handleDelete }) {
       <thead>
         <tr>
           <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('name')}>
-            Nom sprint <FontAwesomeIcon icon="sort" />
+            Sprint name <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('project')}>
-            Projet <FontAwesomeIcon icon="sort" />
+            Project <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('desired_at')}>
             Date <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('status')}>
-            Statut <FontAwesomeIcon icon="sort" />
+            Statuts <FontAwesomeIcon icon="sort" />
           </th>
           {canEdit && <th className="text-center">Actions</th>}
         </tr>
@@ -73,7 +73,7 @@ function SprintTable({ sprints, canEdit, sort, handleEdit, handleDelete }) {
             </td>
             {canEdit &&
               <td className="text-center">
-                <Tooltip arrow title="Modifier">
+                <Tooltip arrow title="Edit">
                   <IconButton
                     onClick={() => handleEdit(sprint.id)}
                     className="text-primary">
@@ -83,7 +83,7 @@ function SprintTable({ sprints, canEdit, sort, handleEdit, handleDelete }) {
                     />
                   </IconButton>
                 </Tooltip>
-                <Tooltip arrow title="Supprimer">
+                <Tooltip arrow title="Delete">
                   <IconButton
                     onClick={() => handleDelete(sprint)}
                     className="text-danger">

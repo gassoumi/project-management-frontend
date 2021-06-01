@@ -65,7 +65,7 @@ function ProblemRow({ problem, handleEdit, handleDelete, authenticatedUser }) {
       </td>
       <td className="text-center">
         <div className={`badge badge-${getColorProblem(problem.status)} px-4`}>
-          {problem.status === "NON_CLOTURE" ? "NON CLOTURE" : "CLOTURE"}
+          {problem.status === "NON_CLOTURE" ? "No Closing" : "Closing"}
         </div>
       </td>
       <td>
@@ -112,7 +112,7 @@ function ProblemRow({ problem, handleEdit, handleDelete, authenticatedUser }) {
                   <div className="nav-link-icon opacity-6">
                     <FontAwesomeIcon icon={['fas', 'pen']} />
                   </div>
-                  <span>Modifier</span>
+                  <span>Edit</span>
                 </ListItem>
               }
               <ListItem
@@ -122,7 +122,7 @@ function ProblemRow({ problem, handleEdit, handleDelete, authenticatedUser }) {
                 <div className="nav-link-icon opacity-6">
                   <FontAwesomeIcon icon={['fas', 'eye']} />
                 </div>
-                <span>Consulter</span>
+                <span>View</span>
               </ListItem>
               {
                 problem.task.user && problem.task.user.id &&
@@ -133,7 +133,7 @@ function ProblemRow({ problem, handleEdit, handleDelete, authenticatedUser }) {
                   <div className="nav-link-icon opacity-6">
                     <FontAwesomeIcon icon={['far', 'trash-alt']} />
                   </div>
-                  <span>Supprimer</span>
+                  <span>Delete</span>
                 </ListItem>
               }
             </List>
@@ -150,22 +150,22 @@ function ProblemTable({ problems, sort, handleEdit, handleDelete, authenticatedU
       <thead>
         <tr>
           <th className="text-left" style={{ cursor: 'pointer' }}>
-            Projet
+            Project
         </th>
           <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('task')}>
-            Tache <FontAwesomeIcon icon="sort" />
+            Task <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('description')}>
             Description <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('status')}>
-            Statut <FontAwesomeIcon icon="sort" />
+            Statuts <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('start_at')}>
-            Date Debut <FontAwesomeIcon icon="sort" />
+            Start date  <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('end_at')}>
-            Date fin <FontAwesomeIcon icon="sort" />
+            End date <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-center">Actions</th>
         </tr>

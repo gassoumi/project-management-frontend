@@ -1,16 +1,16 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {Selector} from "../index";
-import {connect} from "react-redux";
-import {fetchProblems, deleteProblemById, clearCacheProblem} from "../../../redux";
+import { Selector } from "../index";
+import { connect } from "react-redux";
+import { fetchProblems, deleteProblemById, clearCacheProblem } from "../../../redux";
 import ProblemTable from './ProblemTable';
 import DeleteDialog from '../common/DeleteDialog';
 import Card from "@material-ui/core/Card";
 import AddNew from "../common/AddNew";
-import {getSortState, overridePaginationStateWithQueryParams} from "../../../utils";
-import {SuspenseLoading} from "../../../Routes";
-import {CardContent, IconButton, TablePagination, Tooltip} from "@material-ui/core";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { getSortState, overridePaginationStateWithQueryParams } from "../../../utils";
+import { SuspenseLoading } from "../../../Routes";
+import { CardContent, IconButton, TablePagination, Tooltip } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Alert from "../common/Alert";
 
 
@@ -145,16 +145,16 @@ function Problem(props) {
         object={problem}
         handleClose={() => setOpen(false)}
         deleteObject={props.deleteProblemById}
-        title="Êtes-vous sûr de vouloir supprimer le problème?"
+        title="Are you sure to delete thisproblem?"
         label={problem.description}
       />
       <Card className="card-box mb-4">
         <div>
           <AddNew
             canEdit
-            label="Problèmes"
+            label="Problems"
             count={props.count}
-            buttonLabel="Ajouter un problème"
+            buttonLabel="Add a problem"
             handleAdd={createNew}
             handleInput={handleInput}
             handleQuery={handleQuery}
@@ -163,16 +163,16 @@ function Problem(props) {
         </div>
       </Card>
       {props.isFetching ?
-        <SuspenseLoading/>
+        <SuspenseLoading />
         : (props.problems && props.problems.length > 0) ?
           (<div className="example-card-seamless mb-4-spacing">
             <Card className="card-box mb-4">
               <div className="card-header pr-2">
-                <div className="card-header--title">Problèmes status</div>
+                <div className="card-header--title">Status problems</div>
                 <div className="card-header--actions">
                   <Tooltip arrow title="Refresh">
                     <IconButton size="small" color="primary" className="mr-3">
-                      <FontAwesomeIcon icon={['fas', 'cog']} spin/>
+                      <FontAwesomeIcon icon={['fas', 'cog']} spin />
                     </IconButton>
                   </Tooltip>
                 </div>
@@ -202,10 +202,10 @@ function Problem(props) {
             </Card>
           </div>) :
           (<Fragment>
-              <Card className="card-box p-2 mb-4">
-                <Alert label="Aucun problème trouvé"/>
-              </Card>
-            </Fragment>
+            <Card className="card-box p-2 mb-4">
+              <Alert label="No problem found" />
+            </Card>
+          </Fragment>
           )
       }
     </>
@@ -228,8 +228,8 @@ Problem.propTypes = {
 
 const mapStateToProps = (state) => {
   const {
-    pagination: {problems},
-    entity: {problem}
+    pagination: { problems },
+    entity: { problem }
   } = state;
   const listProblem = Selector.getProblemsPage(state);
 
@@ -245,5 +245,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {fetchProblems, deleteProblemById, clearCacheProblem})(Problem);
+export default connect(mapStateToProps, { fetchProblems, deleteProblemById, clearCacheProblem })(Problem);
 

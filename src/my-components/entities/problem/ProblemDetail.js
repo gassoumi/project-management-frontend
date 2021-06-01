@@ -1,20 +1,20 @@
-import React, {useEffect} from 'react';
-import {connect} from "react-redux";
-import {Selector} from '../index';
-import {SuspenseLoading} from "../../../Routes";
-import {fetchProblemById} from "../../../redux/actions";
+import React, { useEffect } from 'react';
+import { connect } from "react-redux";
+import { Selector } from '../index';
+import { SuspenseLoading } from "../../../Routes";
+import { fetchProblemById } from "../../../redux/actions";
 import PropTypes from 'prop-types';
-import {Card, Divider} from "@material-ui/core";
+import { Card, Divider } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import ReactMarkdown from 'react-markdown';
-import {getColorProblem} from "./ProblemTable";
+import { getColorProblem } from "./ProblemTable";
 import moment from 'moment';
 import Link from "@material-ui/core/Link";
-import {Link as RouterLink} from "react-router-dom";
-import {getDisplayString} from "../../utils";
+import { Link as RouterLink } from "react-router-dom";
+import { getDisplayString } from "../../utils";
 
 function ProblemDetail(props) {
-  const {isLoaded, problem, fetchProblemById} = props;
+  const { isLoaded, problem, fetchProblemById } = props;
   const id = props.match.params.id;
 
   useEffect(() => {
@@ -23,17 +23,17 @@ function ProblemDetail(props) {
 
   return (
     <>
-      {!isLoaded ? <SuspenseLoading/> :
+      {!isLoaded ? <SuspenseLoading /> :
         <>
           <Grid container spacing={3}>
             <Grid item xs={12} md={8}>
               <Card className="mb-4">
                 <div className="card-header bg-neutral-first">
                   <div className="card-header--title font-size-lg px-1 py-1 font-weight-bold">
-                    Informations du problème
+                    Problem Informations
                   </div>
                 </div>
-                <Divider/>
+                <Divider />
                 <div className="p-4">
                   <h5 className="mb-1">
                     Description :
@@ -48,17 +48,17 @@ function ProblemDetail(props) {
                     {problem.cause}
                   </ReactMarkdown>
                   <h5 className="mb-1">
-                    Outils de résolution :
+                    Resolution tools :
                   </h5>
                   <ReactMarkdown className="font-size-lg text-black-50">
                     {problem.resolutionTools}
                   </ReactMarkdown>
                   <h5 className="mb-1">
-                    Statut :
+                    Statuts :
                   </h5>
 
                   <h6 className="mb-3"><span className={`badge badge-${getColorProblem(problem.status)}`}>
-                    {problem.status === "NON_CLOTURE" ? "NON CLOTURE" : "CLOTURE"}
+                    {problem.status === "NON_CLOTURE" ? "No Closing" : "Closing"}
                   </span></h6>
                   {
                     problem.task.sprint && problem.task.sprint.project &&
@@ -67,18 +67,18 @@ function ProblemDetail(props) {
                       <Grid container spacing={2}>
                         <Grid item xs={12} md={6}>
                           <h5>
-                            Projet :
+                            Project :
                           </h5>
                           <Link component={RouterLink}
-                                to={`/project/${problem.task.sprint.project.id}`}>
-                               <span className="text-primary font-size-lg">
+                            to={`/project/${problem.task.sprint.project.id}`}>
+                            <span className="text-primary font-size-lg">
                               {getDisplayString(problem.task.sprint.project.designation, 50)}
-                               </span>
+                            </span>
                           </Link>
                         </Grid>
                         <Grid item xs={12} md={6}>
                           <h5>
-                            Tache :
+                            Task :
                           </h5>
                           <Link
                             component={RouterLink}
@@ -95,7 +95,7 @@ function ProblemDetail(props) {
                     <Grid container spacing={2}>
                       <Grid item xs={12} md={6}>
                         <h5>
-                          Date début :
+                          Start date :
                         </h5>
                         <div className="font-size-lg text-black-50">
                           {moment(problem.start_at).format('LL')}
@@ -103,7 +103,7 @@ function ProblemDetail(props) {
                       </Grid>
                       <Grid item xs={12} md={6}>
                         <h5>
-                          Date fin :
+                          End date :
                         </h5>
                         <div className="font-size-lg text-black-50">
                           {moment(problem.end_at).format('LL')}
@@ -138,4 +138,4 @@ ProblemDetail.prototype = {
   fetchProblemById: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, {fetchProblemById})(ProblemDetail);
+export default connect(mapStateToProps, { fetchProblemById })(ProblemDetail);

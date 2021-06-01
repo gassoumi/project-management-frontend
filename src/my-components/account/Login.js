@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -19,19 +19,19 @@ import {
 import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
 
 import hero9 from '../../assets/images/hero-bg/hero-9.jpg';
-import {connect} from "react-redux";
-import {login} from "../../redux/actions";
-import {useForm} from "react-hook-form";
+import { connect } from "react-redux";
+import { login } from "../../redux/actions";
+import { useForm } from "react-hook-form";
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LoadingButton from '../common/LoadingButton';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import {Redirect} from "react-router-dom";
-import {SuspenseLoading} from '../../Routes';
+import { Redirect } from "react-router-dom";
+import { SuspenseLoading } from '../../Routes';
 
 
 function TabPanel(props) {
-  const {children, value, index, ...other} = props;
+  const { children, value, index, ...other } = props;
 
   return (
     <Typography
@@ -52,11 +52,11 @@ TabPanel.propTypes = {
 
 const Login = (props) => {
 
-  const {from} = (props.location.state) || {
-    from: {pathname: '/', search: props.location.search}
+  const { from } = (props.location.state) || {
+    from: { pathname: '/', search: props.location.search }
   };
 
-  const {register, handleSubmit, errors} = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const [checked1, setChecked1] = React.useState(true);
 
@@ -65,16 +65,16 @@ const Login = (props) => {
   };
 
   const onSubmit = (data) => {
-    const {username, password} = data;
+    const { username, password } = data;
     props.login(username, password);
   };
 
   if (props.auth.isAuthenticated) {
-    return <Redirect to={from}/>;
+    return <Redirect to={from} />;
   }
 
   if (props.auth.isLoading) {
-    return <SuspenseLoading/>
+    return <SuspenseLoading />
   }
 
   return (
@@ -96,9 +96,9 @@ const Login = (props) => {
                         <div className="flex-grow-1 w-100 d-flex align-items-center">
                           <div
                             className="bg-composed-wrapper--image"
-                            style={{backgroundImage: 'url(' + hero9 + ')'}}
+                            style={{ backgroundImage: 'url(' + hero9 + ')' }}
                           />
-                          <div className="bg-composed-wrapper--bg bg-premium-dark opacity-5"/>
+                          <div className="bg-composed-wrapper--bg bg-premium-dark opacity-5" />
                           <div className="bg-composed-wrapper--content p-5">
                             <div className="text-white mt-3">
                               <h1 className="display-4 my-3 font-weight-bold">
@@ -108,7 +108,7 @@ const Login = (props) => {
                                 {/*A free hour, when our power of choice is*/}
                                 {/*untrammelled and when nothing prevents.*/}
                               </p>
-                              <div className="divider border-2 my-5 border-light opacity-2 rounded w-25"/>
+                              <div className="divider border-2 my-5 border-light opacity-2 rounded w-25" />
                               <div>
                               </div>
                             </div>
@@ -124,23 +124,21 @@ const Login = (props) => {
                       className="d-flex align-items-center">
                       <Container maxWidth="sm">
                         <h3 className="display-4 mb-2 font-weight-bold">
-                          Connectez-vous à votre compte
+                          Login with your credentials
                         </h3>
                         <p className="font-size-lg mb-5 text-black-50">
-                          Avez vous déjà un compte? Remplissez les champs
-                          ci-dessous pour vous connecter à votre tableau
-                          de bord existant.
+                          You already have an account? Fill in the fields below to login into your existing dashboard.
                         </p>
                         <Card className="mx-0 bg-secondary mt-0 w-100 p-0 mb-4 border-0">
                           <CardContent className="p-3">
                             <div className="text-center text-black-50 mb-3">
-                              <span>connectez-vous avec vos identifiants</span>
+                              <span>Login with your credentials</span>
                             </div>
                             <form onSubmit={handleSubmit(onSubmit)} className="px-5">
                               <div className="mb-3">
                                 <FormControl error={!!errors.username} className="w-100">
                                   <InputLabel htmlFor="input-with-icon-adornment">
-                                    Nom d'utilisateur
+                                    Username
                                   </InputLabel>
                                   <Input
                                     fullWidth
@@ -152,19 +150,19 @@ const Login = (props) => {
                                     id="input-with-icon-adornment"
                                     startAdornment={
                                       <InputAdornment position="start">
-                                        <AccountCircle/>
+                                        <AccountCircle />
                                       </InputAdornment>
                                     }
                                   />
                                   {errors.username &&
-                                  <FormHelperText>{errors.username.message}</FormHelperText>
+                                    <FormHelperText>{errors.username.message}</FormHelperText>
                                   }
                                 </FormControl>
                               </div>
                               <div className="mb-3">
                                 <FormControl error={!!errors.password} className="w-100">
                                   <InputLabel htmlFor="standard-adornment-password">
-                                    Mot de passe
+                                    Password
                                   </InputLabel>
                                   <Input
                                     name="password"
@@ -177,16 +175,16 @@ const Login = (props) => {
                                     type="password"
                                     startAdornment={
                                       <InputAdornment position="start">
-                                        <LockTwoToneIcon/>
+                                        <LockTwoToneIcon />
                                       </InputAdornment>
                                     }
                                   />
                                   {errors.password &&
-                                  <FormHelperText>{errors.password.message}</FormHelperText>
+                                    <FormHelperText>{errors.password.message}</FormHelperText>
                                   }
                                 </FormControl>
                               </div>
-                              <div className="w-100">
+                              {/* <div className="w-100">
                                 <FormControlLabel
                                   control={
                                     <Checkbox
@@ -198,7 +196,7 @@ const Login = (props) => {
                                   }
                                   label="Se souvenir de moi"
                                 />
-                              </div>
+                              </div> */}
                               <div className="text-center">
                                 {/*<Button*/}
                                 {/*  color="primary"*/}
@@ -210,9 +208,9 @@ const Login = (props) => {
                                 <LoadingButton
                                   loading={props.auth.isSigning}
                                   variant="contained"
-                                  title="Se connecter"
+                                  title="Sign in"
                                   size="large"
-                                  className="my-2"/>
+                                  className="my-2" />
                               </div>
                             </form>
                           </CardContent>
@@ -239,6 +237,6 @@ Login.prototype = {
   login: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, {login})(Login);
+export default connect(mapStateToProps, { login })(Login);
 
 

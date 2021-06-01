@@ -1,24 +1,24 @@
 // eslint-disable-next-line react-hooks/exhaustive-deps
-import React, {Component} from 'react';
-import {BrowserRouter as BrowserRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter as BrowserRouter } from 'react-router-dom';
 import configureStore from './config/configureStore';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import Routes from './Routes';
 import ScrollToTop from './utils/ScrollToTop';
 import './assets/base.scss';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import setupAxios from './utils/axiosInterceptors';
 import moment from 'moment';
-import {bindActionCreators} from 'redux';
-import {LOGOUT_SUCCESS} from "./redux/actionTypes";
-import {loadUser} from "./redux/actions";
+import { bindActionCreators } from 'redux';
+import { LOGOUT_SUCCESS } from "./redux/actionTypes";
+import { loadUser } from "./redux/actions";
 //require("moment/min/locales.min");
 import "moment/min/locales.min";
-import {ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
 import Alerts from "./my-components/layout/Alerts";
 
-import {library} from '@fortawesome/fontawesome-svg-core';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   fab,
   faFacebook,
@@ -278,7 +278,7 @@ const clearAuthentication = (messageKey) => (dispatch, getState) => {
   });
 };
 
-const actions = bindActionCreators({clearAuthentication}, store.dispatch);
+const actions = bindActionCreators({ clearAuthentication }, store.dispatch);
 
 setupAxios(store.dispatch,
   () => actions.clearAuthentication('login.error.unauthorized'));
@@ -296,12 +296,12 @@ class App extends Component {
         wordBreak: 'break-word',
       }}>
         <Provider store={store}>
-          <Alerts/>
-          <ToastContainer limit={3} autoClose={2000}/>
+          <Alerts />
+          <ToastContainer limit={3} autoClose={2000} />
           <BrowserRouter>
-            <CssBaseline/>
+            <CssBaseline />
             <ScrollToTop>
-              <Routes/>
+              <Routes />
             </ScrollToTop>
           </BrowserRouter>
         </Provider>

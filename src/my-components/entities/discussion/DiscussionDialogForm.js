@@ -1,5 +1,5 @@
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -10,9 +10,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from "prop-types";
 import TextField from '@material-ui/core/TextField';
-import {useForm} from "react-hook-form";
-import {connect} from "react-redux";
-import {updateDiscussion, createDiscussion} from "../../../redux/actions";
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
+import { updateDiscussion, createDiscussion } from "../../../redux/actions";
 import {
   getMinLengthMessage,
   getRequiredMessage,
@@ -34,13 +34,13 @@ const styles = (theme) => ({
 
 
 const DialogTitle = withStyles(styles)((props) => {
-  const {children, classes, onClose, ...other} = props;
+  const { children, classes, onClose, ...other } = props;
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon/>
+          <CloseIcon />
         </IconButton>
       ) : null}
     </MuiDialogTitle>
@@ -63,16 +63,16 @@ const DialogActions = withStyles((theme) => ({
 
 
 function DiscussionDialogForm({
-                                open, handleClose, discussion, isUpdating,
-                                createDiscussion, updateDiscussion, isNew,
-                              }) {
+  open, handleClose, discussion, isUpdating,
+  createDiscussion, updateDiscussion, isNew,
+}) {
 
   const defaultValue = {
     object: discussion.object || "",
     description: discussion.description || "",
   };
 
-  const {register, handleSubmit, errors} = useForm({
+  const { register, handleSubmit, errors } = useForm({
     mode: "onChange",
     defaultValues: defaultValue,
   });
@@ -95,7 +95,7 @@ function DiscussionDialogForm({
   return (
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
       <DialogTitle className="bg-light" id="form-dialog-ajout-discussion">
-        {isNew ? "Ajouter une " : "Modifier la "} discussion
+        {isNew ? "Add a " : "Edit the "} discussion
       </DialogTitle>
       <form id="form-discussion" onSubmit={handleSubmit(onSubmit)} noValidate>
         <DialogContent dividers>
@@ -113,7 +113,7 @@ function DiscussionDialogForm({
             autoFocus
             margin="dense"
             variant={"outlined"}
-            label="Objet du discussion"
+            label="Subject of discussion"
             autoComplete="disable"
             type="text"
             error={!!errors.object}
@@ -128,9 +128,9 @@ function DiscussionDialogForm({
               required: getRequiredMessage(),
             })}
             rows={5}
-            placeholder="Ecrire une description à propos votre discussion"
+            placeholder="Write a description about your discussion"
             margin="dense"
-            label="Description du discussion"
+            label="Description of the discussion"
             autoComplete="disable"
             variant={"outlined"}
             type="text"
@@ -147,7 +147,7 @@ function DiscussionDialogForm({
             disabled={isUpdating}
             color="primary"
           >
-            Enregistrer
+            Save
           </Button>
           <Button
             // startIcon={<CancelIcon/>}
@@ -155,7 +155,7 @@ function DiscussionDialogForm({
             variant="contained"
             color="secondary"
           >
-            Annuler
+            Cancel
           </Button>
         </DialogActions>
       </form>
@@ -175,4 +175,4 @@ DiscussionDialogForm.propTypes = {
   isNew: PropTypes.bool.isRequired,
 };
 
-export default connect(null, {createDiscussion, updateDiscussion})(DiscussionDialogForm);
+export default connect(null, { createDiscussion, updateDiscussion })(DiscussionDialogForm);

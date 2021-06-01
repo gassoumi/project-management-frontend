@@ -1,5 +1,5 @@
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -10,7 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
-import {useForm, Controller} from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import MomentUtils from '@date-io/moment';
@@ -42,13 +42,13 @@ const styles = (theme) => ({
 
 
 const DialogTitle = withStyles(styles)((props) => {
-  const {children, classes, onClose, ...other} = props;
+  const { children, classes, onClose, ...other } = props;
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon/>
+          <CloseIcon />
         </IconButton>
       ) : null}
     </MuiDialogTitle>
@@ -71,12 +71,12 @@ const DialogActions = withStyles((theme) => ({
 
 
 function NoteUpdate({
-                      open, handleClose, note, isUpdating,
-                      createNote, updateNote, isNew,
-                    }) {
+  open, handleClose, note, isUpdating,
+  createNote, updateNote, isNew,
+}) {
 
 
-  const {register, handleSubmit, errors, watch, control} = useForm({
+  const { register, handleSubmit, errors, watch, control } = useForm({
     mode: "onChange",
   });
 
@@ -104,7 +104,7 @@ function NoteUpdate({
   return (
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
       <DialogTitle className="bg-light" id="form-dialog-ajout-note">
-        {isNew ? "Ajouter une " : "Modifier la "} story
+        {isNew ? "Add a " : "Edit the "} story
       </DialogTitle>
       <form id="form-note" onSubmit={handleSubmit(onSubmit)} noValidate>
         <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -158,7 +158,7 @@ function NoteUpdate({
               required
               inputRef={register}
               margin="dense"
-              label="Commentaire"
+              label="Comment"
               autoComplete="disable"
               type="text"
               error={!!errors.comment}
@@ -168,7 +168,7 @@ function NoteUpdate({
               name="date"
               control={control}
               defaultValue={moment(note.date).format('YYYY-MM-DD') ||
-              moment().format('YYYY-MM-DD')}
+                moment().format('YYYY-MM-DD')}
               rules={{
                 required: getRequiredMessage(),
                 validate: {
@@ -179,15 +179,15 @@ function NoteUpdate({
                 <KeyboardDatePicker
                   // size={"medium"}
                   // inputVariant="outlined"
-                  clearLabel="vider"
-                  cancelLabel="annuler"
+                  // clearLabel="vider"
+                  // cancelLabel="annuler"
                   clearable
                   fullWidth
                   required
                   error={!!errors.date}
                   helperText={errors.date && errors.date.message}
                   margin="normal"
-                  label="Date à faire"
+                  label="Date to do"
                   format="DD/MM/YYYY"
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
@@ -199,8 +199,8 @@ function NoteUpdate({
               <Switch
                 defaultChecked={note.ok}
                 name="ok"
-                inputRef={register}/>
-            } label={statusInput ? "DONE" : "NOT DONE"}/>
+                inputRef={register} />
+            } label={statusInput ? "DONE" : "NOT DONE"} />
 
           </DialogContent>
         </MuiPickersUtilsProvider>
@@ -212,14 +212,14 @@ function NoteUpdate({
             variant="contained"
             color="primary"
           >
-            Enregistrer
+            Save
           </Button>
           <Button
             onClick={handleClose}
             variant="contained"
             color="secondary"
           >
-            Annuler
+            Cancel
           </Button>
         </DialogActions>
       </form>

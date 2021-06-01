@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import TaskWeek from './TaskWeek';
 import LatestProject from './LatestProject';
 import Grid from "@material-ui/core/Grid";
 import WeekSprint from "./WeekSprint";
 import DiscussionList from './DiscussionList';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import {
   fetchWeekTasks,
   fetchWeekSprints,
@@ -17,8 +17,8 @@ import {
   clearCacheProject,
   clearCacheDiscussion,
 } from "../../redux";
-import {Selector} from "../entities";
-import {SuspenseLoading} from "../../Routes";
+import { Selector } from "../entities";
+import { SuspenseLoading } from "../../Routes";
 
 function Dashboard(props) {
 
@@ -58,34 +58,34 @@ function Dashboard(props) {
   return (
     <>
       {!isLoaded ?
-        <SuspenseLoading/> :
+        <SuspenseLoading /> :
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
             <Grid container spacing={3}>
               {props.taskWeek && props.taskWeek.length !== 0 &&
-              <Grid item xs={12}>
-                <TaskWeek rows={props.taskWeek}/>
-              </Grid>
+                <Grid item xs={12}>
+                  <TaskWeek rows={props.taskWeek} />
+                </Grid>
               }
               <Grid item xs={12}>
-                <LatestProject rows={props.latestProjects}/>
+                <LatestProject rows={props.latestProjects} />
               </Grid>
             </Grid>
           </Grid>
-          
+
           <Grid item xs={12} md={4}>
             {/*  space between all included grid */}
             <Grid container direction="column" spacing={3}>
               {props.sprintWeek.length !== 0 &&
-              <Grid item xs={12}>
-                <WeekSprint items={props.sprintWeek}/>
-              </Grid>
+                <Grid item xs={12}>
+                  <WeekSprint items={props.sprintWeek} />
+                </Grid>
               }
               <Grid item xs={12}>
-                <DiscussionList items={props.latestDiscussion} title="Derniers Discussions"/>
+                <DiscussionList items={props.latestDiscussion} title="Last Discussions" />
               </Grid>
               <Grid item xs={12}>
-                <DiscussionList items={props.topDiscussion} title="Top Discussions"/>
+                <DiscussionList items={props.topDiscussion} title="Top Discussions" />
               </Grid>
             </Grid>
           </Grid>
@@ -118,7 +118,7 @@ Dashboard.propTypes = {
 
 const mapStateToProps = state => {
   const {
-    pagination: {weekTasks, weekSprints, latestDiscussions, topDiscussions},
+    pagination: { weekTasks, weekSprints, latestDiscussions, topDiscussions },
   } = state;
 
   const taskWeek = Selector.getWeekTaskPage(state);

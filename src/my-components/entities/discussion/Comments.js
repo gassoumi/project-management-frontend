@@ -58,7 +58,7 @@ function EditComment(props) {
         value={inputComment}
         onChange={(e) => setInputComment(e.target.value)}
         name="commentInput"
-        placeholder="Ajoouter un commentaire"
+        placeholder="Add a comment"
         multiline
       />
       <Grid container justify={"flex-end"} item xs={12}>
@@ -66,13 +66,13 @@ function EditComment(props) {
           <Button disabled={!inputComment || oldInputComment === inputComment} type="submit"
             variant="contained"
             color="primary">
-            Enregistrer
+            Save
           </Button>
           <Button variant="contained"
             color={"default"}
             onClick={handleCancelEdit}
           >
-            Annuler
+            Cancel
           </Button>
         </div>
       </Grid>
@@ -207,13 +207,13 @@ function Comments(props) {
                       <ListItemIcon>
                         <EditIcon fontSize={"small"} />
                       </ListItemIcon>
-                      Modifier
+                      Edit
                     </MenuItem>
                     <MenuItem onClick={() => handleDelete(comment)}>
                       <ListItemIcon>
                         <DeleteIcon fontSize={"small"} />
                       </ListItemIcon>
-                      Supprimer
+                      Delete
                     </MenuItem>
                   </Menu>
                 </Grid>

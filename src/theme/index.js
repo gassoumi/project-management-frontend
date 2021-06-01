@@ -1,9 +1,10 @@
-import {createMuiTheme} from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core';
 import typography from './typography';
 
 /* eslint-disable import/no-unresolved, import/no-webpack-loader-syntax */
 import vars from '!!sass-vars-to-js-loader!../assets/core/_variables-mui.scss';
-import {frFR} from '@material-ui/core/locale';
+import { frFR, enUS } from '@material-ui/core/locale';
+
 
 const MuiTheme = createMuiTheme({
   palette: {
@@ -63,6 +64,6 @@ const MuiTheme = createMuiTheme({
     }
   },
   typography
-}, frFR);
+}, enUS);
 
 export default MuiTheme;

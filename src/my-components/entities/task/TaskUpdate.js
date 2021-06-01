@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import TaskForm from './TaskForm';
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
-import {SuspenseLoading} from "../../../Routes";
-import {Card, Divider} from "@material-ui/core";
+import { SuspenseLoading } from "../../../Routes";
+import { Card, Divider } from "@material-ui/core";
 
 
 function TaskUpdate(props) {
@@ -56,14 +56,14 @@ function TaskUpdate(props) {
   return (
     <>
       {!isNewTask && !isLoaded ?
-        <SuspenseLoading/> :
+        <SuspenseLoading /> :
         <Grid container justify={"center"}>
           <Grid item xs={12} lg={9}>
             <Card className="mb-4">
               <div className="p-4 font-size-lg font-weight-bold">
-                {isNewTask ? "Ajouter une nouvelle " : "Modifier la "} tache
+                {isNewTask ? "Add a new " : "Edit the "} task
               </div>
-              <Divider/>
+              <Divider />
               <TaskForm
                 isNewTask={isNewTask}
                 task={task}

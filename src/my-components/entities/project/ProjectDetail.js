@@ -1,25 +1,25 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Paper from '@material-ui/core/Paper';
-import {Selector} from '../index'
-import {fetchProjectById, fetchProjectTasks} from "../../../redux";
-import {makeStyles} from '@material-ui/core/styles';
+import { Selector } from '../index'
+import { fetchProjectById, fetchProjectTasks } from "../../../redux";
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TeamList from './TeamList';
 import Button from "@material-ui/core/Button";
 import EditIcon from '@material-ui/icons/Edit';
 import TasksProjectTable from './TasksProjectTable';
-import {sleep} from "../../../redux/actions/sprint";
+import { sleep } from "../../../redux/actions/sprint";
 import axios from "axios";
 import CircularProgress from '../common/CircularProgress';
-import {SuspenseLoading} from "../../../Routes";
+import { SuspenseLoading } from "../../../Routes";
 import Card from "@material-ui/core/Card";
-import {CardContent, TablePagination} from "@material-ui/core";
-import {ExampleWrapperSimple} from "../../../layout-components";
-import {Doughnut} from "react-chartjs-2";
-import {getTaskCodeColor} from "../task/TaskTable";
+import { CardContent, TablePagination } from "@material-ui/core";
+import { ExampleWrapperSimple } from "../../../layout-components";
+import { Doughnut } from "react-chartjs-2";
+import { getTaskCodeColor } from "../task/TaskTable";
 import ReactMarkdown from 'react-markdown';
 
 
@@ -72,18 +72,18 @@ function ProjectDescription(props) {
             </Typography>
           </Grid>
           {props.canEdit &&
-          <Grid item xs={4} container justify={"flex-end"}>
-            <Grid item>
-              <Button startIcon={<EditIcon/>}
-                      onClick={props.handleEdit}
-                      type="button"
-                      variant="contained"
-                      color={"secondary"}
-              >
-                Modifier
+            <Grid item xs={4} container justify={"flex-end"}>
+              <Grid item>
+                <Button startIcon={<EditIcon />}
+                  onClick={props.handleEdit}
+                  type="button"
+                  variant="contained"
+                  color={"secondary"}
+                >
+                  Edit
               </Button>
+              </Grid>
             </Grid>
-          </Grid>
           }
         </Grid>
         {/*<Typography gutterBottom variant='caption' paragraph>*/}
@@ -161,7 +161,7 @@ function ProjectDetail(props) {
     <>
       {
         !props.isProjectLoaded ?
-          <SuspenseLoading/> :
+          <SuspenseLoading /> :
           <Grid className={classes.root} container spacing={3}>
             <Grid className={classes.markdown} item xs={12} md={8}>
               <Grid container spacing={3}>
@@ -169,18 +169,18 @@ function ProjectDetail(props) {
                   <ProjectDescription
                     canEdit={props.canEdit}
                     handleEdit={handleEdit}
-                    project={props.project}/>
+                    project={props.project} />
                 </Grid>
                 {
                   props.count > 0 &&
                   <Grid item xs={12} sm={12}>
                     {
                       props.isFetchingProjectTasks ?
-                        <CircularProgress/> :
+                        <CircularProgress /> :
                         <div className="example-card-seamless mb-4-spacing">
                           <Card className="card-box mb-4">
                             <div className="card-header pr-2">
-                              <div className="card-header--title">Les taches du projet</div>
+                              <div className="card-header--title">Project tasks</div>
                             </div>
                             <CardContent className="p-3">
                               <div className="table-responsive">
@@ -210,14 +210,14 @@ function ProjectDetail(props) {
             <Grid item xs={12} sm={12} md={4}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
-                  <TeamList items={props.project.projectUsers}/>
+                  <TeamList items={props.project.projectUsers} />
                 </Grid>
                 {
                   isStatLoaded && stat.length > 0 &&
                   <Grid item xs={12}>
                     <Fragment>
-                      <ExampleWrapperSimple sectionHeading="Task en chart">
-                        <Doughnut data={getData(stat)}/>
+                      <ExampleWrapperSimple sectionHeading="Task in chart">
+                        <Doughnut data={getData(stat)} />
                       </ExampleWrapperSimple>
                     </Fragment>
                   </Grid>
@@ -252,7 +252,7 @@ const mapStateToProps = (state, ownProps) => {
   const tasks = Selector.getProjectTasksPage(state);
 
   const {
-    pagination: {projectTasks},
+    pagination: { projectTasks },
   } = state;
 
   return {
@@ -267,5 +267,5 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-export default connect(mapStateToProps, {fetchProjectById, fetchProjectTasks})(ProjectDetail);
+export default connect(mapStateToProps, { fetchProjectById, fetchProjectTasks })(ProjectDetail);
 

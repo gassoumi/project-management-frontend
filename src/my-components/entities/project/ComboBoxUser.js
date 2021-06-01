@@ -15,7 +15,7 @@ const URL = '/api/auth/users';
 const PARAM_SEARCH = "search=";
 
 function ComboBoxUser(props) {
-  const {register, name, errors, defaultValue} = props;
+  const { register, name, errors, defaultValue } = props;
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -83,7 +83,7 @@ function ComboBoxUser(props) {
         <TextField
           fullWidth
           {...params}
-          label="Choisir un utilisateur"
+          label="Choose a user"
           variant="outlined"
           name={name}
           inputRef={register}
@@ -93,7 +93,7 @@ function ComboBoxUser(props) {
             ...params.InputProps,
             endAdornment: (
               <React.Fragment>
-                {loading ? <CircularProgress color="inherit" size={20}/> : null}
+                {loading ? <CircularProgress color="inherit" size={20} /> : null}
                 {params.InputProps.endAdornment}
               </React.Fragment>
             ),

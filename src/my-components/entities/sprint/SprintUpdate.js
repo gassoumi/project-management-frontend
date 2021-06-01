@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {withStyles} from '@material-ui/core/styles';
+import React, { useEffect } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -15,7 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import moment from 'moment';
-import {useForm, Controller} from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import AsyncComboBox from '../common/AsyncComboBox';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import MomentUtils from '@date-io/moment';
@@ -46,13 +46,13 @@ const styles = (theme) => ({
 const URL_PROJECT = '/api/projects/';
 
 const DialogTitle = withStyles(styles)((props) => {
-  const {children, classes, onClose, ...other} = props;
+  const { children, classes, onClose, ...other } = props;
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon/>
+          <CloseIcon />
         </IconButton>
       ) : null}
     </MuiDialogTitle>
@@ -75,9 +75,9 @@ const DialogActions = withStyles((theme) => ({
 
 
 function SprintUpdate({
-                        open, handleClose, sprint,
-                        createSprint, updateSprint, isNew, isUpdating
-                      }) {
+  open, handleClose, sprint,
+  createSprint, updateSprint, isNew, isUpdating
+}) {
 
   const defaultValue = {
     name: sprint.name || "",
@@ -88,7 +88,7 @@ function SprintUpdate({
       moment().format('YYYY-MM-DD')
   };
 
-  const {register, handleSubmit, errors, control, reset} = useForm({
+  const { register, handleSubmit, errors, control, reset } = useForm({
     mode: "onChange",
     defaultValues: defaultValue,
   });
@@ -102,7 +102,7 @@ function SprintUpdate({
 
   const onSubmit = data => {
 
-    const {name, project, desired_at: date, status} = data;
+    const { name, project, desired_at: date, status } = data;
 
     const newSprint = {
       name,
@@ -125,7 +125,7 @@ function SprintUpdate({
   return (
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
       <DialogTitle className="bg-light" id="customized-dialog-title">
-        {isNew ? "Ajouter un " : "Modifier le "} sprint
+        {isNew ? "Add a new " : "Edit the "} sprint
       </DialogTitle>
       <form id="form-sprint" onSubmit={handleSubmit(onSubmit)} noValidate>
         <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -160,7 +160,7 @@ function SprintUpdate({
               })}
               autoFocus
               margin="dense"
-              label="Nom du Sprint"
+              label="Sprint name"
               autoComplete="disable"
               type="text"
               error={!!errors.name}
@@ -173,10 +173,10 @@ function SprintUpdate({
                 control={control}
                 errors={errors}
                 name="project"
-                label="Choisir un projet"
+                label="Choose a project"
                 optionLabel="designation"
                 url={URL_PROJECT}
-                rules={{required: getRequiredMessage()}}
+                rules={{ required: getRequiredMessage() }}
               />
             </FormControl>
             <FormControl
@@ -185,19 +185,19 @@ function SprintUpdate({
               required
               error={!!errors.status}
             >
-              <InputLabel id="demo-simple-select-label">Statut</InputLabel>
+              <InputLabel id="demo-simple-select-label">Statuts</InputLabel>
               <Controller
                 name="status"
                 // defaultValue={sprint.state || ""}
                 control={control}
-                rules={{required: getRequiredMessage()}}
+                rules={{ required: getRequiredMessage() }}
                 as={
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                   >
                     <MenuItem value="">
-                      <em>Choisir un statut</em>
+                      <em>Choose a statuts</em>
                     </MenuItem>
                     <MenuItem value="Planifiè">Planifiè</MenuItem>
                     <MenuItem value="En Cours">En Cours</MenuItem>
@@ -207,7 +207,7 @@ function SprintUpdate({
                 }
               />
               {errors.status &&
-              <FormHelperText>{errors.status.message}</FormHelperText>
+                <FormHelperText>{errors.status.message}</FormHelperText>
               }
             </FormControl>
             <Controller
@@ -221,15 +221,15 @@ function SprintUpdate({
               }}
               as={
                 <KeyboardDatePicker
-                  clearLabel="vider"
-                  cancelLabel="annuler"
+                  // clearLabel="vider"
+                  // cancelLabel="annuler"
                   clearable
                   fullWidth
                   required
                   error={!!errors.desired_at}
                   helperText={errors.desired_at && errors.desired_at.message}
                   margin="dense"
-                  label="Date souhaité"
+                  label="desired date"
                   format="DD/MM/YYYY"
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
@@ -246,14 +246,14 @@ function SprintUpdate({
             variant="contained"
             color="primary"
           >
-            Enregistrer
+            Save
           </Button>
           <Button
             onClick={handleClose}
             variant="contained"
             color="secondary"
           >
-            Annuler
+            Cancel
           </Button>
         </DialogActions>
       </form>

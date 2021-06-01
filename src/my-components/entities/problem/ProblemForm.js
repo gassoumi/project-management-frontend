@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {useForm, Controller} from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
 import MomentUtils from '@date-io/moment';
@@ -11,10 +11,10 @@ import {
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
-import {connect} from "react-redux";
-import {createProblem, updateProblem, clearCacheProblem} from "../../../redux";
+import { connect } from "react-redux";
+import { createProblem, updateProblem, clearCacheProblem } from "../../../redux";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
@@ -113,7 +113,7 @@ function ProblemForm(props) {
 
 
   const onSubmit = data => {
-    const {description, resolutionTools, start_at, end_at, cause, status, task} = data;
+    const { description, resolutionTools, start_at, end_at, cause, status, task } = data;
     const newProblem = {
       description,
       resolutionTools,
@@ -185,7 +185,7 @@ function ProblemForm(props) {
               // margin={"normal"}
               variant="outlined"
               required
-              label="Outils de résolution"
+              label="Resolution tools"
               name="resolutionTools"
               inputRef={register({
                 required: getRequiredMessage(),
@@ -205,7 +205,7 @@ function ProblemForm(props) {
               error={!!errors.status}
               fullWidth
               variant="outlined">
-              <InputLabel id="demo-simple-select-outlined-statut">Statut</InputLabel>
+              <InputLabel id="demo-simple-select-outlined-statut">Statuts</InputLabel>
               <Controller
                 name="status"
                 // defaultValue={""}
@@ -213,19 +213,19 @@ function ProblemForm(props) {
                   <Select
                     labelId="demo-simple-select-outlined-statut"
                     id="demo-simple-select-outlined"
-                    label="Statut"
+                    label="Statuts"
                   >
                     <MenuItem value="">
-                      <em>Choisir un statut</em>
+                      <em>Choose a statuts</em>
                     </MenuItem>
-                    <MenuItem value="CLOTURE">Cloturé</MenuItem>
-                    <MenuItem value="NON_CLOTURE">Non Cloturé</MenuItem>
+                    <MenuItem value="CLOTURE">Closing</MenuItem>
+                    <MenuItem value="NON_CLOTURE">No Closing</MenuItem>
                   </Select>}
                 control={control}
-                rules={{required: getRequiredMessage()}}
+                rules={{ required: getRequiredMessage() }}
               />
               {errors.status &&
-              <FormHelperText>{errors.status.message}</FormHelperText>
+                <FormHelperText>{errors.status.message}</FormHelperText>
               }
             </FormControl>
           </Grid>
@@ -240,10 +240,10 @@ function ProblemForm(props) {
                 control={control}
                 errors={errors}
                 name="task"
-                label="Coisir une tache"
+                label="Coose a task"
                 optionLabel="description"
                 url={URL_TASK}
-                rules={{required: getRequiredMessage(),}}
+                rules={{ required: getRequiredMessage(), }}
               />
             </FormControl>
           </Grid>
@@ -260,15 +260,15 @@ function ProblemForm(props) {
               as={
                 <KeyboardDatePicker
                   inputVariant="outlined"
-                  clearLabel="vider"
-                  cancelLabel="annuler"
+                  // clearLabel="vider"
+                  // cancelLabel="annuler"
                   clearable
                   fullWidth
                   required
                   error={!!errors.start_at}
                   helperText={errors.start_at && errors.start_at.message}
                   // margin="normal"
-                  label="Date début"
+                  label="Start date"
                   format="DD/MM/YYYY"
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
@@ -295,15 +295,15 @@ function ProblemForm(props) {
               as={
                 <KeyboardDatePicker
                   inputVariant="outlined"
-                  clearLabel="vider"
-                  cancelLabel="annuler"
+                  // clearLabel="vider"
+                  // cancelLabel="annuler"
                   clearable
                   fullWidth
                   required
                   error={!!errors.end_at}
                   helperText={errors.end_at && errors.end_at.message}
                   // margin="normal"
-                  label="Date fin"
+                  label="End Date"
                   format="DD/MM/YYYY"
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
@@ -318,19 +318,19 @@ function ProblemForm(props) {
                   disabled={isUpdating}
                   variant="contained"
                   color="primary"
-                  startIcon={<SaveIcon/>}
+                  startIcon={<SaveIcon />}
                   type="submit"
                 >
-                  Enregistrer
+                  Save
                 </Button>
                 <Button
                   onClick={handleCancel}
                   variant="outlined"
                   className="text-github"
                   color="secondary"
-                  startIcon={<CancelIcon/>}
+                  startIcon={<CancelIcon />}
                 >
-                  Annuler
+                  Cancel
                 </Button>
               </div>
             </Grid>
@@ -358,4 +358,4 @@ const mapStateToProps = state => ({
   isUpdating: state.entity.problem.isUpdating,
 });
 
-export default connect(mapStateToProps, {createProblem, updateProblem, clearCacheProblem})(ProblemForm);
+export default connect(mapStateToProps, { createProblem, updateProblem, clearCacheProblem })(ProblemForm);

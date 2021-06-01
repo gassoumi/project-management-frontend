@@ -1,5 +1,5 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
@@ -9,9 +9,9 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Paper from '@material-ui/core/Paper';
-import {Link as RouterLink} from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
-import {getDisplayString} from "../utils";
+import { getDisplayString } from "../utils";
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +37,7 @@ DiscussionList.prototype = {
   title: PropTypes.string.isRequired
 };
 
-export default function DiscussionList({items, title}) {
+export default function DiscussionList({ items, title }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -50,22 +50,22 @@ export default function DiscussionList({items, title}) {
               </div>
             </ListSubheader>}
         >
-          <Divider/>
+          <Divider />
           {items.map((item, index) => (
             <React.Fragment key={item.id}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar src={item.user && item.user.userProfile &&
-                  item.user.userProfile.photo ? item.user.userProfile.photo : ""}>
+                    item.user.userProfile.photo ? item.user.userProfile.photo : ""}>
                     {item.user.username.charAt(0).toUpperCase()}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
                   primary={
                     <Link component={RouterLink} to={`/discussion/${item.id}`}>
-                        <span className="text-primary">
+                      <span className="text-primary">
                         {item.object}
-                        </span>
+                      </span>
                     </Link>
                   }
                   secondary={
@@ -83,7 +83,7 @@ export default function DiscussionList({items, title}) {
                   }
                 />
               </ListItem>
-              {index !== (items.length - 1) && <Divider variant="inset" component="li"/>}
+              {index !== (items.length - 1) && <Divider variant="inset" component="li" />}
             </React.Fragment>
           ))
           }

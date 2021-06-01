@@ -1,6 +1,6 @@
 import React from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {Fab, Grid, Tooltip} from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Fab, Grid, Tooltip } from '@material-ui/core';
 import moment from 'moment';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -21,7 +21,7 @@ export function getColorNoteStatus(value) {
   }
 }
 
-export default function NoteList({notes, handleEdit, handleDelete}) {
+export default function NoteList({ notes, handleEdit, handleDelete }) {
   return (
     <div className="pt-3">
       <Grid container spacing={4}>
@@ -29,9 +29,9 @@ export default function NoteList({notes, handleEdit, handleDelete}) {
           <Grid key={note.id} item xs={12} sm={6} md={4}>
             <div
               className="card card-box-hover-rise mb-4"
-              style={{height: '100%'}}
-              // href="#/"
-              // onClick={e => e.preventDefault()}
+              style={{ height: '100%' }}
+            // href="#/"
+            // onClick={e => e.preventDefault()}
             >
               <div className="card-badges">
                 <div className={`badge badge-${getColorNoteStatus(note.ok)} badge-pill`}>
@@ -43,26 +43,26 @@ export default function NoteList({notes, handleEdit, handleDelete}) {
                 </h5>
 
                 <ReactMarkdown className="card-text flex-grow-1">
-                  {note.comment ? note.comment : "Pas encore de commentaire"}
+                  {note.comment ? note.comment : "No comment yet"}
                 </ReactMarkdown>
-               
+
                 <div className="card-date mt-2 d-flex align-items-end">
                   <div className="flex-grow-1 align-self-center">
                     <FontAwesomeIcon
                       icon={['far', 'clock']}
                       className="text-warning mr-1"
                     />
-                    <span className="text-warning ">A faire à {moment(note.date).format('L')} </span>
+                    <span className="text-warning ">To do at {moment(note.date).format('L')} </span>
                   </div>
                   <div className="d-flex justify-content-end align-items-end ">
-                    <Tooltip arrow title="Modifier">
+                    <Tooltip arrow title="Edit">
                       <Fab size="small" color="primary" onClick={() => handleEdit(note.id)} className="m-2">
-                        <EditIcon/>
+                        <EditIcon />
                       </Fab>
                     </Tooltip>
-                    <Tooltip arrow title="Supprimer">
+                    <Tooltip arrow title="Delete">
                       <Fab size="small" color="secondary" onClick={() => handleDelete(note)} className="m-2 bg-danger">
-                        <DeleteIcon/>
+                        <DeleteIcon />
                       </Fab>
                     </Tooltip>
                   </div>

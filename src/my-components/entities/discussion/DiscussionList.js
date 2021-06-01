@@ -48,7 +48,7 @@ function DiscussionList({ discussions }) {
                     {getDisplayString(discussion.description, 200)}
                   </p>
                   <small className="text-black-50 pt-1 d-block">
-                    Créée le : <b className="text-first">
+                    Created at : <b className="text-first">
                       {moment(discussion.created_at).format('LL')}
                     </b>
                   </small>

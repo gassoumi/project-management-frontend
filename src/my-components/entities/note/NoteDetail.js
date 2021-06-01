@@ -1,5 +1,5 @@
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -25,13 +25,13 @@ const styles = (theme) => ({
 });
 
 const DialogTitle = withStyles(styles)((props) => {
-    const {children, classes, onClose, ...other} = props;
+    const { children, classes, onClose, ...other } = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
             <Typography variant="h6">{children}</Typography>
             {onClose ? (
                 <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-                    <CloseIcon/>
+                    <CloseIcon />
                 </IconButton>
             ) : null}
         </MuiDialogTitle>
@@ -52,13 +52,13 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function NoteDetail(props) {
-    const {open, handleClose, note} = props;
+    const { open, handleClose, note } = props;
 
     return (
         <div>
             <Dialog fullWidth={true}
-                    maxWidth={"sm"} onClose={handleClose} aria-labelledby="customized-dialog-title-note-detail"
-                    open={open}>
+                maxWidth={"sm"} onClose={handleClose} aria-labelledby="customized-dialog-title-note-detail"
+                open={open}>
                 <DialogTitle id="customized-dialog-title-note-detail" onClose={handleClose}>
                     {note.note}
                     <Tooltip title="Date à faire">
@@ -69,10 +69,10 @@ export default function NoteDetail(props) {
                 </DialogTitle>
                 <DialogContent dividers>
                     <Typography color={"error"} gutterBottom>
-                        Commentaire
+                        Comment
                     </Typography>
                     <Typography gutterBottom>
-                        {note.comment ? note.comment : "Pas encore de commentaire"}
+                        {note.comment ? note.comment : "No comment yet"}
                     </Typography>
                 </DialogContent>
                 <DialogActions>

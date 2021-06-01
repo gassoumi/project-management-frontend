@@ -58,26 +58,26 @@ function NoteTable({ tasks, canEdit, sort, handleEdit, handleDelete, displayStat
       <thead>
         <tr>
           <th className="text-left">
-            Nom projet
+            Project name
         </th>
           <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('description')}>
-            Tache <FontAwesomeIcon icon="sort" />
+            Task <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-left" style={{ cursor: 'pointer' }} onClick={sort('user')}>
-            Responsable <FontAwesomeIcon icon="sort" />
+            Responsible <FontAwesomeIcon icon="sort" />
           </th>
           {
             displayStatus &&
             <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('status')}>
-              Statut <FontAwesomeIcon icon="sort" />
+              Statuts <FontAwesomeIcon icon="sort" />
             </th>
           }
 
           <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('start_at')}>
-            Date début <FontAwesomeIcon icon="sort" />
+            Start date <FontAwesomeIcon icon="sort" />
           </th>
           <th className="text-center" style={{ cursor: 'pointer' }} onClick={sort('end_at')}>
-            Date fin <FontAwesomeIcon icon="sort" />
+            End date <FontAwesomeIcon icon="sort" />
           </th>
           {canEdit && <th className="text-center">Actions</th>}
         </tr>
@@ -130,7 +130,7 @@ function NoteTable({ tasks, canEdit, sort, handleEdit, handleDelete, displayStat
 
             <td className="text-center">
               {canEdit &&
-                <Tooltip arrow title="Modifier">
+                <Tooltip arrow title="Edit">
                   <IconButton
                     onClick={() => handleEdit(task.id)}
                     className="text-primary">
@@ -141,7 +141,7 @@ function NoteTable({ tasks, canEdit, sort, handleEdit, handleDelete, displayStat
                   </IconButton>
                 </Tooltip>
               }
-              <Tooltip arrow title="Consulter">
+              <Tooltip arrow title="View">
                 <IconButton
                   component={RouterLink}
                   to={`/task/${task.id}`}
@@ -153,7 +153,7 @@ function NoteTable({ tasks, canEdit, sort, handleEdit, handleDelete, displayStat
                 </IconButton>
               </Tooltip>
               {canEdit &&
-                <Tooltip arrow title="Supprimer">
+                <Tooltip arrow title="Delete">
                   <IconButton
                     onClick={() => handleDelete(task)}
                     className="text-danger">

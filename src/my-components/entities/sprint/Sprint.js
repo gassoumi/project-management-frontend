@@ -1,18 +1,18 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from "react-redux";
-import {Selector} from '../index';
-import {fetchSprints, deleteSprintById, clearCacheSprint, createSprint, updateSprint} from "../../../redux/actions";
+import { connect } from "react-redux";
+import { Selector } from '../index';
+import { fetchSprints, deleteSprintById, clearCacheSprint, createSprint, updateSprint } from "../../../redux/actions";
 import SprintUpdate from './SprintUpdate';
 import axios from 'axios';
 import SprintTable from './SprintTable';
-import {SuspenseLoading} from "../../../Routes";
+import { SuspenseLoading } from "../../../Routes";
 import DeleteDialog from '../common/DeleteDialog';
 import Card from "@material-ui/core/Card";
 import AddNew from "../common/AddNew";
-import {getSortState, overridePaginationStateWithQueryParams} from "../../../utils";
-import {CardContent, IconButton, TablePagination, Tooltip} from "@material-ui/core";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { getSortState, overridePaginationStateWithQueryParams } from "../../../utils";
+import { CardContent, IconButton, TablePagination, Tooltip } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Alert from "../common/Alert";
 
 
@@ -179,7 +179,7 @@ function Sprint(props) {
         axios.get(`/api/projects/${response.data.project}/`)
           .then(res => {
             if (active) {
-              const sprint = {...response.data, project: res.data};
+              const sprint = { ...response.data, project: res.data };
               setSprint(sprint);
               handleClickOpen();
               setIdSprint(-1);
@@ -202,8 +202,8 @@ function Sprint(props) {
           open={openDeleteDialog}
           handleClose={handleCloseDeleteDialog}
           deleteObject={deleteSprintById}
-          title=" Êtes-vous sûr de vouloir supprimer ce sprint?"
-          label={sprintToDelete.name}/>
+          title="Are you sure to delete this sprint?"
+          label={sprintToDelete.name} />
         <SprintUpdate
           isUpdating={isUpdating}
           createSprint={createSprint}
@@ -211,7 +211,7 @@ function Sprint(props) {
           isNew={isNew}
           sprint={sprint}
           open={open}
-          handleClose={handleClose}/>
+          handleClose={handleClose} />
 
         <Card className="card-box mb-4">
           <div>
@@ -219,7 +219,7 @@ function Sprint(props) {
               canEdit={canEdit}
               label="Sprints"
               count={count}
-              buttonLabel="Ajouter un sprint"
+              buttonLabel="Add a sprint"
               handleAdd={createNew}
               handleInput={handleInput}
               handleQuery={handleQuery}
@@ -229,16 +229,16 @@ function Sprint(props) {
         </Card>
 
         {isFetching ?
-          <SuspenseLoading/>
+          <SuspenseLoading />
           : (sprints && sprints.length > 0) ?
             (<div className="example-card-seamless mb-4-spacing">
               <Card className="card-box mb-4">
                 <div className="card-header pr-2">
-                  <div className="card-header--title">Sprints statut</div>
+                  <div className="card-header--title">Sprints statuts</div>
                   <div className="card-header--actions">
                     <Tooltip arrow title="Refresh">
                       <IconButton size="small" color="primary" className="mr-3">
-                        <FontAwesomeIcon icon={['fas', 'cog']} spin/>
+                        <FontAwesomeIcon icon={['fas', 'cog']} spin />
                       </IconButton>
                     </Tooltip>
                   </div>
@@ -268,10 +268,10 @@ function Sprint(props) {
               </Card>
             </div>) :
             (<Fragment>
-                <Card className="card-box p-2 mb-4">
-                  <Alert label="Aucun sprint trouvé"/>
-                </Card>
-              </Fragment>
+              <Card className="card-box p-2 mb-4">
+                <Alert label="No sprint found" />
+              </Card>
+            </Fragment>
             )
         }
       </Fragment>
@@ -299,7 +299,7 @@ Sprint.propTypes = {
 
 const mapStateToProps = (state) => {
   const {
-    pagination: {sprints},
+    pagination: { sprints },
   } = state;
   //const listProjectIds = project.ids || [];
   const listSprint = Selector.getSprintsPage(state);

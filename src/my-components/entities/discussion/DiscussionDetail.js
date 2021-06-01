@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {Selector} from "../index";
-import {connect} from "react-redux";
+import { Selector } from "../index";
+import { connect } from "react-redux";
 import {
   fetchDiscussion, fetchCommentsByDiscussion, createComment,
   clearCacheComment, updateComment, deleteCommentById, fetchTopDiscussions,
 } from "../../../redux";
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import {SuspenseLoading as Loading} from "../../../Routes";
+import { SuspenseLoading as Loading } from "../../../Routes";
 import moment from 'moment';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -125,7 +125,7 @@ function DiscussionDetail(props) {
 
   const getProgressElement = () => (
     <div className={classes.circularProgress}>
-      <CircularProgress disableShrink/>
+      <CircularProgress disableShrink />
     </div>
   );
 
@@ -135,12 +135,12 @@ function DiscussionDetail(props) {
       return (
         <>
           {/*<Redirect from={props.location.path} to={'/notFound'}/>*/}
-          <ElementNotFound/>
+          <ElementNotFound />
           {/*<Route path='*' exact={true} component={PagesError404}/>*/}
         </>
       )
     } else {
-      return <Alert label={error}/>
+      return <Alert label={error} />
     }
   }
 
@@ -154,7 +154,7 @@ function DiscussionDetail(props) {
         handleClose={() => setOpen(false)}
       />
       <Grid item xs={12} md={8}>
-        {!isDiscussionLoaded ? <Loading/> :
+        {!isDiscussionLoaded ? <Loading /> :
           <Paper className={classes.paper} elevation={2}>
             <Grid container item xs={12}>
               <Grid container justify={"flex-start"} item xs={8}>
@@ -163,18 +163,18 @@ function DiscussionDetail(props) {
                 </Typography>
               </Grid>
               {displayEditDiscussionButton &&
-              <Grid item xs={4} container justify={"flex-end"}>
-                <Grid item>
-                  <Button startIcon={<EditIcon/>}
-                          onClick={() => setOpen(true)}
-                          type="button"
-                          variant="contained"
-                          color={"secondary"}
-                  >
-                    Modifier
+                <Grid item xs={4} container justify={"flex-end"}>
+                  <Grid item>
+                    <Button startIcon={<EditIcon />}
+                      onClick={() => setOpen(true)}
+                      type="button"
+                      variant="contained"
+                      color={"secondary"}
+                    >
+                      Edit
                   </Button>
+                  </Grid>
                 </Grid>
-              </Grid>
               }
             </Grid>
             <Typography color={"textSecondary"} paragraph>
@@ -182,7 +182,7 @@ function DiscussionDetail(props) {
                                  par ${discussion.user.username}
                                  `}
             </Typography>
-            <Divider/>
+            <Divider />
             {/*<Typography*/}
             {/*  className={classes.description} variant={"body1"} paragraph*/}
             {/*  gutterBottom={true}>*/}
@@ -192,31 +192,31 @@ function DiscussionDetail(props) {
               {discussion.description}
             </ReactMarkdown>
 
-            <Divider/>
+            <Divider />
             {
               isFetchingComments && pageToFetch === 1 ?
                 getProgressElement() :
                 (<>
                   <Typography variant={"h6"} className={"pt-2"} gutterBottom>
-                    {`${count} commentaires`}
+                    {`${count} comments`}
                   </Typography>
                   <div className={classes.comments}>
                     <form onSubmit={handleSubmit} className={classes.inputComment} noValidate
-                          autoComplete="off">
+                      autoComplete="off">
                       <TextField
                         fullWidth
                         value={inputComment}
                         onChange={(e) => setInputComment(e.target.value)}
                         name="commentInput"
-                        placeholder="Ajoouter un commentaire"
+                        placeholder="Add a comment"
                         multiline
                       />
                       <Grid container justify={"flex-end"} item xs={12}>
                         <div className={classes.buttons}>
                           <Button disabled={!inputComment} type="submit"
-                                  variant="contained"
-                                  color="primary">
-                            Ajouter un commentaire
+                            variant="contained"
+                            color="primary">
+                            Add a comment
                           </Button>
                         </div>
                       </Grid>
@@ -239,7 +239,7 @@ function DiscussionDetail(props) {
                             onClick={handleLoadMoreComments}
                             variant="contained"
                             color="secondary">
-                            Charger plus de commentaires
+                            Load more comments
                           </Button>)
                       }
                     </Grid>
@@ -250,7 +250,7 @@ function DiscussionDetail(props) {
 
       </Grid>
       <Grid item xs={12} md={4}>
-        <DiscussionList title={'Top Discussions'} items={topDiscussion}/>
+        <DiscussionList title={'Top Discussions'} items={topDiscussion} />
       </Grid>
     </Grid>
   )
@@ -277,7 +277,7 @@ DiscussionDetail.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
   const {
-    pagination: {comments},
+    pagination: { comments },
   } = state;
 
   const topDiscussion = Selector.getTopDiscussionPage(state);

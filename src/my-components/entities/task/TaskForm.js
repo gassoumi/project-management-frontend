@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {useForm, Controller} from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
 import MomentUtils from '@date-io/moment';
@@ -16,10 +16,10 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
-import {connect} from "react-redux";
-import {createTask, updateTask} from "../../../redux";
+import { connect } from "react-redux";
+import { createTask, updateTask } from "../../../redux";
 import AsyncComboBox from '../common/AsyncComboBox';
 import {
   getDateMessage,
@@ -119,7 +119,7 @@ function TaskForm(props) {
 
 
   const onSubmit = data => {
-    const {description, status, start_at, end_at, user, sprint} = data;
+    const { description, status, start_at, end_at, user, sprint } = data;
     const newTask = {
       description,
       status,
@@ -176,15 +176,15 @@ function TaskForm(props) {
               }}
               as={
                 <KeyboardDatePicker
-                  clearLabel="vider"
-                  cancelLabel="annuler"
+                  // clearLabel="vider"
+                  // cancelLabel="annuler"
                   clearable
                   fullWidth
                   required
                   error={!!errors.start_at}
                   helperText={errors.start_at && errors.start_at.message}
                   // margin="normal"
-                  label="Date début"
+                  label="Start date"
                   format="DD/MM/YYYY"
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
@@ -210,15 +210,15 @@ function TaskForm(props) {
               // defaultValue={null}
               as={
                 <KeyboardDatePicker
-                  clearLabel="vider"
-                  cancelLabel="annuler"
+                  // clearLabel="vider"
+                  // cancelLabel="annuler"
                   clearable
                   fullWidth
                   required
                   error={!!errors.end_at}
                   helperText={errors.end_at && errors.end_at.message}
                   // margin="normal"
-                  label="Date fin"
+                  label="End date"
                   format="DD/MM/YYYY"
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
@@ -229,24 +229,24 @@ function TaskForm(props) {
           <Grid item xs={12} md={6}>
             <FormControl
               fullWidth
-              // margin="normal"
+            // margin="normal"
             >
               <AsyncComboBox
                 control={control}
                 // defaultValue={task.sprint || null}
                 errors={errors}
                 name="user"
-                label="Choisir un responsable"
+                label="Choose a responsible"
                 optionLabel="username"
                 url={URL_USER}
-                rules={{required: getRequiredMessage()}}
+                rules={{ required: getRequiredMessage() }}
               />
             </FormControl>
           </Grid>
           <Grid item xs={12} md={6}>
             <FormControl
               fullWidth
-              // margin="normal"
+            // margin="normal"
             >
               <AsyncComboBox
                 control={control}
@@ -254,11 +254,11 @@ function TaskForm(props) {
                 disabled={!watchUser}
                 errors={errors}
                 name="sprint"
-                label="Choisir un sprint"
+                label="Choose a sprint"
                 optionLabel="name"
                 url={URL_SPRINT}
                 urlParams={watchUser && watchUser.id ? `&user_id=${watchUser.id}` : null}
-                rules={{required: getRequiredMessage()}}
+                rules={{ required: getRequiredMessage() }}
               />
             </FormControl>
           </Grid>
@@ -267,9 +267,9 @@ function TaskForm(props) {
               required
               error={!!errors.status}
               fullWidth
-              // margin="normal"
+            // margin="normal"
             >
-              <InputLabel id="task-select-label">Statut</InputLabel>
+              <InputLabel id="task-select-label">Statuts</InputLabel>
               <Controller
                 name="status"
                 // defaultValue={""}
@@ -278,7 +278,7 @@ function TaskForm(props) {
                     labelId="task-select-label"
                   >
                     <MenuItem value="">
-                      <em>Choisir un statut</em>
+                      <em>Choose a statuts</em>
                     </MenuItem>
                     <MenuItem value={"Backlog"}>Backlog</MenuItem>
                     <MenuItem value="A Faire">A Faire</MenuItem>
@@ -288,10 +288,10 @@ function TaskForm(props) {
                   </Select>
                 }
                 control={control}
-                rules={{required: getRequiredMessage()}}
+                rules={{ required: getRequiredMessage() }}
               />
               {errors.status &&
-              <FormHelperText>{errors.status.message}</FormHelperText>
+                <FormHelperText>{errors.status.message}</FormHelperText>
               }
             </FormControl>
           </Grid>
@@ -303,19 +303,19 @@ function TaskForm(props) {
                   variant="contained"
                   color="primary"
                   className="m-2"
-                  startIcon={<SaveIcon/>}
+                  startIcon={<SaveIcon />}
                   type="submit"
                 >
-                  Enregistrer
+                  Save
                 </Button>
                 <Button
                   onClick={handleCancel}
                   variant="outlined"
                   className="text-github"
                   color="secondary"
-                  startIcon={<CancelIcon/>}
+                  startIcon={<CancelIcon />}
                 >
-                  Annuler
+                  Cancel
                 </Button>
               </div>
             </Grid>
@@ -341,4 +341,4 @@ const mapStateToProps = state => ({
   isUpdating: state.entity.task.isUpdating,
 });
 
-export default connect(mapStateToProps, {createTask, updateTask})(TaskForm);
+export default connect(mapStateToProps, { createTask, updateTask })(TaskForm);

@@ -17,19 +17,19 @@ function TasksProjectTable({ rows }) {
         <thead>
           <tr>
             <th className="text-left">
-              Tache
+              Task
           </th>
             <th className="text-left">
-              Responsable
+              Responsible
           </th>
             <th className="text-center">
-              Statut
+              Status
           </th>
             <th className="text-center">
-              Date début
+              Start date
           </th>
             <th className="text-center">
-              Date fin
+              End date
           </th>
           </tr>
         </thead>

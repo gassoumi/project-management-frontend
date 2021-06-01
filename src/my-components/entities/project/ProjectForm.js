@@ -1,21 +1,21 @@
-import {makeStyles} from "@material-ui/core/styles";
-import React, {useState, useEffect} from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import ComboBoxUser from "./ComboBoxUser";
 import ComboBoxClassification from "./ComboBoxClassification";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Typography from "@material-ui/core/Typography";
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import SaveIcon from '@material-ui/icons/Save';
-import {createProject, updateProject, deleteProjectById, clearCacheProject} from "../../../redux/actions";
-import {connect} from "react-redux";
-import {green, red} from '@material-ui/core/colors';
+import { createProject, updateProject, deleteProjectById, clearCacheProject } from "../../../redux/actions";
+import { connect } from "react-redux";
+import { green, red } from '@material-ui/core/colors';
 import CancelIcon from '@material-ui/icons/Cancel';
-import {Tooltip} from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 import PropTypes from 'prop-types';
 import {
   getMaxLengthMessage,
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 // The following component is Input Component of the user
-const UserInput = ({user, register, addUser, removeUser, errors, displayMinus}) => {
+const UserInput = ({ user, register, addUser, removeUser, errors, displayMinus }) => {
   const userName = `user-${user.user_id}`;
   const classificationName = `class-${user.user_id}`;
   const defaultUsername = user.username || null;
@@ -87,25 +87,25 @@ const UserInput = ({user, register, addUser, removeUser, errors, displayMinus}) 
     <>
 
       <Grid item xs={12} sm={6} md={5}>
-        <ComboBoxUser defaultValue={defaultUsername} register={register} name={userName} errors={errors}/>
+        <ComboBoxUser defaultValue={defaultUsername} register={register} name={userName} errors={errors} />
       </Grid>
       <Grid item xs={12} sm={6} md={5}>
         <ComboBoxClassification defaultValue={defaultClassification} register={register} errors={errors}
-                                name={classificationName}/>
+          name={classificationName} />
       </Grid>
       <Grid item xs={12} sm={12} md={2}>
-        <Tooltip arrow title="Ajouter un autre utilisateur">
+        <Tooltip arrow title="Add another user">
           <IconButton type="button" onClick={addUser} aria-label="add">
-            <AddCircleIcon style={{color: green[500]}}/>
+            <AddCircleIcon style={{ color: green[500] }} />
           </IconButton>
         </Tooltip>
         {displayMinus &&
-        <Tooltip arrow title="Supprimer cet utilisateur">
-          <IconButton color="secondary" type="button" onClick={() => removeUser(user.user_id)}
-                      aria-label="remove">
-            <RemoveCircleIcon style={{color: red[500]}}/>
-          </IconButton>
-        </Tooltip>
+          <Tooltip arrow title="Remove this user">
+            <IconButton color="secondary" type="button" onClick={() => removeUser(user.user_id)}
+              aria-label="remove">
+              <RemoveCircleIcon style={{ color: red[500] }} />
+            </IconButton>
+          </Tooltip>
         }
       </Grid>
 
@@ -115,9 +115,9 @@ const UserInput = ({user, register, addUser, removeUser, errors, displayMinus}) 
 
 
 const ProjectForm = ({
-                       project, isNew, createProject, updateProject, cancel, updateSuccess, deleteSuccess,
-                       clearCacheProject, isUpdating
-                     }) => {
+  project, isNew, createProject, updateProject, cancel, updateSuccess, deleteSuccess,
+  clearCacheProject, isUpdating
+}) => {
 
   const classes = useStyles();
   const [users, setUsers] = useState([]);
@@ -130,7 +130,7 @@ const ProjectForm = ({
   };
 
 
-  const {register, handleSubmit, errors, reset} = useForm({
+  const { register, handleSubmit, errors, reset } = useForm({
     mode: "onChange",
   });
 
@@ -186,7 +186,7 @@ const ProjectForm = ({
 
 
   const onSubmit = (data) => {
-    const {code, designation, objective} = data;
+    const { code, designation, objective } = data;
     const projectUsers = users.map(user => {
       const username = data[`user-${user.user_id}`];
       const classification = data[`class-${user.user_id}`];
@@ -221,7 +221,7 @@ const ProjectForm = ({
             defaultValue={project.code || ""}
             required
             variant="outlined"
-            label="Code Projet"
+            label="Project code"
             name="code"
             inputRef={register({
               required: getRequiredMessage(),
@@ -289,33 +289,33 @@ const ProjectForm = ({
 
 
         {users.map((user, index) => (
-            <UserInput key={user.user_id} user={user} addUser={addUser}
-                       removeUser={removeUser}
-                       displayMinus={index !== 0}
-                       register={register} errors={errors} required/>
+          <UserInput key={user.user_id} user={user} addUser={addUser}
+            removeUser={removeUser}
+            displayMinus={index !== 0}
+            register={register} errors={errors} required />
 
-          )
+        )
         )}
 
         <Grid container>
           <Grid container justify={"flex-end"} item xs={12}>
             <div className={classes.buttons}>
               <Button
-                startIcon={<SaveIcon/>}
+                startIcon={<SaveIcon />}
                 disabled={isUpdating}
                 type="submit"
                 variant="contained"
                 color="primary">
-                Enregistrer{isUpdating && '...'}
+                Save{isUpdating && '...'}
               </Button>
               <Button
-                startIcon={<CancelIcon/>}
+                startIcon={<CancelIcon />}
                 onClick={cancel}
                 variant="outlined"
                 className="text-github"
                 color="secondary"
               >
-                Annuler
+                Cancel
               </Button>
             </div>
           </Grid>

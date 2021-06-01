@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Grid from "@material-ui/core/Grid";
-import {Selector} from "../index";
-import {connect} from "react-redux";
-import {fetchDiscussions, fetchTopDiscussions, clearCacheDiscussion} from "../../../redux";
+import { Selector } from "../index";
+import { connect } from "react-redux";
+import { fetchDiscussions, fetchTopDiscussions, clearCacheDiscussion } from "../../../redux";
 import DiscussionDisplay from './DiscussionList';
 import Pagination from '@material-ui/lab/Pagination';
 import Typography from "@material-ui/core/Typography";
 import DiscussionDialogForm from './DiscussionDialogForm';
 import Card from "@material-ui/core/Card";
 import AddNew from '../common/AddNew';
-import {SuspenseLoading} from "../../../Routes";
+import { SuspenseLoading } from "../../../Routes";
 import DiscussionList from "../../dashboard/DiscussionList";
-import {getSortState, overridePaginationStateWithQueryParams} from "../../../utils";
+import { getSortState, overridePaginationStateWithQueryParams } from "../../../utils";
 import Alert from '../common/Alert';
 
 
@@ -123,11 +123,11 @@ function Discussion(props) {
           buttonLabel="Ajouter une discussion"
           handleInput={(value) => setQuery(value)}
           canEdit={true}
-          handleQuery={handleQuery}/>
+          handleQuery={handleQuery} />
       </Card>
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
-          {isFetching ? <SuspenseLoading/> :
+          {isFetching ? <SuspenseLoading /> :
             list.length > 0 ?
               (<Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -145,9 +145,9 @@ function Discussion(props) {
                         className="text-body"
                         variant={"body1"}
                       >
-                        {`Affichage ${count === 0 ? 0 : (page - 1) * pageSize + 1}
+                        {`Display ${count === 0 ? 0 : (page - 1) * pageSize + 1}
                                                 -${nextPageUrl == null ? count : page * pageSize}
-                                                 De ${count} Discussion(s)`}
+                                                 of ${count} Discussion(s)`}
                       </Typography>
                     </div>
                     <div className="d-block d-flex flex-column align-items-center">
@@ -157,16 +157,16 @@ function Discussion(props) {
                         shape="rounded"
                         count={Math.ceil(count / pageSize)}
                         page={page}
-                        onChange={handleChange}/>
+                        onChange={handleChange} />
                     </div>
                   </div>
                 </Grid>
               </Grid>) :
-              <Alert label="Pas de discussions trouvées"/>
+              <Alert label="No discussion found" />
           }
         </Grid>
         <Grid item xs={12} md={4}>
-          <DiscussionList title={'Top Discussions'} items={topDiscussion}/>
+          <DiscussionList title={'Top Discussions'} items={topDiscussion} />
         </Grid>
       </Grid>
     </>
@@ -190,7 +190,7 @@ Discussion.propTypes = {
 
 const mapStateToProps = (state) => {
   const {
-    pagination: {discussions},
+    pagination: { discussions },
   } = state;
   const listDiscussion = Selector.getDiscussionsPage(state);
   const topDiscussion = Selector.getTopDiscussionPage(state);
@@ -208,5 +208,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {fetchDiscussions, fetchTopDiscussions, clearCacheDiscussion})(Discussion);
+export default connect(mapStateToProps, { fetchDiscussions, fetchTopDiscussions, clearCacheDiscussion })(Discussion);
 

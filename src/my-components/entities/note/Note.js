@@ -1,26 +1,26 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DeleteDialog from "../common/DeleteDialog";
 import NoteUpdate from './NoteUpdate'
 import NoteTable from "./NoteTable";
-import {Selector} from "../index";
-import {connect} from "react-redux";
-import {fetchNotes, deleteNote, clearCacheNote, setTabValueNote, createNote, updateNote} from "../../../redux";
+import { Selector } from "../index";
+import { connect } from "react-redux";
+import { fetchNotes, deleteNote, clearCacheNote, setTabValueNote, createNote, updateNote } from "../../../redux";
 import axios from "axios";
 import NoteDetail from './NoteDetail';
 import Card from "@material-ui/core/Card";
 import AddNew from "../common/AddNew";
-import {getSortState, overridePaginationStateWithQueryParams} from "../../../utils";
+import { getSortState, overridePaginationStateWithQueryParams } from "../../../utils";
 import NoteList from './NoteList';
-import {Box, CardContent, Divider, IconButton, Tab, Tabs, Tooltip, Typography} from "@material-ui/core";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Box, CardContent, Divider, IconButton, Tab, Tabs, Tooltip, Typography } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Pagination from '@material-ui/lab/Pagination';
-import {SuspenseLoading} from "../../../Routes";
+import { SuspenseLoading } from "../../../Routes";
 import Alert from '../common/Alert';
 
 
 function TabPanel(props) {
-  const {children, value, index, ...other} = props;
+  const { children, value, index, ...other } = props;
 
   return (
     <Typography
@@ -54,7 +54,7 @@ function Note(props) {
   );
   const [query, setQuery] = React.useState(paginationState.search);
 
-  const {isFetching, fetchNotes, deleteNote, notes, pageSize, page, createNote, updateNote, isUpdating, count} = props;
+  const { isFetching, fetchNotes, deleteNote, notes, pageSize, page, createNote, updateNote, isUpdating, count } = props;
 
 
   const handleInput = (value) => {
@@ -137,32 +137,32 @@ function Note(props) {
   }, [props.location.search]);
 
   useEffect(() => {
-      let active = true;
+    let active = true;
 
-      if (idNote === -1) {
-        return undefined;
-      }
-      // setIsLoaded(false);
-      axios.get(`/api/notes/${idNote}/`)
-        .then(response => {
-          if (active) {
-            setNote(response.data);
-            // setOpen(true);
-            setIdNote(-1);
-            if (isEdit) {
-              setOpen(true);
-            } else {
-              setOpenDetailDialog(true);
-            }
-            // setIsLoaded(true);
+    if (idNote === -1) {
+      return undefined;
+    }
+    // setIsLoaded(false);
+    axios.get(`/api/notes/${idNote}/`)
+      .then(response => {
+        if (active) {
+          setNote(response.data);
+          // setOpen(true);
+          setIdNote(-1);
+          if (isEdit) {
+            setOpen(true);
+          } else {
+            setOpenDetailDialog(true);
           }
-        })
-        .catch(error => console.log(error));
+          // setIsLoaded(true);
+        }
+      })
+      .catch(error => console.log(error));
 
-      return () => {
-        active = false;
-      }
-    }, [idNote]
+    return () => {
+      active = false;
+    }
+  }, [idNote]
   );
 
   const createNewNote = () => {
@@ -218,13 +218,13 @@ function Note(props) {
         isNew={isNew}
         note={note}
         open={open}
-        handleClose={() => setOpen(false)}/>
+        handleClose={() => setOpen(false)} />
       <DeleteDialog
         object={noteToDelete}
         open={openDeleteDialog}
         handleClose={() => setOpenDeleteDialog(false)}
         deleteObject={deleteNote}
-        title="Êtes-vous sûr de vouloir supprimer cette Story?"
+        title="Are you sure to delete this Story?"
         label={noteToDelete.note}
       />
       <Card className="card-box mb-4">
@@ -233,25 +233,25 @@ function Note(props) {
             canEdit
             label="Story"
             count={props.count}
-            buttonLabel="Ajouter une story"
+            buttonLabel="Add a story"
             handleAdd={createNewNote}
             handleInput={handleInput}
             handleQuery={handleQuery}
             queryValue={query}
           />
-          <Divider/>
+          <Divider />
           <Tabs
             value={props.value}
             indicatorColor="secondary"
             textColor="secondary"
             variant="fullWidth"
             onChange={handleChange}>
-            <Tab label="Colonnes de liste"/>
-            <Tab label="Tableau"/>
+            <Tab label="Grid" />
+            <Tab label="Table" />
           </Tabs>
         </div>
       </Card>
-      {isFetching ? <SuspenseLoading/> :
+      {isFetching ? <SuspenseLoading /> :
         (notes && notes.length > 0) ?
           <Fragment>
             <div className="mb-4">
@@ -270,7 +270,7 @@ function Note(props) {
                       <div className="card-header--actions">
                         <Tooltip arrow title="Refresh">
                           <IconButton size="small" color="primary" className="mr-3">
-                            <FontAwesomeIcon icon={['fas', 'cog']} spin/>
+                            <FontAwesomeIcon icon={['fas', 'cog']} spin />
                           </IconButton>
                         </Tooltip>
                       </div>
@@ -281,7 +281,7 @@ function Note(props) {
                           handleEdit={handleEdit}
                           handleDelete={handleDelete}
                           notes={notes}
-                          sort={sort}/>
+                          sort={sort} />
                       </div>
                     </CardContent>
                   </Card>
@@ -300,7 +300,7 @@ function Note(props) {
           </Fragment> :
           <Fragment>
             <Card className="card-box p-2 mb-4">
-              <Alert label="Aucun story trouvé"/>
+              <Alert label="No story found" />
             </Card>
           </Fragment>
       }
@@ -329,7 +329,7 @@ Note.propTypes = {
 
 const mapStateToProps = (state) => {
   const {
-    pagination: {notes},
+    pagination: { notes },
   } = state;
 
   return {
