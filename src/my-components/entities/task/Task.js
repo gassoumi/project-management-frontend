@@ -246,10 +246,10 @@ function Task(props) {
                   onChange={handleChange}>
                   <Tab className="py-3" label="Tous" />
                   <Tab className={`py-3 text-${getColorTask('Backlog')}`} label="Backlog" />
-                  <Tab className={`py-3 text-${getColorTask('A Faire')}`} label="A faire" />
-                  <Tab className={`py-3 text-${getColorTask('En Cours')}`} label="En cours" />
-                  <Tab className={`py-3 text-${getColorTask('A Verifier')}`} label="A vérifier" />
-                  <Tab className={`py-3 text-${getColorTask('Termine')}`} label="Terminé" />
+                  <Tab className={`py-3 text-${getColorTask('A Faire')}`} label="To do" />
+                  <Tab className={`py-3 text-${getColorTask('En Cours')}`} label="In progress" />
+                  <Tab className={`py-3 text-${getColorTask('A Verifier')}`} label="To check" />
+                  <Tab className={`py-3 text-${getColorTask('Termine')}`} label="Completed" />
                 </Tabs>
                 <TabPanel value={value} index={0}>
                   <div className="table-responsive">

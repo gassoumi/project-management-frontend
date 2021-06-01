@@ -269,7 +269,7 @@ function TaskForm(props) {
               fullWidth
             // margin="normal"
             >
-              <InputLabel id="task-select-label">Statuts</InputLabel>
+              <InputLabel id="task-select-label">Status</InputLabel>
               <Controller
                 name="status"
                 // defaultValue={""}
@@ -278,13 +278,13 @@ function TaskForm(props) {
                     labelId="task-select-label"
                   >
                     <MenuItem value="">
-                      <em>Choose a statuts</em>
+                      <em>Choose a status</em>
                     </MenuItem>
                     <MenuItem value={"Backlog"}>Backlog</MenuItem>
-                    <MenuItem value="A Faire">A Faire</MenuItem>
-                    <MenuItem value="En Cours">En Cours</MenuItem>
-                    <MenuItem value={"A Verifier"}>A Vérifier</MenuItem>
-                    <MenuItem value={"Termine"}>Termine</MenuItem>
+                    <MenuItem value="A Faire">To do</MenuItem>
+                    <MenuItem value="En Cours">In progress</MenuItem>
+                    <MenuItem value={"A Verifier"}>To check</MenuItem>
+                    <MenuItem value={"Termine"}>Completed</MenuItem>
                   </Select>
                 }
                 control={control}
